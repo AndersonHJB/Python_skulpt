@@ -1,7 +1,9 @@
 # Python_skulpt
-你好，我是悦创。
+你好，我是悦创。基于 skulpt 开发的 Python online。开始日期：2021年11月5日。
 
-基于 skulpt 开发的 Python online。
+
+
+为了给流沙团队开发一款在线的可交互的 Python 在线编辑器，不得不说我绞尽脑汁，接下来我会不我的开发过程放在这里与你分享。如果觉得好请点个 Star，我将会持续维护这个项目。
 
 
 
@@ -46,6 +48,14 @@ Skulpt 是一个完全依靠浏览器端模拟实现 Python 运行的工具。�
 ## 2. 下载 Skulpt 与安装
 
 GitHub 地址：[https://github.com/skulpt/skulpt](https://github.com/skulpt/skulpt)
+
+这里，我是使用 git 进行下载：
+
+```git
+aiyc@aiyc:~/桌面$ git clone git@github.com:skulpt/skulpt.git
+```
+
+
 
 主要是需要 dist 目录下的 `skulpt.min.js` 和 `skulpt-stdlib.js` 这两个文件：
 

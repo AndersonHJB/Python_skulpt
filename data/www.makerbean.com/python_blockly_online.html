@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.makerbean.com/python_blockly_online by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 15 Oct 2021 06:26:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Python在线编程 | 每颗豆</title>
+    <meta name="keywords" content="Python在线编程, 在线运行, Python online">
+    <meta name="description" content="Python在线编程，在线运行，还可画图及做游戏">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="icon" href="static/images/favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="static/css/plugins/plugins.min.css">
+
+    <!-- Main Style CSS -->
+    
+    <link rel="stylesheet" href="https://makerbean-web.oss-cn-beijing.aliyuncs.com/css/style.min.css">
+    
+    
+<link rel="stylesheet" href="static/css/online-editor.css">
+<style type="text/css">
+    #canvas-modal .modal-dialog {
+        max-width: unset;
+    }
+    #share-qrcode img {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 100;
+        cursor: pointer;
+    }
+    .content {
+        margin: 0;
+        padding: 0;
+        position: absolute;
+    }
+    .blocklyWidgetDiv {
+        margin-top: -54px;
+    }
+</style>
+
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e712693387c3444f47c42c103f7d0e1a";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+</head>
+
+<body>
+    <div class="preloader-activate preloader-active open_tm_preloader">
+        <div class="preloader-area-wrap">
+            <div class="spinner d-flex justify-content-center align-items-center h-100">
+                <h3 class="bounce1">请稍等，正在加载资源中</h3>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+                <div class="bounce4"></div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+            </div>
+        </div>
+    </div>
+    <!--====================  header area ====================-->
+    <div class="header-area header-sticky header-area--absolute">
+        <div class="container-fluid container-fluid--cp-150">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="header position-relative">
+                        <!-- brand logo -->
+                        <div class="header__logo">
+                            <a class="navbar-brand" href="index.html" style="padding: 5px 5px;">
+                                <img src="static/images/base/logo.png" alt="Brand" width="120px" height="40px">
+                            </a>
+                        </div>
+                        <!-- navigation menu -->
+                        <div class="header__navigation d-none d-xl-block">
+                            <nav class="navigation-menu">
+                                <ul>
+                                   
+                                   <li class="header-tab-index"><a href="index.html"><span>首页</span></a></li>
+                                    <li class="header-tab-online_courses"><a href="online_courses/index.html"><span>在线课程</span></a></li>
+                                    <li class="has-children has-children--multilevel-submenu header-tab-online_programming">
+                                        <a href="python_online.html"><span>在线编程</span></a>
+                                        <ul class="submenu">
+                                            <li><a href="python_blockly_online.html"><span>Python拖拽式编程</span></a></li>
+                                            <li><a href="python_online.html"><span>Python编程</span></a></li>
+                                            <li><a href="pinoblock_p5js.html"><span>p5js图形化编程</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-children has-children--multilevel-submenu header-tab-online_tools">
+                                        <a href="#"><span>在线工具</span></a>
+                                        <ul class="submenu">
+                                            <li><a href="https://rewindcode.cn/"><span>倒带代码练习系统</span></a></li>
+                                            <li><a href="http://pythontutor.com/visualize.html#mode=edit"><span>可视化代码执行</span></a></li>
+                                            <li><a href="http://c2qr.com/"><span>代码分享工具</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="header-tab-about"><a href="about.html"><span>关于我们</span></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- header actions -->
+                        <div class="header__actions">
+                            <div class="header__icons-wrapper" id="hidden-icon-wrapper">
+                                <div class="header-button">
+                                    
+                                    <a class="ht-btn ht-btn--outline" href="#" onclick="open_wechat_login_modal()">登录</a>
+                                    
+                                </div>
+                            </div>
+                            <!-- mobile menu -->
+                            <div class="mobile-navigation-icon d-block d-xl-none" id="mobile-menu-trigger">
+                                <i></i>
+                            </div>
+                            <!-- hidden icons menu -->
+                            <div class="hidden-icons-menu d-block d-md-none" id="hidden-icon-trigger">
+                                <a href="javascript:void(0)">
+                                    <i class="far fa-ellipsis-h-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--====================  End of header area  ====================-->
+    
+<div id="overlay" class="d-none justify-content-center">
+    <div class="align-self-center">
+        <div class="spinner-border text-success" role="status">
+            <span class="sr-only">程序正在运行中，请稍后...</span>
+        </div>
+        <p>程序正在运行中，请稍后...</p>
+    </div>
+</div>
+<div class="container-fluid" id="container" style="margin-top: 54px">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 p-0" id="blockly-div">
+            <div class="content" id="content_blocks"></div>
+            <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+              <category name="%{BKY_CATLOGIC}" colour="%{BKY_LOGIC_HUE}">
+                <block type="controls_if"></block>
+                <block type="logic_compare"></block>
+                <block type="logic_operation"></block>
+                <block type="logic_negate"></block>
+                <block type="logic_boolean"></block>
+                <block type="logic_null"></block>
+                <block type="logic_ternary"></block>
+              </category>
+              <category name="%{BKY_CATLOOPS}" colour="%{BKY_LOOPS_HUE}">
+                <block type="controls_repeat_ext">
+                  <value name="TIMES">
+                    <shadow type="math_number">
+                      <field name="NUM">10</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="controls_whileUntil"></block>
+                <block type="controls_for">
+                  <value name="FROM">
+                    <shadow type="math_number">
+                      <field name="NUM">1</field>
+                    </shadow>
+                  </value>
+                  <value name="TO">
+                    <shadow type="math_number">
+                      <field name="NUM">10</field>
+                    </shadow>
+                  </value>
+                  <value name="BY">
+                    <shadow type="math_number">
+                      <field name="NUM">1</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="controls_forEach"></block>
+                <block type="controls_flow_statements"></block>
+              </category>
+              <category name="%{BKY_CATMATH}" colour="%{BKY_MATH_HUE}">
+                <block type="math_number">
+                  <field name="NUM">123</field>
+                </block>
+                <block type="math_arithmetic">
+                  <value name="A">
+                    <shadow type="math_number">
+                      <field name="NUM">1</field>
+                    </shadow>
+                  </value>
+                  <value name="B">
+                    <shadow type="math_number">
+                      <field name="NUM">1</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="math_single">
+                  <value name="NUM">
+                    <shadow type="math_number">
+                      <field name="NUM">9</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="math_trig">
+                  <value name="NUM">
+                    <shadow type="math_number">
+                      <field name="NUM">45</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="math_constant"></block>
+                <block type="math_number_property">
+                  <value name="NUMBER_TO_CHECK">
+                    <shadow type="math_number">
+                      <field name="NUM">0</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="math_round">
+                  <value name="NUM">
+                    <shadow type="math_number">
+                      <field name="NUM">3.1</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="math_on_list"></block>
+                <block type="math_modulo">
+                  <value name="DIVIDEND">
+                    <shadow type="math_number">
+                      <field name="NUM">64</field>
+                    </shadow>
+                  </value>
+                  <value name="DIVISOR">
+                    <shadow type="math_number">
+                      <field name="NUM">10</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="math_constrain">
+                  <value name="VALUE">
+                    <shadow type="math_number">
+                      <field name="NUM">50</field>
+                    </shadow>
+                  </value>
+                  <value name="LOW">
+                    <shadow type="math_number">
+                      <field name="NUM">1</field>
+                    </shadow>
+                  </value>
+                  <value name="HIGH">
+                    <shadow type="math_number">
+                      <field name="NUM">100</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="math_random_int">
+                  <value name="FROM">
+                    <shadow type="math_number">
+                      <field name="NUM">1</field>
+                    </shadow>
+                  </value>
+                  <value name="TO">
+                    <shadow type="math_number">
+                      <field name="NUM">100</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="math_random_float"></block>
+                <block type="math_atan2">
+                  <value name="X">
+                    <shadow type="math_number">
+                      <field name="NUM">1</field>
+                    </shadow>
+                  </value>
+                  <value name="Y">
+                    <shadow type="math_number">
+                      <field name="NUM">1</field>
+                    </shadow>
+                  </value>
+                </block>
+              </category>
+              <category name="%{BKY_CATTEXT}" colour="%{BKY_TEXTS_HUE}">
+                <block type="text_print">
+                  <value name="TEXT">
+                    <shadow type="text">
+                      <field name="TEXT">abc</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="text"></block>
+                <block type="text_join"></block>
+                <block type="text_append">
+                  <value name="TEXT">
+                    <shadow type="text"></shadow>
+                  </value>
+                </block>
+                <block type="text_length">
+                  <value name="VALUE">
+                    <shadow type="text">
+                      <field name="TEXT">abc</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="text_isEmpty">
+                  <value name="VALUE">
+                    <shadow type="text">
+                      <field name="TEXT"></field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="text_indexOf">
+                  <value name="VALUE">
+                    <block type="variables_get">
+                      <field name="VAR">{textVariable}</field>
+                    </block>
+                  </value>
+                  <value name="FIND">
+                    <shadow type="text">
+                      <field name="TEXT">abc</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="text_charAt">
+                  <value name="VALUE">
+                    <block type="variables_get">
+                      <field name="VAR">{textVariable}</field>
+                    </block>
+                  </value>
+                </block>
+                <block type="text_getSubstring">
+                  <value name="STRING">
+                    <block type="variables_get">
+                      <field name="VAR">{textVariable}</field>
+                    </block>
+                  </value>
+                </block>
+                <block type="text_changeCase">
+                  <value name="TEXT">
+                    <shadow type="text">
+                      <field name="TEXT">abc</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="text_trim">
+                  <value name="TEXT">
+                    <shadow type="text">
+                      <field name="TEXT">abc</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="text_prompt_ext">
+                  <value name="TEXT">
+                    <shadow type="text">
+                      <field name="TEXT">abc</field>
+                    </shadow>
+                  </value>
+                </block>
+              </category>
+              <category name="%{BKY_CATLISTS}" colour="%{BKY_LISTS_HUE}">
+                <block type="lists_create_with">
+                  <mutation items="0"></mutation>
+                </block>
+                <block type="lists_create_with"></block>
+                <block type="lists_repeat">
+                  <value name="NUM">
+                    <shadow type="math_number">
+                      <field name="NUM">5</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="lists_length"></block>
+                <block type="lists_isEmpty"></block>
+                <block type="lists_indexOf">
+                  <value name="VALUE">
+                    <block type="variables_get">
+                      <field name="VAR">{listVariable}</field>
+                    </block>
+                  </value>
+                </block>
+                <block type="lists_getIndex">
+                  <value name="VALUE">
+                    <block type="variables_get">
+                      <field name="VAR">{listVariable}</field>
+                    </block>
+                  </value>
+                </block>
+                <block type="lists_setIndex">
+                  <value name="LIST">
+                    <block type="variables_get">
+                      <field name="VAR">{listVariable}</field>
+                    </block>
+                  </value>
+                </block>
+                <block type="lists_getSublist">
+                  <value name="LIST">
+                    <block type="variables_get">
+                      <field name="VAR">{listVariable}</field>
+                    </block>
+                  </value>
+                </block>
+                <block type="lists_split">
+                  <value name="DELIM">
+                    <shadow type="text">
+                      <field name="TEXT">,</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="lists_sort"></block>
+              </category>
+              <category name="%{BKY_CATCOLOUR}" colour="%{BKY_COLOUR_HUE}">
+                <block type="colour_picker"></block>
+                <block type="colour_random"></block>
+                <block type="colour_rgb">
+                  <value name="RED">
+                    <shadow type="math_number">
+                      <field name="NUM">100</field>
+                    </shadow>
+                  </value>
+                  <value name="GREEN">
+                    <shadow type="math_number">
+                      <field name="NUM">50</field>
+                    </shadow>
+                  </value>
+                  <value name="BLUE">
+                    <shadow type="math_number">
+                      <field name="NUM">0</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="colour_blend">
+                  <value name="COLOUR1">
+                    <shadow type="colour_picker">
+                      <field name="COLOUR">#ff0000</field>
+                    </shadow>
+                  </value>
+                  <value name="COLOUR2">
+                    <shadow type="colour_picker">
+                      <field name="COLOUR">#3333ff</field>
+                    </shadow>
+                  </value>
+                  <value name="RATIO">
+                    <shadow type="math_number">
+                      <field name="NUM">0.5</field>
+                    </shadow>
+                  </value>
+                </block>
+              </category>
+              <category name="每颗豆工具箱" colour="#80a55b">
+                <block type="from_makerbean_import_dbot"></block>
+                <block type="load_dbot_builtin_data"></block>
+                <block type="col_string_remove_symbol_letters">
+                    <value name="col">
+                      <block type="text">
+                        <field name="TEXT">手机号</field>
+                      </block>
+                    </value>
+                </block>
+                <block type="col_string_remove_prefix">
+                    <value name="col">
+                      <block type="text">
+                        <field name="TEXT">手机号</field>
+                      </block>
+                    </value>
+                    <value name="prefix">
+                      <block type="text">
+                        <field name="TEXT">86</field>
+                      </block>
+                    </value>
+                </block>
+                <block type="import_mb_live_chart"></block>
+                <block type="generate_mb_live_chart">
+                    <value name="y">
+                      <block type="lists_create_with">
+                        <mutation items="5"></mutation>
+                        <value name="ADD0">
+                          <block type="math_number">
+                            <field name="NUM">4636</field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="math_number">
+                            <field name="NUM">21373</field>
+                          </block>
+                        </value>
+                        <value name="ADD2">
+                          <block type="math_number">
+                            <field name="NUM">25085</field>
+                          </block>
+                        </value>
+                        <value name="ADD3">
+                          <block type="math_number">
+                            <field name="NUM">21717</field>
+                          </block>
+                        </value>
+                        <value name="ADD4">
+                          <block type="math_number">
+                            <field name="NUM">46628</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="x">
+                      <block type="lists_create_with">
+                        <mutation items="5"></mutation>
+                        <value name="ADD0">
+                          <block type="text">
+                            <field name="TEXT">中国</field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="text">
+                            <field name="TEXT">法国</field>
+                          </block>
+                        </value>
+                        <value name="ADD2">
+                          <block type="text">
+                            <field name="TEXT">意大利</field>
+                          </block>
+                        </value>
+                        <value name="ADD3">
+                          <block type="text">
+                            <field name="TEXT">西班牙</field>
+                          </block>
+                        </value>
+                        <value name="ADD4">
+                          <block type="text">
+                            <field name="TEXT">美国</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="title">
+                      <block type="text">
+                        <field name="TEXT">20200422各国新冠死亡人数对比</field>
+                      </block>
+                    </value>
+                    <value name="balls_per_thousand">
+                      <block type="math_number">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+              </category>
+              <sep></sep>
+              <category name="%{BKY_CATVARIABLES}" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
+              <category name="%{BKY_CATFUNCTIONS}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
+            </xml>
+            <div id="content_area" class="h-100"></div>
+        </div>
+        <div class="col-lg-4 col-md-4" id="left-div">
+            <div id="editor" class="dark-scrollbar"></div>
+            <div class="run-btn-area d-none d-sm-block">
+                <div class="btn-group" role="group">
+                    <button id="run" class="btn btn--green" onclick="run_py()">> 运行</button>
+                    <button id="save-py" class="btn btn--green" onclick="save_py()">下载程序</button>
+                    <button id="example-py" class="btn btn--green" onclick="open_example_py()">示例程序</button>
+                    <button class="btn btn--green sign-up-class"><a href="#" style="color: #fff">我要上课</a></button>
+                </div>
+                <div class="float-right row mr-3 right-btn-group">
+                    <div class="p5-mode-checkbox-div col-md-4 d-none form-check">
+                        <input class="form-check-input" id="p5-mode-checkbox" type="checkbox" value="" checked="checked">
+                        <i class="fa fa-square-o fa-2x"></i>
+                        <i class="fa fa-check-square-o fa-2x"></i>
+                        <span>画图模式</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 dark-scrollbar" id="right-div">
+            <div class="row mx-0">
+                <textarea id="console" autocomplete="off">初始化中……</textarea>
+            </div>
+            <div class="row mx-0 p-3 d-none" id="files-container">
+                <div class="col-lg-12">
+                    <h4>文件（单击可下载）</h4>
+                    <hr>                    
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="share-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">微信扫一扫分享成果</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <div id="share-qrcode" class="mb-3"></div>
+                <p>在微信中打开后<mark>点击右上角按钮</mark>即可分享给更多朋友玩</p>
+                <p>目前仅可分享画图模式下的作品哦</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" type="button" data-dismiss="modal">关闭</button></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="examples-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">打开示例程序</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <ul class="separator-list">
+                    <li class="list-item"><a href="#" class="hover-style-link" onclick="set_example(0)">动态图表生成模板</a></li>
+                    <li class="list-item"><a href="#" class="hover-style-link" onclick="set_example(1)">网络爬虫数据分析模板</a></li>
+                    <li class="list-item"><a href="#" class="hover-style-link" onclick="set_example(2)">商品订单数据分析模板</a></li>
+                    <li class="list-item"><a href="#" class="hover-style-link" onclick="set_example(4)">美国队长</a></li>
+                    <li class="list-item"><a href="#" class="hover-style-link" onclick="set_example(5)">无脸男</a></li>
+                    <li class="list-item"><a href="#" class="hover-style-link" onclick="set_example(7)">小猪佩奇</a></li>
+                    <li class="list-item"><a href="#" class="hover-style-link" onclick="set_example(8)">龙猫</a></li>
+                    <li class="list-item"><a href="#" class="hover-style-link" onclick="set_example(10)">文字转圈圈</a></li>
+                    <li class="list-item"><a href="#" class="hover-style-link" onclick="set_example(11)">动画效果模板</a></li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" type="button" data-dismiss="modal">关闭</button></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="canvas-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">我的画布</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <div id="p5Canvas"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" type="button" data-dismiss="modal">关闭</button></div>
+        </div>
+    </div>
+</div>
+
+    <!--====================  footer area ====================-->
+    <div class="footer-area-wrapper">
+        <div class="footer-area section-space--ptb_90">
+            <div class="container">
+                <div class="row footer-widget-wrapper">
+                    <div class="col-lg-4 col-md-6 footer-widget">
+                        <ul class="footer-widget__list">
+                            <li>北京市海淀区西北旺网易北京研发中心</li>
+                            <li><a href="#" class="hover-style-link">service@makerbean.com</a></li>
+                            <li><a href="#" class="hover-style-link hover-style-link--green">www.makerbean.com</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-6 footer-widget">
+                        <h6 class="footer-widget__title mb-20">我们是谁</h6>
+                        <ul class="footer-widget__list">
+                            <li><a href="about.html" class="hover-style-link">关于</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-6 footer-widget">
+                        <h6 class="footer-widget__title mb-20">合作伙伴</h6>
+                        <ul class="footer-widget__list">
+                            <li><a href="https://study.163.com/" class="hover-style-link">网易云课堂</a></li>
+                            <li><a href="https://ke.youdao.com/" class="hover-style-link">有道精品课</a></li>
+                            <li><a href="http://thumaker.cn/" class="hover-style-link">清华创客空间</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 offset-lg-1 footer-widget">
+                        <div class="text-center">
+                            <img src="static/images/base/weixin_qrcode.jpg">
+                            <p style="margin-top: 10px;">扫一扫关注每颗豆微信公众号</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright-area border-top section-space--ptb_30">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-left">
+                        <span class="copyright-text">© 2021 每颗豆创客 <a href="https://beian.miit.gov.cn/">京ICP备15024205号-8</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--====================  End of footer area  ====================-->
+
+    <!--====================  scroll top ====================-->
+    <a href="#" class="scroll-top" id="scroll-top">
+        <i class="arrow-top fal fa-long-arrow-up"></i>
+        <i class="arrow-bottom fal fa-long-arrow-up"></i>
+    </a>
+    <!--====================  End of scroll top  ====================-->
+
+
+    <!--====================  mobile menu overlay ====================-->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-overlay__inner">
+            <div class="mobile-menu-overlay__header">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-8">
+                            <!-- logo -->
+                            <div class="logo">
+                                <a href="index-2.html">
+                                    <img src="static/images/base/logo.png" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-4">
+                            <!-- mobile menu content -->
+                            <div class="mobile-menu-content text-right">
+                                <span class="mobile-navigation-close-icon" id="mobile-menu-close-trigger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mobile-menu-overlay__body">
+                <nav class="offcanvas-navigation offcanvas-navigation--onepage">
+                    <ul>
+                        <li class="active"><a href="index.html"><span>首页</span></a></li>
+                        <li><a href="online_course.html"><span>在线课程</span></a></li>
+                        <li><a href="python_online.html"><span>Python在线编程</span></a></li>
+                        <li><a href="http://pythontutor.makerbean.com/visualize.html"><span>可视化代码执行</span></a></li>
+                        <li><a href="about.html"><span>关于我们</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!--====================  End of mobile menu overlay  ====================-->
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">微信扫一扫登录</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <h5 id="login-qrcode-expired-warning" class="mb-3"></h5>
+                    <div id="login-qrcode" class="mb-3">
+                        <div class="spinner-border text-success" role="status">
+                            <span class="sr-only">正在生成登录二维码...</span>
+                        </div>
+                        <p>正在生成登录二维码...请稍后</p>
+                    </div>
+                    <p>关注公众号即可登录</p>
+                    <p>登录后就能分享作品、记录练习进度以及获取更多权益！</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="ht-btn ht-btn-xs btn-secondary" data-dismiss="modal" onclick="clearInterval(check_interval)">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/Swiper/4.5.1/js/swiper.min.js"></script>
+    <script src="https://cdn.staticfile.org/tippy.js/3.4.1/tippy.min.js"></script>
+    <script src="https://cdn.staticfile.org/lightgallery/1.6.12/js/lightgallery.min.js"></script>
+    <script src="https://cdn.staticfile.org/lg-video/1.2.2/lg-video.min.js"></script>
+    <script src="https://cdn.staticfile.org/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-circle-progress/1.2.2/circle-progress.min.js"></script>
+    <script src="https://cdn.staticfile.org/instafeed.js/1.4.1/instafeed.min.js"></script>
+    <script src="https://cdn.staticfile.org/wow/1.1.2/wow.min.js"></script>
+    <script src="https://cdn.staticfile.org/odometer.js/0.4.8/odometer.min.js"></script>
+    <script src="https://cdn.staticfile.org/gsap/2.1.2/TweenMax.min.js"> </script>
+
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/qrcode.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/main-no-animation.min.js"></script>
+
+    
+
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/brython_builtins.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/version_info.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py2js.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/loaders.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_object.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_type.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_utils.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_sort.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_builtin_functions.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_exceptions.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_range_slice.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_bytes.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_set.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/js_objects.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/stdlib_paths.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_import.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/unicode_data.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_string.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_int.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_long_int.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_float.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_complex.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_dict.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_list.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_generator.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/py_dom.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/builtin_modules.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/brython3.9.1/async.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/brython/3.9.1/brython_stdlib.min.js"></script>
+<!-- <script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/ace/ace.js"></script> -->
+<script type="text/javascript" src="https://cdn.staticfile.org/ace/1.4.12/ace.min.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/ace/ext-language_tools.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/ace/mode-python3.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/ace/snippets/python3.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/ace/theme-monokai.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/blockly/js/blockly_compressed.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/blockly/js/blocks_compressed.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/blockly/js/javascript_compressed.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/blockly/js/python_compressed.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/blockly/js/makerbean_blocks.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/blockly/js/makerbean_generator.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/blockly/js/code.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.staticfile.org/p5.js/1.2.0/p5.min.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/FileSaver.min.js"></script>
+<script type="text/javascript" src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/qrcode.min.js"></script>
+<script type="text/javascript" src="static/js/error_msg_analyse.js"></script>
+<script type="text/python3" src="static/python/python_blockly_online.py"></script>
+
+<script type="text/javascript">
+    var python_task_id = '';
+    $('.header-area.header-sticky.header-area--absolute').addClass('is-sticky');
+
+    var autoCompleteData = [
+        { "meta": "机器人", "caption": "爬虫机器人", "value": "爬虫机器人", "score": 100 },
+        { "meta": "机器人", "caption": "表格机器人", "value": "表格机器人", "score": 100 },
+        { "meta": "机器人", "caption": "数据机器人", "value": "数据机器人", "score": 100 },
+        { "meta": "指令", "caption": "爬虫机器人.抓取猎聘", "value": "爬虫机器人.抓取猎聘", "score": 100 },
+        { "meta": "指令", "caption": "爬虫机器人.抓取论文", "value": "爬虫机器人.抓取论文", "score": 100 },
+        { "meta": "指令", "caption": "表格机器人.添加数据", "value": "表格机器人.添加数据", "score": 100 },
+        { "meta": "指令", "caption": "表格机器人.保存文件", "value": "表格机器人.保存文件", "score": 100 },
+        { "meta": "指令", "caption": "表格机器人.提取一列数据", "value": "表格机器人.提取一列数据", "score": 100 },
+        { "meta": "指令", "caption": "数据机器人.分析词语频次", "value": "数据机器人.分析词语频次", "score": 100 },
+        { "meta": "指令", "caption": "数据机器人.生成词云图", "value": "数据机器人.生成词云图", "score": 100 },
+        { "meta": "指令", "caption": "数据机器人.生成3D地图", "value": "数据机器人.生成3D地图", "score": 100 },
+    ];
+    var ideCompleter = {
+        getCompletions: function (editor, session, pos, prefix, callback) {
+            if (prefix.length === 0) {
+                return callback(null, []);
+            } else {
+                return callback(null, autoCompleteData);
+            }
+        }
+    }
+
+    function onBlocklyChanged(event) {
+        var code = Blockly.Python.workspaceToCode(Code.workspace);
+        window.ace.edit('editor').setValue(code);
+        if (window.sessionStorage) {
+            var xml = Blockly.Xml.workspaceToDom(Code.workspace);
+            var text = Blockly.Xml.domToText(xml);
+            window.sessionStorage.loadOnceBlocks = text;
+        }
+    }
+
+    window.onload = function() {
+        brython();
+
+        ace.config.set('basePath', 'https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/ace/')
+        language_tools = ace.require("ace/ext/language_tools");
+        language_tools.addCompleter(ideCompleter);
+
+        ace.edit("editor").commands.on("afterExec", function (e, t) {
+            if (e.command.name == "insertstring" && e.args == ".") {
+                var all = e.editor.completers;
+                //e.editor.completers = completers;
+                e.editor.execCommand("startAutocomplete");
+                e.editor.completers = all;
+            }
+        });
+
+        $('#content_blocks').change(onBlocklyChanged);
+
+        $('#left-div')[0].style.height = window.innerHeight - 54 - 51 + 'px';
+        $('#right-div textarea')[0].style.height = window.innerHeight - 54 + 'px';
+        // $(".preloader-activate").removeClass('preloader-active');
+        // $(".preloader-activate").addClass('loaded');
+        setTimeout(function(){
+                // jQuery('.open_tm_preloader').addClass('loaded');
+                var code = Blockly.Python.workspaceToCode(Code.workspace);
+                window.ace.edit('editor').setValue(code);
+                Code.workspace.zoomToFit();
+            },
+            1000
+        );
+    }
+
+    function run_py() {
+        var editor = ace.edit("editor");
+        var code = editor.getValue();
+        if (code.search('from makerbean import') >=0 || code.search('import makerbean') >= 0 || code.search('import requests') >= 0) {
+            localStorage.setItem('py_src', code);
+            
+                open_wechat_login_modal();
+            
+        } else {        
+            window.run_python();
+            if (code.search('createCanvas') >=0 || code.search('background') >= 0 || code.search('import mb_live_chart') >=0) {
+                $('#canvas-modal').modal('show');
+            }
+        }
+    }
+    function check_run_python_result() {
+        $.ajax({
+            type: 'post',
+            url: '/check_run_python_result',
+            dataType: 'json',
+            data: {
+                task_id: task_id,
+                csrfmiddlewaretoken: 'APu7P0sh9p6j0p2qZ1ohnPBnzgSyxHQxhnU91o0cvwJNoPqAoi534hNs1c36yMHe',
+            },
+            success: function(d){
+                if (d.finished) {
+                    clearInterval(check_interval);
+                    check_result = check_output_error(d.result.output);
+                    if (check_result.error) {
+                        $('#console').val(check_result.msg);
+                    } else {
+                        $('#console').val(d.result.output);
+                    }
+                    $("#files-container ul").html('');
+                    d.result.files.forEach(function (item) {
+                        $("#files-container ul").append(`<li><a href="${item.link}">${item.name}</a></li>`);
+                    });
+                    $('#overlay').addClass('d-none');
+                    $('#overlay').removeClass('d-flex');
+                }
+            }
+        })
+    }
+    function save_py(){
+        var editor = ace.edit("editor");
+        var code = editor.getValue();
+        var blob = new Blob([code], {type: "text/plain;charset=utf-8"});
+        saveAs(blob, "makerbean.py");
+    }
+    function share_py() {
+        
+            open_wechat_login_modal();
+        
+    }
+    function insert_key(key) {
+        if (key == 'dq'){
+            key = '"';
+        }
+        var editor = ace.edit("editor");
+        editor.insert(key);
+    }
+    function open_example_py() {
+        $('#examples-modal').modal('show');
+    }
+    function set_example(number) {
+        example_code = [
+            '# Adapted from Jem Brown\'s Energy Consumption Data Visualization\n# 导入mb_live_chart模块\n\n# 各国死亡人数\ntotal_deaths = [4636, 21373, 25085, 21717, 46628]\n# 各国家名称\ncontry_names = ["中国", "法国", "意大利", "西班牙", "美国"]\n# 在下面引号内填写标题，如：20200422各国新冠死亡人数对比\ntitle = "请填写图表标题"\n# 每千人表示球数，数字越高对机器性能要求越高\nballs_per_thousand = 1\n# 生成动态图表\nmb_live_chart(total_deaths, contry_names, title, balls_per_thousand)\n',
+            'from makerbean import 爬虫机器人\nfrom makerbean import 表格机器人\nfrom makerbean import 数据机器人\n\n# 获取前五页的数据\n\n# 添加数据到表格中\n\n# 保存表格文件\n\n# 提取表格中第三列\n\n# 分析词语频次\n\n# 生成词云图\n',
+            'from makerbean import 数据机器人\n\n# 加载数据\n\n# 查看订单列名称\n\n# 查看合并统计不同订单状态\n\n# 筛选已付款订单\n\n# 查看下单时间列\n\n# 筛选2020年以后的订单\n\n# 整理地点格式，截取到省级\n\n# 合并统计不同地点订单数量\n\n# 生成3D地图\n\n',
+            'def setup():    \n    createCanvas(800, 400)\n\ndef draw():\n    background(200)\n    text("我的第一个程序！点击屏幕不同位置看看大白的反应", 10,25)\n    fill(255)\n    ellipse(200, 400, 400, 600)\n    ellipse(200, 100, 200, 120)\n    fill(0)\n    ellipse(150-(200-mouseX)*0.05, 100-(200-mouseY)*0.05, 20, 20)\n    ellipse(250-(200-mouseX)*0.05, 100-(200-mouseY)*0.05, 20, 20)\n    line(150-(200-mouseX)*0.05, 100-(200-mouseY)*0.05, 250-(200-mouseX)*0.05, 100-(200-mouseY)*0.05)\n',
+            '#  Manuale di Programmazione Cinematografica\n#  Daniele Olmisani, 2015\n\n#  Captain America: the First Avenger\n\nglobal PAPER, INK1, INK2, INK3\nPAPER = (235, 225, 205)\nINK1 = (215, 50, 40)\nINK2 = (240, 245, 245)\nINK3 = (0, 140, 165)\n\ndef setup():\n    createCanvas(480, 640)\n    noLoop()\n\ndef draw():\n    global PAPER, INK1, INK2, INK3\n    translate(canvasWidth/2.0, canvasHeight/2.0)\n\n    background(PAPER)\n    stroke(INK1)  \n    strokeWeight(35.0)\n    \n    fill(INK2)\n    ellipse(0, 0, 340, 340)\n\n    fill(INK3)\n    ellipse(0, 0, 200, 200)\n\n    noStroke()\n    fill(INK2)\n\n    beginShape()\n    vertex(  0, -50) \n    vertex( 29,  40)\n    vertex(-47, -15) \n    vertex( 47, -15)\n    vertex(-29,  40)\n    endShape(p.CLOSE)\n',
+            'PAPER = 20\nINK1 = (205, 195, 180)\nINK2 = (145, 35, 35)\n\ndef setup():\n    createCanvas(displayWidth, 640)\n    noLoop()\n\ndef draw():\n    background(PAPER)\n    \n    d = min(canvasWidth, canvasHeight) / 1.5\n    \n    translate(canvasWidth/2.0, canvasHeight/2.0)\n    \n    noStroke()\n    \n    fill(INK1)\n    ellipse(0, 0, d, 1.3*d)\n    \n    fill(INK2)\n    ellipse(0, 0, 0.7*d, 1.1*d)\n    \n    rectMode(p.CENTER)\n    \n    fill(INK1)\n    rect(0, 0, 0.4*d, 1.1*d)\n    rect(0, -0.1*d, 0.9*d, 0.25*d)\n\n    fill(20,20,20,20)\n    rect(canvasWidth/4, 0, canvasWidth/2, canvasHeight)\n    \n    fill(PAPER)\n    rect(0, 0.5*d, 0.25*d, 0.09*d, d)\n    \n    ellipse(-0.26*d, -0.1*d, 0.2*d, 0.1*d)\n    ellipse( 0.26*d, -0.1*d, 0.2*d, 0.1*d)\n',
+            'def setup():\n    createCanvas(1000, 1000)\n\ndef draw():\n    background(255)\n    \n    # orelles\n    fill(0)\n    ellipse(200, 250, 350, 350)\n    fill(0)\n    ellipse(800, 250, 350, 350)\n    \n    # cap\n    fill(0)\n    ellipse(500, 575, 600, 600)\n    \n    # contorn cara\n    fill(225, 194, 166)\n    noStroke()\n    ellipse(425, 505, 250, 364)\n    fill(225, 194, 166)\n    noStroke()\n    ellipse(575, 505, 250, 364)\n    noStroke()\n    fill(225, 194, 166)\n    ellipse(500, 730, 600, 325)\n    noStroke()\n    fill(225, 194, 166)\n    ellipse(293, 710, 200, 230)\n    noStroke()\n    fill(225, 194, 166)\n    ellipse(707, 710, 200, 230)\n    noStroke()\n    fill(225, 194, 166)\n    ellipse(500, 700, 320, 450)\n    \n    # boca\n    noStroke()\n    fill(0)\n    ellipse(500, 650, 270, 500)\n    noStroke()\n    fill(225, 194, 166)\n    ellipse(500, 780, 250, 110)\n    noStroke()\n    fill(225, 194, 166)\n    ellipse(500, 600, 350, 450)\n    noFill()\n    stroke(0)\n    strokeWeight(6)\n    bezier(300, 725, 375, 870, 625, 870, 700, 725)\n    noFill()\n    stroke(0)\n    strokeWeight(6)\n    bezier(285, 745, 295, 725, 302, 720, 330, 717)\n    noFill()\n    stroke(0)\n    strokeWeight(6)\n    bezier(715, 745, 705, 725, 698, 720, 670, 717)\n    fill(234, 97, 138)\n    noStroke()\n    bezier(450, 875, 480, 900, 520, 900, 550, 875)\n    fill(234, 97, 138)\n    stroke(0)\n    strokeWeight(1)\n    bezier(490, 875, 510, 860, 540, 860, 550, 875)\n    fill(234, 97, 138)\n    stroke(0)\n    strokeWeight(2)\n    bezier(450, 875, 460, 860, 490, 860, 520, 880)\n    \n    # ulls\n    stroke(0)\n    strokeWeight(7)\n    fill(255)\n    ellipse(437.5, 550, 75, 200)\n    stroke(0)\n    strokeWeight(7)\n    fill(255)\n    ellipse(562.5, 550, 75, 200)\n    noFill()\n    stroke(0)\n    strokeWeight(5)\n    bezier(410, 665, 450, 650, 500, 630, 590, 665)\n    \n    # interior ulls\n    fill(0)\n    noStroke()\n    ellipse(444, 608, 35, 75)\n    fill(0)\n    noStroke()\n    ellipse(556, 608, 35, 75)\n    \n    # nas\n    noStroke()\n    ellipse(500, 710, 145, 80)\n    \n    # ombres orelles\n    fill(255, 40)\n    noStroke()\n    ellipse(200, 250, 300, 300)\n    fill(0)\n    noStroke()\n    ellipse(190, 270, 320, 290)\n    fill(255, 40)\n    noStroke()\n    ellipse(800, 250, 300, 300)\n    fill(0)\n    noStroke()\n    ellipse(790, 270, 320, 290)\n    \n    # ombres ulls\n    fill(255, 70)\n    noStroke()\n    ellipse(444, 595, 20, 35)\n    fill(255, 70)\n    noStroke()\n    ellipse(556, 595, 20, 35)\n    \n    # ombre nas\n    fill(255, 40)\n    noStroke()\n    rotate(0.07)\n    ellipse(565, 660, 90, 40)\n\n',
+            "import math\n\ndef setup():\n    createCanvas(displayWidth, 500)\n\ndef draw():\n    translate(-90,0)\n    background(255)\n    textAlign(p.CENTER)\n    text('点击屏幕，小猪佩奇的眼睛会跟着你动哦', displayWidth/2+90, 30)\n    noStroke()\n    fill('#ffc6de')\n    ellipse(200, 200, 200, 200)\n    rect(200, 100, 150, 100)\n    ellipse(350, 150, 100, 100)\n    ellipse(200-20, 100, 30, 80)\n    ellipse(200+20, 100, 30, 80)\n    \n    fill('#ff84c4')\n    ellipse(370-20, 150, 20, 20)\n    ellipse(370+10, 150, 20, 20)\n    \n    # eyes\n    fill(255)\n    ellipse(200, 150, 40, 40)\n    ellipse(250, 150, 40, 40)\n    fill(0)\n    ellipse(200+(mouseX-200)*0.02, 150+(mouseY-150)*0.02, 20, 20)\n    ellipse(250+(mouseX-250)*0.02, 150+(mouseY-150)*0.02, 20, 20)\n    \n    fill('#ffa8d2')\n    ellipse(130, 200, 50, 50)\n    \n    stroke('#fd62a5')\n    strokeWeight(5)\n    noFill()\n    arc(220, 230, 50, 50, 0, math.pi)\n",
+            'paper_color = (90,85,80)\nink1_color = 240\nink2_color = 30\nink3_color = (230,210,170)\n\ndef setup():\n    createCanvas(displayWidth,640)\n\ndef draw():\n    background(paper_color)\n    # text(str(mouseX/width*2-1), 10,20)\n    fill(255)\n    textAlign(p.CENTER)\n    text("按屏幕不同位置龙猫的眼睛会跟着你动哦！", canvasWidth/2, 20)\n    scale_num = min(displayWidth, 640)\n    translate(0.5*canvasWidth, 0.25*canvasHeight)\n    scale(scale_num)\n    noStroke()\n    \n    fill(ink1_color)\n    ellipse(-0.3,0,0.2,0.2)\n    ellipse(0.3,0,0.2,0.2)\n    fill(0)\n    \n    fill(ink2_color)\n    ellipse(-0.3+(mouseX/canvasWidth*2-1)*0.05,(mouseY/canvasHeight)*0.05,0.1,0.1)\n    ellipse(0.3+(mouseX/canvasWidth*2-1)*0.05,(mouseY/canvasHeight)*0.05,0.1,0.1)\n    \n    ellipse(0,0.05,0.1,0.02)\n    ellipse(0,0.06,0.03,0.02)\n    \n    fill(ink3_color)\n    ellipse(0,1,1.5,1.5)\n    \n    fill(paper_color)\n    ellipse(0,0.45,0.2,0.2)\n    fill(ink3_color)\n    ellipse(0,0.48,0.3,0.2)\n    \n    fill(paper_color)\n    ellipse(-0.2,0.55,0.2,0.2)\n    ellipse(0.2,0.55,0.2,0.2)\n    fill(ink3_color)\n    ellipse(-0.2,0.58,0.3,0.2)\n    ellipse(0.2,0.58,0.3,0.2)\n', 'def setup():\n    createCanvas(displayWidth,displayHeight)\n\ndef draw():\n    background(237, 87, 76)\n    noStroke()\n    w = displayWidth\n    h = displayHeight\n    ellipse(w*3/8, h*3/8, w/4, w/4)\n    ellipse(w*5/8, h*3/8, w/4, w/4)\n    triangle(0.2866*w, h*3/8+0.0884*w, 0.7134*w, h*3/8+0.0884*w, w/2, h*3/8+0.3018*w)\n    ellipse(w/2, h*3/8+0.0884*w, 0.1768*w, 0.1768*w)\n    textSize(w/8)\n    fill(255)\n    text("情人节快乐！", w/8, h*3/8+0.5*w)\n    if mouseIsPressed or touches:\n        fill(237, 87, 76)\n        textSize(w/16)\n        text("某某某", 0.40625*w, h*3/8+0.0884*w)',
+            '# Circular Hello Curves by Vamoss\n# https://www.openprocessing.org/sketch/697891\n\ntextToWrite = "Hello Makerbean!"\nSEGMENTS = 200\nPI = 3.1415926\nTWO_PI = PI * 2\n\n\nclass Point:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n\n\ndef setup():\n    global centerX, centerY, fontSize, INNER_RADIUS, RADIUS_VARIATION\n    createCanvas(windowWidth, windowHeight)\n    centerX = windowWidth / 2\n    centerY = windowHeight / 2\n    \n    screenPct = min(canvasHeight, canvasWidth) / 1000\n    fontSize = screenPct * 150\n    INNER_RADIUS = screenPct * 200\n    RADIUS_VARIATION = screenPct * 200\n    \n    textFont("Helvetica")\n    textSize(fontSize)\n\n\ndef pointForIndex(pct):\n    global centerX, centerY, fontSize, INNER_RADIUS, RADIUS_VARIATION\n    NOISE_SCALE = 1.5\n    angle = pct * TWO_PI\n    cosAngle = cos(angle)\n    sinAngle = sin(angle)\n    time = frameCount / 100\n    noiseValue = noise(NOISE_SCALE * cosAngle + NOISE_SCALE, NOISE_SCALE * sinAngle + NOISE_SCALE, time)\n    radius = INNER_RADIUS + RADIUS_VARIATION * noiseValue\n    return Point(radius * cosAngle + centerX, radius * sinAngle + centerY)\n\n\ndef draw():\n    background(255);\n    fill(0);\n    noStroke();\n    \n    beginShape();\n    for i in range(SEGMENTS):\n        p0 = pointForIndex(i / SEGMENTS)\n        vertex(p0.x, p0.y)\n    endShape(p.CLOSE)\n    \n    pct = atan2(mouseY - centerY, mouseX - centerX) / TWO_PI\n\n    pixToAngularPct = 1 / ((INNER_RADIUS + RADIUS_VARIATION / 2) * TWO_PI)\n    for textChar in textToWrite:\n        charWidth = textWidth(textChar)\n        pct += charWidth/2 * pixToAngularPct\n        \n        leftP = pointForIndex(pct-0.01)\n        rightP = pointForIndex(pct+0.01)\n        angle = atan2(leftP.y - rightP.y, leftP.x - rightP.x) + PI\n        \n        push()\n        point = pointForIndex(pct)\n        translate(point.x, point.y)\n        rotate(angle)\n        translate(-point.x, -point.y)\n        text(textChar, point.x-charWidth/2, point.y)\n        pop()\n        \n        pct += charWidth/2 * pixToAngularPct\n',
+            'def setup():    \n    # 这里面的语句运行一次\n\ndef draw():\n    # 这里面的语句会循环运行\n'
+        ];
+
+        var editor = window.ace.edit("editor");
+        editor.setValue(example_code[number]);
+        $('#examples-modal').modal('hide')
+    }
+
+    $.ajax({
+        type: 'get',
+        url: '/online_courses/python_online_course_link/',
+        success: function(d){
+            if (d.success) {
+                console.log(d.link);
+                $(".sign-up-class a").attr('href', d.link);
+            }
+        }
+    })
+
+    $('#canvas-modal').on('hidden.bs.modal', function (e) {
+        $('#p5Canvas').html('');
+        var editor = ace.edit("editor");
+        var code = editor.getValue();
+        if (code.search('import makerbean') < 0) {
+            window.myp5.noLoop();
+        }
+    })
+    </script>
+
+
+    <script type="text/javascript">
+        var qr_data, check_interval;
+
+        $('#login-modal').on('hidden.bs.modal', function (e) {
+            clearInterval(check_interval);
+        })
+
+        function open_wechat_login_modal() {
+            $('#login-modal').modal('show');
+            $.ajax({
+                type: 'post',
+                url: '/wechatplatform/login',
+                dataType: 'json',
+                data: {},
+                success: function(d){
+                    $('#login-qrcode').html('');
+                    qr_data = d;
+                    new QRCode(document.getElementById("login-qrcode"), d.url);
+                    check_interval = setInterval(check_user_scan, 2000);
+                    qrCodeGenerateSuccess = true;
+                },
+                error: function() {
+                    if (($("#login-modal").data('bs.modal') || {})._isShown){
+                        $.ajax(this);
+                    }
+                }
+            })
+        }
+
+        function check_user_scan() {
+            $.ajax({
+                type: 'get',
+                url: '/wechatplatform/check',
+                dataType: 'json',
+                data: {'uuid': qr_data.uuid},
+                success: function(d){
+                    if (d.scanned) {
+                        clearInterval(check_interval);
+                        $('#login-modal').modal('hide');
+                        location.reload();
+                    } else if (d.expired) {
+                        clearInterval(check_interval);
+                        $('#login-qrcode-expired-warning').text('二维码已过期，请重新刷新页面获取');
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+
+<!-- Mirrored from www.makerbean.com/python_blockly_online by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 15 Oct 2021 06:26:08 GMT -->
+</html>

@@ -1,0 +1,13 @@
+package:
+  name: cytoolz
+  version: 0.11.0
+source:
+  sha256: c64f3590c3eb40e1548f0d3c6b2ccde70493d0b8dc6cc7f9f3fec0bb3dcd4222
+  url: https://files.pythonhosted.org/packages/58/67/1c60da8ba831bfefedb64c78b9f6820bdf58972797c95644ee3191daf27a/cytoolz-0.11.0.tar.gz
+requirements:
+  run:
+  - nose
+  - toolz
+test:
+  imports:
+  - cytoolz

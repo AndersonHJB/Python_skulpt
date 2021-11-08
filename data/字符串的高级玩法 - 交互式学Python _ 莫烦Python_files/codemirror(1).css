@@ -1,0 +1,68 @@
+.CodeMirror {
+  font-size: 12px;
+  height: auto;
+  line-height: 19px;
+  border-radius: 4px;
+}
+
+.scriptInput {
+  display: none;
+}
+
+.cm-s-darcula.CodeMirror {
+  background: #424242;
+}
+
+.scriptOutput {
+  width: auto;
+  height: auto;
+  border: 1px solid rgb(167 165 165);
+  padding: 4px;
+  color: var(--c-p);
+  margin: 15px 0;
+  word-wrap: break-word;
+  display: none;
+  font-size: 13px;
+  white-space:pre-wrap
+}
+
+.scriptRunBtn {
+  display: none;
+}
+
+.scriptRunBtn:disabled {
+  background-color: #999797;
+}
+
+.cm-s-darcula span.cm-string {
+  color: #00B580;
+}
+
+.cm-s-darcula span.cm-variable {
+  color: #9BC28E;
+}
+
+.cm-s-darcula span.cm-builtin {
+  color: #00CCCC;
+}
+
+.cm-s-darcula span.cm-number {
+  color: #F971BB;
+}
+
+.cm-s-darcula span.cm-variable-2 {
+  color: #fb90f0;
+}
+
+.cm-s-darcula span.cm-builtin {
+  color: #00CCCC;
+}
+
+.cm-s-darcula span.cm-meta {
+  color: #459CFF;
+}
+
+.cm-s-darcula span.cm-def {
+  color: #ffffff;
+  font-style: italic;
+}

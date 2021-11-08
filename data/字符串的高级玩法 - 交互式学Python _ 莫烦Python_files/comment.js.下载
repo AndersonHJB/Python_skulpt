@@ -1,0 +1,1141 @@
+const DeletedCommentByUser = "<div class='deleted-comment'>该评论已删除</div>";
+const DeletedCommentByAdmin = "<div class='deleted-comment'>该评论涉及广告或不和谐元素，已被管理员删除</div>";
+const urlRegex = /(.{0,2})(https?:\/\/\S[a-zA-Z0-9!\?=@#\$%\&\*\+\(\._\-\/\\u4e00-\\u9fa5]*)(.?)/g;
+const urlDescription = /(\[[\s\S]+?]\((https?:\/\/\S[a-zA-Z0-9!\?=@#\$%\&\*\+\(\._\-\/\\u4e00-\\u9fa5]*)\))/g;
+const codeRegex = /^```(\S*?)\s*?\n([\s\S]*?)\n```/gm;
+const inlineCodeRegex = /`([\s\S]*?)`/g
+const PageSize = 5;
+const likedColor = "#f56e42";
+const unLikedColor = "#8590a6";
+const likedPathD = "M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z"
+var CurrentPageNum = 0;
+var CurrentRespPageNum = 0;
+var CurrentMyCommentPageNum = 0;
+var LoginUris;
+
+
+function commentLogout(logoutUrl, commentUrl, postId) {
+    $.ajax({
+        url: logoutUrl,
+        type: 'POST',
+        contentType: 'application/json',
+        dataType: "json",
+        error: function (xhr, textStatus, error) {
+            console.log(xhr.responseText);
+            console.log(xhr.statusText);
+            console.log(textStatus);
+            console.log(error);
+        },
+        success: function (response) {
+            if (response.error === "" || response.error === null) {
+                commentGet(commentUrl, postId);
+                insertThirdPartyLogin();
+            } else {
+                console.log(response.error)
+            }
+
+        }
+    })
+}
+function markNewRespToRead(commentUrl, cids){
+    $.ajax({
+        url: commentUrl,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            method: "mark_user_new_responses_read",
+            mark_ids: cids,
+        }),
+        dataType: "json",
+        error: function (xhr, textStatus, error) {
+            console.log(xhr.responseText);
+            console.log(xhr.statusText);
+            console.log(textStatus);
+            console.log(error);
+        },
+        success: function (response) {
+            if (response.error === "" || response.error === null) {
+                let nav1 = $("#my-msg-page-nav"+"1");
+                if (nav1.contents().length !== 0) {
+                    nav1.empty();
+                }
+                let nav2 = $("#my-msg-page-nav"+"2");
+                if (nav2.contents().length !== 0) {
+                    nav2.empty();
+                }
+            } else {
+                console.log(response.error)
+            }
+
+        }
+    })
+}
+function checkCommentResponse(commentUrl){
+    $.ajax({
+        url: commentUrl,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            method: "get_user_new_response"
+        }),
+        dataType: "json",
+        error: function (xhr, textStatus, error) {
+            console.log(xhr.responseText);
+            console.log(xhr.statusText);
+            console.log(textStatus);
+            console.log(error);
+        },
+        success: function (response) {
+            if (response.error === "" || response.error === null) {
+                responseDisplay(commentUrl, response.data);
+            } else {
+                console.log(response.error)
+            }
+
+        }
+    })
+}
+
+function userMsgBtnClicked(){
+    const getUrl = window.location;
+    const baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[0];
+    window.location.replace(baseUrl + "user/message/");
+}
+
+function moveToId(id){
+    if (id === null) {
+        return
+    }
+    var myElement = document.getElementById(id);
+    var topPos = myElement.offsetTop;
+    window.scrollTo({top: topPos - 120, behavior: 'smooth'});
+    $('#'+id).fadeOut(300).fadeIn(150).fadeOut(150).fadeIn(150);
+}
+
+function responseDisplay(commentUrl, responses) {
+    let elem = $(".user-msg-notify-btn")
+    elem.on("click", function(){userMsgBtnClicked()});
+    let rCount = 0;
+    if (responses.length === 0) {
+        return
+    } else if (responses.length <= 9) {
+        rCount = responses.length;
+    } else {
+        rCount = "+";
+    }
+
+    elem.append(
+    $("<span>", {
+        class: "notification-badge"
+    }).text(rCount));
+}
+
+function showAllResponse(commentUrl, responses, respType){
+    let commentReplyAuthorSpan = "";
+    let deleteBtn = (r) => null;
+    if (respType === "new"){
+        $(".user-msg-notify-btn span").css("display", "none");
+        let markIds = [];
+        for (let resp of responses) {
+            markIds.push(resp.cid);
+        }
+        markNewRespToRead(commentUrl, markIds);
+        commentReplyAuthorSpan = "回复了我："
+    } else if (respType === "myResp") {
+        commentReplyAuthorSpan = "收到了我的回复：";
+        deleteBtn = (r) => $("<button>", {
+                    class:"comment-btn comment-btn-right-margin",
+                    id:"resp-del-btn-id-" + r.cid,
+                    text: "删除"
+                }).on("click", function(){commentDel(commentUrl, r.cid)});
+    } else if (respType === "respToMe") {
+        commentReplyAuthorSpan = "回复了我："
+    }
+
+
+    if (responses.length === 0) {
+        return
+    }
+    var ul = $(".user-resp-msg");
+    ul.empty();
+
+    for (const r of responses) {
+        ul.append($("<li>").html(
+            $("<div>", {class:"comment-content"}).append(
+                $("<div>", {
+                    class:"comment-author",
+                    text: r.reply_user_name,
+                }).css("margin-right", "5px"),
+                $("<span>", {
+                    class:"comment-reply-author-span",
+                    text: commentReplyAuthorSpan,
+                }),
+                $("<a>", {
+                    href: r.post_url,
+                    text: r.post_title + ' ⤴',
+                    class: "resp-post-title",
+                }).attr("target", "_self").append(
+                    $("<div>", {
+                        class:"resp-info-text comment-body",
+                        id: "resp-info-text-id-" + r.cid,
+                    }),
+                ),
+                $("<div>", {
+                    class: "comment-date",
+                    text: r.datetime,
+                }),
+                $("<div>", {class: "comment-body"}).html(detectReplaceComment(r.comment)),
+                $("<button>", {
+                        class:"comment-like-btn comment-btn",
+                        id:"resp-like-btn-id-" + r.cid,
+                        html: "<svg fill=\""+unLikedColor+"\" viewBox=\"0 0 24 18\" width=\"16\" height=\"16\" style=\"margin-right: 5px;\"><path d=\""+likedPathD+"\" fill-rule=\"evenodd\"></path></svg>",
+                    }).on("click", function(){
+                        commentLike(commentUrl, r.cid, r.pid, "resp-like-btn-id-" + r.cid);
+                }),
+                $("<button>", {
+                    class:"comment-btn comment-btn-right-margin",
+                    id:"resp-reply-btn-id-" + r.cid,
+                    text: "回复"
+                }).on("click", function(){responseReplyBox(commentUrl,r.cpid,r.cid,r.pid)}),
+                deleteBtn(r),
+                $("<div>", {class:"comment-reply-tools-div", id:"response-reply-tools-id-"+r.cid}),
+                $("<div>", {
+                    id: "respComment-" + r.cid,
+                    class: "comment-reply-div"
+                })
+            )
+        ));
+        if (r.liked) {
+            $("#resp-like-btn-id-" + r.cid +" > svg").attr("fill", likedColor);
+        }
+        if (r.rc_comment !== "") {
+            $("#resp-info-text-id-" + r.cid).html(detectReplaceComment(r.rc_comment));
+        } else {
+           $("#resp-info-text-id-" + r.cid).text("无");
+        }
+    }
+    reHighlight();
+}
+
+function responseReplyBox(commentUrl, parentId, replyId, postId) {
+    const rtx = $("#respComment-textarea-" + replyId);
+    if (rtx) {
+        rtx.remove();
+    }
+    const rbtn = $("#resp-reply-btn-id-" + replyId);
+    if (rbtn){
+        rbtn.css({"display":"none"});
+    }
+    const rbtn2 = $("#respComment-submit-btn-" + replyId);
+    if (rbtn2) {
+        rbtn2.remove();
+    }
+    $("#response-reply-tools-id-"+replyId).empty().append(
+        $("<button>", {
+            class: "comment-btn",
+            text: "</>",
+            id: "response-reply-tools-codeblock-id-" + replyId,
+        }).on(
+            "click",
+            function(){insertCodePlaceholder(replyId, "respComment-textarea-"+replyId)}
+            ).append(
+              $("<span>", {class:"tooltiptext", text:"选中多行代码高亮"})
+        )
+
+    )
+    $("#respComment-" + replyId).append(
+        $("<textarea>", {
+            class: "comment-textarea",
+            name:"comments",
+            id:"respComment-textarea-" + replyId,
+        }).on("keydown", textareaKeydown).on("input", function(){this.style.height = "";this.style.height = this.scrollHeight + "px"}).attr("maxlength", 2000),
+        $("<button>", {
+            class: "comment-submit-btn",
+            text: "发布",
+            id: "respComment-submit-btn-" + replyId,
+        }).on("click", function(){commentPut(commentUrl, postId, parentId, replyId, 'respComment-textarea-' + replyId)})
+    );
+     $("#respComment-textarea-" + replyId).focus();
+
+}
+
+function showHistResp(commentUrl){
+    $.ajax({
+        url: commentUrl,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            method: "get_user_hist_response",
+            page_num: CurrentRespPageNum,
+            page_size: PageSize
+        }),
+        dataType: "json",
+        error: function (xhr, textStatus, error) {
+            console.log(xhr.responseText);
+            console.log(xhr.statusText);
+            console.log(textStatus);
+            console.log(error);
+        },
+        success: function (response) {
+            if (response.error === "" || response.error === null) {
+                const responses = response.data.comments;
+                const totalNum = response.data.total_num;
+                if (responses.length === 0) {
+                    return
+                }
+                showAllResponse(commentUrl, responses, "respToMe");
+                setPageNav(commentUrl, totalNum, null, "my-msg-page-nav1", CurrentRespPageNum, "get_user_hist_response");
+                setPageNav(commentUrl, totalNum, null, "my-msg-page-nav2", CurrentRespPageNum, "get_user_hist_response");
+            } else {
+                console.log(response.error);
+            }
+
+        }
+    })
+}
+
+function showHistComment(commentUrl){
+    $.ajax({
+        url: commentUrl,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            method: "get_user_hist_comment",
+            page_num: CurrentMyCommentPageNum,
+            page_size: PageSize
+        }),
+        dataType: "json",
+        error: function (xhr, textStatus, error) {
+            console.log(xhr.responseText);
+            console.log(xhr.statusText);
+            console.log(textStatus);
+            console.log(error);
+        },
+        success: function (response) {
+            if (response.error === "" || response.error === null) {
+                const comments = response.data.comments;
+                const totalNum = response.data.total_num;
+                if (comments.length === 0) {
+                    return
+                }
+                showAllResponse(commentUrl, comments, "myResp")
+                setPageNav(commentUrl, totalNum, null, "my-msg-page-nav1", CurrentMyCommentPageNum, "get_user_hist_comment");
+                setPageNav(commentUrl, totalNum, null, "my-msg-page-nav2", CurrentMyCommentPageNum, "get_user_hist_comment");
+            } else {
+                console.log(response.error)
+            }
+
+        }
+    })
+}
+
+function setThirdPartyLoginUris(uris){
+    LoginUris = [uris.github, uris.qq, uris.weibo, uris.gitee];
+}
+function insertThirdPartyLogin(){
+    $(".nav-notification").css({display:"none"});
+    $("#comment-textarea-main").attr("disabled", true).prop("placeholder", "留言请先第三方账号登录");
+    $("#third-party-oauth-login").empty();
+    $("<p>", {
+        class: "third-party-oauth-login-p",
+        text: "第三方账户登录："
+    }).appendTo("#third-party-oauth-login");
+
+    const srcs = ["github.png", "qq_icon.png", "weibo.png", "gitee.png"]
+    const names = ["github", "qq", "weibo", "gitee"];
+    for (i = 0; i < LoginUris.length; i++) {
+        var a = $("<a>", {
+            href: LoginUris[i],
+        });
+        a.appendTo("#third-party-oauth-login")
+        $("<img>", {
+            class: "oauth-login-img",
+            src: "/static/img/icon/" + srcs[i],
+            alt: names[i]
+        }).appendTo(a)
+    }
+}
+
+function commentPut(commentUrl, postId, parentId, replyId, textareaId) {
+    var content = $('#' + textareaId).val().trim();
+    if (content !== "") {
+        $.ajax({
+            url: commentUrl,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                content: content,
+                post_id: postId,
+                parent_id: parentId,
+                reply_id: replyId
+            }),
+            dataType: "json",
+            error: function (xhr, textStatus, error) {
+                console.log(xhr.responseText);
+                console.log(xhr.statusText);
+                console.log(textStatus);
+                console.log(error);
+            },
+            success: function (response) {
+                if (response.error === "" || response.error === null) {
+                    if (textareaId.startsWith("comment-reply-textarea-")) {
+                        commentGet(commentUrl, postId);
+                        $("#del-btn-id-" + replyId).removeAttr("style");
+                    } else if (textareaId === "comment-textarea-main") {
+                        commentGet(commentUrl, postId);
+                        $('#comment-submit').attr('disabled', true);
+                    } else if (textareaId.startsWith("respComment-textarea-")) {
+                        $("#respComment-submit-btn-"+replyId).remove();
+                        $("#respComment-textarea-" + replyId).remove();
+                        $("#response-reply-tools-codeblock-id-"+replyId).remove();
+                        $("#resp-reply-btn-id-" + replyId).css({"display": "inline-block"});
+                        alert("回复成功！");
+                    }
+                    document.getElementById(textareaId).value = "";
+                } else {
+                    alert("发布失败，还没有登录或者登录态过期");
+                    insertThirdPartyLogin();
+                }
+            }
+        })
+    } else {
+        document.getElementById(textareaId).value = "";
+    }
+}
+
+function commentSortDateSwitch(commentUrl, postId){
+    var elem = $("#comment-sort-btn");
+    if (elem.val() === "newFirst") {
+        elem.val("oldFirst");
+        elem.text("⇌ 展示最早");
+    } else {
+        elem.val("newFirst");
+        elem.text("⇌ 展示最新");
+    }
+    commentGet(commentUrl, postId)
+}
+
+function commentGet(commentUrl, postId, tcid) {
+    var commentOrder = $("#comment-sort-btn").val();
+    $.ajax({
+        url: commentUrl,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            post_id: postId,
+            order: commentOrder,
+            page_num: CurrentPageNum,
+            page_size: PageSize,
+            method: "get_post_comments",
+            tcid: tcid
+        }),
+        dataType: "json",
+        error: function (xhr, textStatus, error) {
+            console.log(xhr.responseText);
+            console.log(xhr.statusText);
+            console.log(textStatus);
+            console.log(error);
+        },
+        success: function (response) {
+            if (response.error === "" || response.error === null) {
+                commentDisplay(commentUrl, postId, response.data.comments);
+                const totalNum = response.data.total_num;
+                setPageNav(commentUrl, totalNum, postId, "comment-page-nav1", CurrentPageNum, "get_post_comments");
+                setPageNav(commentUrl, totalNum, postId, "comment-page-nav2", CurrentPageNum, "get_post_comments");
+            } else {
+                console.log(response.error)
+            }
+        },
+        complete: function (data) {
+            if (tcid >= 0) {
+                moveToCommentId(tcid);
+            }
+        }
+    })
+}
+
+function setPageNav(commentUrl, totalNum, postId, divId, currentPageNum, method){
+    let div = $("#"+divId);
+    div.empty();
+    if (totalNum <= PageSize) {
+        return
+    }
+    const maxPageNum = Math.ceil(totalNum/PageSize);
+
+    if (maxPageNum <= 5){
+        if (currentPageNum > 0) {
+            setPageNavLi(commentUrl, postId, div, -2, currentPageNum, method);
+        }
+        for (let i = 0; i<=maxPageNum-1;i++){
+            setPageNavLi(commentUrl, postId, div, i, currentPageNum, method);
+        }
+        if (currentPageNum < maxPageNum-1){
+            setPageNavLi(commentUrl, postId, div, -3, currentPageNum, method);
+        }
+    } else {
+        const before = currentPageNum - 2;
+        const after = currentPageNum + 2;
+
+        if (currentPageNum > 0) {
+            setPageNavLi(commentUrl, postId, div, -2, currentPageNum, method);
+        }
+        setPageNavLi(commentUrl, postId, div, 0, currentPageNum, method);
+        if (currentPageNum < 2) {
+            for (let i =1; i<3;i++){
+                setPageNavLi(commentUrl, postId, div, i, currentPageNum, method);
+            }
+        }
+        if (before > 0) {
+            setPageNavLi(commentUrl, postId, div, -1, currentPageNum, method);
+        }
+        if (currentPageNum >=2 && currentPageNum < maxPageNum-3) {
+            for (let i =currentPageNum - 1; i<=currentPageNum+1;i++){
+                setPageNavLi(commentUrl, postId, div, i, currentPageNum, method);
+            }
+        }
+
+        if (after < maxPageNum - 1) {
+            setPageNavLi(commentUrl, postId, div, -1, currentPageNum, method);
+        }
+        if (currentPageNum >= maxPageNum-3) {
+            for (let i =maxPageNum-4; i<maxPageNum-1;i++){
+                setPageNavLi(commentUrl, postId, div, i, currentPageNum, method);
+            }
+        }
+        setPageNavLi(commentUrl, postId, div, maxPageNum-1, currentPageNum, method);
+
+        if (currentPageNum < maxPageNum-1) {
+            setPageNavLi(commentUrl, postId, div, -3, currentPageNum, method);
+        }
+    }
+}
+
+function setPageNavLi(commentUrl, postId, div, i, currentPageNum, method){
+    var btn = document.createElement("button");
+    btn.className = "comment-page-nav-btn";
+    if (i === -1){
+        btn.innerText = "...";
+    } else if (i === currentPageNum){
+        btn.innerText = (i+1).toString();
+        btn.style.color = "#d9d9d9";
+    } else if (i === -2){   // 上一页
+        btn.innerText = "上一页";
+        btn.onclick= function(){
+            if (method === "get_post_comments") {
+                CurrentPageNum -= 1;
+                commentGet(commentUrl, postId);
+            } else if (method === "get_user_hist_response") {
+                CurrentRespPageNum -= 1;
+                showHistResp(commentUrl);
+            } else if (method === "get_user_hist_comment") {
+                CurrentMyCommentPageNum -= 1;
+                showHistComment(commentUrl);
+            }
+
+        };
+    } else if (i === -3){
+        btn.innerText = "下一页";
+        btn.onclick= function(){
+            if (method === "get_post_comments") {
+                CurrentPageNum += 1;
+                commentGet(commentUrl, postId);
+            } else if (method === "get_user_hist_response") {
+                CurrentRespPageNum += 1;
+                showHistResp(commentUrl);
+            } else if (method === "get_user_hist_comment") {
+                CurrentMyCommentPageNum += 1;
+                showHistComment(commentUrl);
+            }
+        };
+    } else {
+        btn.onclick= function(){
+            if (method === "get_post_comments") {
+                CurrentPageNum = i;
+                commentGet(commentUrl, postId);
+            } else if (method === "get_user_hist_response") {
+                CurrentRespPageNum = i;
+                showHistResp(commentUrl);
+            } else if (method === "get_user_hist_comment") {
+                CurrentMyCommentPageNum = i;
+                showHistComment(commentUrl);
+            }
+        };
+        btn.innerText = (i+1).toString();
+    }
+
+    div.append(btn);
+}
+
+function commentDel(commentUrl, commentId) {
+    if (confirm("确认删除？")) {
+        $.ajax({
+            url: commentUrl,
+            type: 'DELETE',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                comments_id: [commentId]
+            }),
+            dataType: "json",
+            error: function (xhr, textStatus, error) {
+                console.log(xhr.responseText);
+                console.log(xhr.statusText);
+                console.log(textStatus);
+                console.log(error);
+            },
+            success: function (response) {
+                if (response.error === "" || response.error === null) {
+                    const reasonCode = response.data["reason"];
+                    var reasonMsg = DeletedCommentByUser;
+                    if (reasonCode === 1) {
+                        reasonMsg = DeletedCommentByAdmin;
+                    }
+                    $("#comment-id-"+commentId).html(reasonMsg);
+                    $("#comment-hidden-id-"+commentId).text(reasonMsg);
+                    $("#like-btn-id-" + commentId).remove();
+                    $("#reply-btn-id-" + commentId).remove();
+                    $("#change-btn-id-"+ commentId).remove();
+                    $("#del-btn-id-"+ commentId).remove();
+                } else {
+                    console.log(response.error)
+                }
+
+            }
+        })
+    }
+
+}
+
+
+function commentDisplay(commentUrl, postId, comments) {
+    var contentUl = $("#bottom-comments-ul");
+    contentUl.empty();
+    if (comments.length === 0) {
+        $("#comment-page-nav1").css("padding", 0);
+        contentUl.append($("<p>", {
+            text: "快来当第一个留言的同学吧~"
+        }).css("text-align", "center"));
+        return
+    }
+    // do parent comments
+    for (const c of comments) {
+        if (c.parent_id !== null) {
+            continue    // if not parent
+        }
+        contentUl.append(getCommentLi(c, commentUrl, postId))
+
+    }
+    // do child comments
+    for (const c of comments) {
+        if (c.parent_id === null || c.parent_id <= 0) {
+            continue    // if is parent
+        }
+        const reply = getCommentLi(c, commentUrl, postId);
+        $("#reply-ul-id-" + c.parent_id).prepend(reply)
+    }
+    // do delete liked
+    var text = "";
+    for (const c of comments) {
+        if (c.delete_code === 0) {
+            text = DeletedCommentByUser;
+        } else if (c.delete_code === 1) {
+            text = DeletedCommentByAdmin;
+        } else {
+            text = detectReplaceComment(c.html);
+        }
+
+        $("#comment-id-" + c.id).html(text);
+        if (c.liked && c.delete_code === -1) {
+            $("#like-btn-id-" + c.id).css("color", likedColor);
+            $("#like-btn-id-" + c.id+" > svg").attr("fill", likedColor);
+        }
+    }
+    // highlight codes
+    reHighlight();
+}
+
+function reHighlight(){
+    const brPlugin = {
+        "before:highlightBlock": ({ block }) => {
+          block.innerHTML = block.innerHTML.replace(/<br[ /]*>/g, '\n');
+        },
+        "after:highlightBlock": ({ result }) => {
+          result.value = result.value.replace(/\n/g, "<br>");
+        }
+      };
+
+    // how to use it
+    hljs.addPlugin(brPlugin);
+
+    $('.comment-body > pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
+    $('.comment-body > span code').each(function(i, inline) {
+        hljs.highlightBlock(inline);
+    }).css("display", "inline-block"
+    ).css("color","#fe7171"
+    ).css("background-color", "#e5e8e8"
+    ).css("overflow-x", "inherit"
+    ).css("padding", "0 4px"
+    ).css("font-size", "1em");
+}
+function detectReplaceComment(text) {
+    text = $.trim(text);
+    var found = [];
+    var match;
+    while (match = codeRegex.exec(text)){
+        const lang = match[1];
+        const codes = match[2];
+        found.push([match.index, match[0].length, lang, codes]);
+    }
+    for (var i=found.length-1;i>=0;i--){
+        const v = found[i];
+        text = text.substr(0, v[0]) + "<pre><code class='" + v[2] + " hljs'>" +v[3] + "</code></pre>" + text.substr(v[0]+v[1])
+    }
+    var inlineFound = [];
+    while (match = inlineCodeRegex.exec(text)){
+        const code = match[1];
+        inlineFound.push([match.index, match[0].length, code]);
+    }
+    for (var i=inlineFound.length-1;i>=0;i--){
+        const v = inlineFound[i];
+        text = text.substr(0, v[0]) + "<span><code class='plaintext hljs'>" + v[2] + "</code></span>" + text.substr(v[0]+v[1])
+    }
+
+    text = text.replace(urlRegex, function(s, prefix, url, subfix) {
+        if (prefix === "](" && subfix === ")") {
+            return s
+        }
+        var target;
+        if (url.startsWith("https://mofanpy.com")) {
+            target = "_self";
+        } else {
+            target = "_blank";
+        }
+        return prefix + ' <a href="' + url + '" target="' + target +'" style="font-size:0.8em">' + url + '</a> ' + subfix;
+      });
+    text = text.replace(urlDescription, function(urlDesc){
+        const res = urlDesc.match(/^\[([\s\S]+?)]\((https?:\/\/\S[^\s]+)\)$/);
+        if (res.length !== 3) {
+            return urlDesc
+        }
+        const desc = res[1];
+        const url = res[2];
+        var target;
+        if (url.startsWith("https://mofanpy.com")) {
+            target = "_self";
+        } else {
+            target = "_blank";
+        }
+        return ' <a href="' + url + '" target="' + target +'">' + desc + '</a> ';
+    });
+    text = text.replace(/\r?\n/g, "<br />");
+    text = text.replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;")
+    return text
+}
+function unescapeHtml(safe) {
+    if (safe) {
+        return safe.replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#039;/g, "'")
+    }
+    return ""
+}
+
+function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+ }
+
+function getCommentLi(c, commentUrl, postId) {
+    var commentParentId = c.parent_id;
+    var commentContent =  $("<div>", {class:"comment-content", id:"comment-content-div-"+c.id}).append(
+            $("<div>", {class: "comment-author", text: c.user_name})
+        );
+    if (c.parent_id !== null) {
+        commentContent.append(
+            $("<div>", {class:"comment-author-reply",text:"回复"}),
+            $("<div>", {
+                class:"comment-author comment-replier",text:c.reply_user_name + ' ⤴'
+                }).on("click", function(){moveToCommentId(c.reply_id)})
+            );
+    } else {
+        commentParentId = c.id;
+    }
+    commentContent.append(
+        $("<div>", {class:"comment-date", text:c.datetime}),
+        $("<div>", {class:"comment-body-hidden", text:unescapeHtml(c.html), id:"comment-hidden-id-"+c.id}),
+        $("<div>", {class:"comment-body", id:"comment-id-" + c.id})
+    );
+    if (c.delete_code === -1) {
+        var likeColor = likedColor;
+        if (!c.liked) {
+            likeColor = unLikedColor;
+        }
+        commentContent.append($("<button>", {
+            class:"comment-like-btn comment-btn",
+            id:"like-btn-id-" + c.id,
+            html: "<svg fill=\""+likeColor+"\" viewBox=\"0 0 24 18\" width=\"16\" height=\"16\" style=\"margin-right: 5px;\"><path d=\""+likedPathD+"\" fill-rule=\"evenodd\"></path></svg>" + c.like_count
+        }).on("click", function(){
+            commentLike(commentUrl, c.id,postId, "like-btn-id-" + c.id)
+        }));
+    }
+    if (c.delete_code === -1) {
+        commentContent.append(
+            $("<button>", {
+                class:"hide-button comment-btn",
+                id:"reply-btn-id-" + c.id,
+                text: "回复"
+            }).on("click", function(){commentReplyBox(commentUrl,commentParentId,c.id,postId)})
+        );
+        if (c.changeable) {
+            commentContent.append(
+                $("<button>", {
+                    class:"hide-button comment-btn",
+                    id:"change-btn-id-" + c.id,
+                    text: "修改"
+                }).on("click", function(){commentChangeBox(commentUrl,c.id)})
+            )
+        }
+        if (c.deletable && c.delete_code === -1) {
+            commentContent.append(
+                $("<button>", {
+                    class:"hide-button comment-btn",
+                    id:"del-btn-id-" + c.id,
+                    text: "删除"
+                }).on("click", function(){commentDel(commentUrl,c.id)})
+            )
+        }
+    }
+    var li = $("<li>", {
+        class: "comment-li"
+    }).append(
+        $("<div>", {class:"comment-thumbnail"}).append(
+            $("<img>", {class:"cycle-img", src: c.user_img_path})
+        ),
+        commentContent,
+        $("<div>", {class:"comment-reply-tools-div", id:"comment-reply-tools-id-"+c.id}),
+        $("<div>", {class:"comment-reply-div", id:"comment-reply-id-"+ c.id})
+    );
+    if (c.parent_id === null || c.parent_id === 0) {
+        li.append($("<ul>", {class:"reply-ul", id:"reply-ul-id-" + c.id}));
+    }
+    return li
+}
+
+function moveToCommentId(replyId) {
+    if (replyId === null) {
+        return
+    }
+    var divId;
+    if (replyId === 0) {
+        divId = "third-party-oauth-login";
+    } else if (replyId > 0) {
+        divId = "comment-content-div-" + replyId;
+    }
+    var myElement = document.getElementById(divId);
+    var topPos = myElement.offsetTop;
+    window.scrollTo({top: topPos - 120, behavior: 'smooth'});
+    $('#'+divId).fadeOut(300).fadeIn(200).fadeOut(200).fadeIn(200);
+
+}
+
+function commentLike(commentUrl, commentId, postId, btnId) {
+    $.ajax({
+        url: commentUrl,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            comment_id: commentId,
+            post_id: postId,
+            method: "like"
+        }),
+        dataType: "json",
+        error: function (xhr, textStatus, error) {
+            console.log(xhr.responseText);
+            console.log(xhr.statusText);
+            console.log(textStatus);
+            console.log(error);
+        },
+        success: function (response) {
+            if (response.error === "" || response.error === null) {
+                const likeCount = response.data.like_count;
+                const liked = response.data.liked;
+                var likeColor = likedColor;
+                if (btnId.startsWith('like-btn-id-')) {
+                    var like1 = document.getElementById('like-btn-id-' + commentId);
+                    if (!liked) {
+                        likeColor = unLikedColor;
+                    }
+                    like1.innerHTML = "<svg fill=\""+likeColor+"\" viewBox=\"0 0 24 18\" width=\"16\" height=\"16\" style=\"margin-right: 5px;\"><path d=\""+likedPathD+"\" fill-rule=\"evenodd\"></path></svg>" + likeCount;
+                    like1.style.color = likeColor;
+                } else if (btnId.startsWith("resp-like-btn-id-")) {
+                    var like2 = document.getElementById('resp-like-btn-id-' + commentId);
+                    if (!liked) {
+                        likeColor = unLikedColor;
+                    }
+                    like2.innerHTML = "<svg fill=\""+likeColor+"\" viewBox=\"0 0 24 18\" width=\"16\" height=\"16\" style=\"margin-right: 5px;\"><path d=\""+likedPathD+"\" fill-rule=\"evenodd\"></path></svg>";
+
+                }
+
+            }
+
+        }
+    })
+}
+function insertCodePlaceholder(replyId, textareaId){
+    const t = document.getElementById(textareaId);
+    var start = t.selectionStart;
+    var end = t.selectionEnd;
+    if (start === end) { // 无缝
+        // t.value = t.value.substr(0, start) + "``" + t.value.substr(end);
+        // t.setSelectionRange(start + 1, end -1);
+        const newText1 = "\n```python\n";
+        const newText2 = "\n```\n";
+        t.value = t.value.substr(0, start) + newText1 + newText2 + t.value.substr(end);
+        t.selectionStart = t.selectionEnd = start + newText1.length;
+    } else { // 多选
+        var text = t.value.substr(start, end - start);
+        const _len = text.split("\n").length;
+
+        const newText1 = "\n```python\n";
+        const newText2 = "\n```\n";
+        start = findStartOfLine(t.value, start);
+        end = findEndOfLine(t.value, end);
+        text = t.value.substr(start, end - start);
+        t.value = t.value.substr(0, start) + newText1 +text + newText2 + t.value.substr(end);
+        t.setSelectionRange(start + newText1.length, end + _len - 1 + newText1.length);
+    }
+
+    const ta = $("#"+textareaId);
+    ta.height(ta[0].scrollHeight);
+    ta.focus();
+}
+function commentReplyBox(commentUrl, parentId, replyId, postId) {
+    $("#comment-reply-tools-id-"+replyId).empty().append(
+        $("<button>", {
+            class: "comment-btn",
+            text: "</>",
+            id: "comment-reply-tools-codeblock-id-" + replyId,
+        }).on(
+            "click",
+            function(){insertCodePlaceholder(replyId, "comment-reply-textarea-"+replyId)}
+            ).append(
+              $("<span>", {class:"tooltiptext", text:"选中多行代码高亮"})
+        )
+
+    )
+    var cr = $("#comment-reply-id-" + replyId);
+    cr.empty()
+    cr.append(
+        $("<textarea>", {
+            class: "comment-textarea",
+            name:"comments",
+            id:"comment-reply-textarea-" + replyId,
+        }).on("keydown", textareaKeydown
+        ).on("input", function(){this.style.height = "";this.style.height = this.scrollHeight + "px"}
+        ).attr("maxlength", 2000),
+        $("<button>", {
+            class: "comment-submit-btn",
+            text: "发布"
+        }).on("click", function(){commentPut(commentUrl, postId, parentId, replyId, 'comment-reply-textarea-' + replyId)})
+    )
+    $("#comment-reply-textarea-" + replyId).focus();
+
+    $("#reply-btn-id-" + replyId).off("click").on("click", function () {
+        commentCancelReply(commentUrl, parentId, replyId, postId)
+    }).text("取消回复").css("display", "inline");
+    $("#del-btn-id-" + replyId).hide();
+    $("#change-btn-id-" + replyId).hide();
+}
+
+function commentCancelReply(commentUrl, parentId, replyId, postId) {
+    $("#reply-btn-id-" + replyId).off("click").on("click", function () {
+        commentReplyBox(commentUrl, parentId, replyId, postId)
+    }).text("回复").removeAttr("style");
+    $("#comment-reply-id-" + replyId).text("");
+    $("#del-btn-id-" + replyId).removeAttr('style')
+    $("#change-btn-id-" + replyId).removeAttr('style');
+    $("#comment-reply-tools-codeblock-id-" + replyId).remove();
+}
+
+function commentChangeBox(commentUrl, commentId) {
+    var cDiv = $("#comment-id-" + commentId);
+    const text = $("#comment-hidden-id-" + commentId).text();
+
+    cDiv.text("");
+    var ta = $("<textarea>", {
+        class: "comment-textarea",
+        name: "comments" ,
+        id:"comment-modify-textarea-" + commentId,
+        text: text
+    }).on("keydown", textareaKeydown
+    ).on("input", function(){this.style.height = "";this.style.height = this.scrollHeight + "px"}
+    );
+    $("#comment-modify-textarea-" + commentId).focus();
+    cDiv.append(
+        $("<div>", {
+            class: "comment-reply-tools-div",
+            id: "comment-reply-tools-id-" + commentId,
+        }).css("margin-left", "0").append(
+            $("<button>", {
+                class: "comment-btn",
+                text: "</>",
+                id: "comment-reply-tools-codeblock-id-" + commentId,
+            }).on(
+                "click",
+                function(){insertCodePlaceholder(commentId, "comment-modify-textarea-"+commentId
+                )}).append(
+              $("<span>", {class:"tooltiptext", text:"选中多行代码高亮"})
+        )),
+        ta
+    );
+    $("#change-btn-id-" + commentId).off("click").on("click", function () {
+        commentChange(commentUrl, commentId)
+    }).text("提交").css("display", "inline");
+    $("#del-btn-id-" + commentId).off("click").on("click", function () {
+        commentCancelChange(commentUrl, commentId)
+    }).text("取消修改").css("display", "inline");
+    $("#reply-btn-id-" + commentId).css("display", "none");
+    ta.height(ta[0].scrollHeight + "px");
+}
+
+function commentCancelChange(commentUrl, commentId) {
+    const oldText = $("#comment-hidden-id-"+commentId).text();
+    $("#comment-id-" + commentId).html(detectReplaceComment(escapeHtml(oldText)));
+    $("#del-btn-id-" + commentId).off("click").on("click", function () {
+        commentDel(commentUrl, commentId)
+    }).text("删除").removeAttr("style");
+    $("#change-btn-id-" + commentId).off("click").on("click", function () {
+        commentChangeBox(commentUrl, commentId)
+    }).text("修改").removeAttr("style");
+    $("#reply-btn-id-" + commentId).removeAttr("style");
+    reHighlight();
+}
+
+function commentChange(commentUrl, commentId) {
+    var ta = $('#comment-modify-textarea-' + commentId);
+    var hiddenTxt = $("#comment-hidden-id-"+commentId);
+    const oldText = hiddenTxt.text();
+    var content = ta.val().trim();
+    if (content === "" || content === oldText) {
+        ta.remove();
+        $("#comment-id-"+commentId).html(detectReplaceComment(escapeHtml(content)));
+        $("#del-btn-id-" + commentId).off("click").on("click", function () {commentDel(commentUrl, commentId)}).text("删除").removeAttr("style");
+        $("#change-btn-id-" + commentId).off("click").on("click",function () {commentChangeBox(commentUrl, commentId)}).text("修改").removeAttr("style");
+        $("#reply-btn-id-" + commentId).removeAttr("style");
+        hiddenTxt.text(content);
+        reHighlight();
+        return
+    }
+    $.ajax({
+        url: commentUrl,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            comment_id: commentId,
+            content: content,
+            method: "change"
+        }),
+        dataType: "json",
+        error: function (xhr, textStatus, error) {
+            console.log(xhr.responseText);
+            console.log(xhr.statusText);
+            console.log(textStatus);
+            console.log(error);
+        },
+        success: function (response) {
+            if (response.error === "" || response.error === null) {
+                ta.remove();
+                $("#comment-id-"+commentId).html(detectReplaceComment(response.data));
+                $("#del-btn-id-" + commentId).off("click").on("click", function () {commentDel(commentUrl, commentId)}).text("删除").removeAttr("style");
+                $("#change-btn-id-" + commentId).off("click").on("click",function () {commentChangeBox(commentUrl, commentId)}).text("修改").removeAttr("style");
+                $("#reply-btn-id-" + commentId).removeAttr("style");
+                hiddenTxt.text(content);
+                reHighlight();
+            } else {
+                console.log(response.error)
+            }
+
+        }
+    })
+}
+
+function textareaKeydown(e) {
+    var start = this.selectionStart;
+    var end = this.selectionEnd;
+    const tabSpace = "    ";
+    const tabSpaceLen = tabSpace.length;
+    if (e.keyCode === 9) {
+        // 判断选取文本
+        var text;
+        if (start === end) { // 无缝
+            // 是否按住Shift键
+            if (e.shiftKey) {
+                const newStart = findStartOfLine(this.value, start);
+                text = this.value.substr(newStart, end - newStart);
+                const ptn = new RegExp(`^ {1,${tabSpaceLen}}`, "g");
+                const oldTextLen = text.length;
+                text = text.replace(ptn, "");
+                if (oldTextLen === text.length) {
+                    e.preventDefault();
+                    return
+                }
+                this.value = this.value.substr(0, newStart) + text + this.value.substr(end);
+                const selection = Math.max(newStart, end - tabSpaceLen);
+                this.setSelectionRange(selection, selection);
+            } else {
+                this.value = this.value.substr(0, start) + tabSpace + this.value.substr(end);
+                this.setSelectionRange(start + tabSpaceLen, end + tabSpaceLen);
+            }
+        } else { // 多选
+            const newStart = findStartOfLine(this.value, start);
+            // 是否按住Shift
+            if (e.shiftKey) {
+                text = "\n"+this.value.substr(newStart, end - newStart);
+                const oldTextLen = end - newStart;
+                const ptn = new RegExp(`\n {1,${tabSpaceLen}}`, "g");
+                text = text.replace(ptn, "\n").slice(1);
+                const subLen = oldTextLen - text.length;
+                this.value = this.value.substr(0, newStart) + text + this.value.substr(end);
+                this.setSelectionRange(newStart, end - subLen);
+            } else {
+                text = this.value.substr(newStart, end - newStart);
+                text = tabSpace + text.replace(/\n/g, "\n"+tabSpace);
+                this.value = this.value.substr(0, newStart) + text + this.value.substr(end);
+                const _len = text.split("\n").length * tabSpaceLen;
+                this.setSelectionRange(newStart, end + _len);
+            }
+        }
+        // 取消默认动作
+        e.preventDefault();
+    }
+}
+
+function findStartOfLine( value, offset ) {
+    const delimiter = /[\r\n]/i;
+    // Starting at the current offset, let's start walking backwards through the
+    // value until we either run out of characters; or, we hit a character that
+    // represents some line delimiter.
+    for ( var i = ( offset - 1 ) ; i >= 0 ; i-- ) {
+        if ( delimiter.test( value.charAt( i ) ) ) {
+            return( i + 1 );
+        }
+    }
+    return( 0 );
+}
+
+function findEndOfLine( value, offset ) {
+    const delimiter = /[\r\n]/i;
+    for ( var i = ( offset + 1 ) ; i <= value.length ; i++ ) {
+        if ( delimiter.test( value.charAt( i ) ) ) {
+            return i ;
+        }
+    }
+    return( value.length );
+}

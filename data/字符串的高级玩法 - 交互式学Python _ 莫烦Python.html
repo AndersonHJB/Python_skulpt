@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)https://mofanpy.com/tutorials/python-basic/interactive-python/string/ -->
+<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="title" content="字符串的高级玩法 - 交互式学Python | 莫烦Python">
+<meta name="description" content="字符串绝对不是单一的文字，它是有生命的~ 有很多有趣的方法可以丰富你的字符串表达，这里介绍的技术 %、format、f 模式，你肯定在使用Python某个阶段中会要用到。">
+<meta name="image" content="https://static.mofanpy.com/img/course_cover-small/interactive_python.png">
+<meta name="keywords" content="莫烦,沫凡,周沫凡,周莫烦,周莫凡,python,tutorial,machine learning,莫烦Python,莫烦,python,机器学习,神经网络,深度学习,machine learning,deep learning,neural network,强化学习,reinforcement learning,进化算法,evolution algorithm,字符串的高级玩法">
+<meta name="author" content="Mofan, Morvan,莫烦,周沫凡,周莫烦,莫烦">
+
+<meta name="baidu-site-verification" content="qdybaXHfFg">
+<meta name="sogou_site_verification" content="zzqZtIRvnK">
+<meta name="msvalidate.01" content="A25A16143F8A52E0CC3FD76FE0E5F03B">
+<meta name="360-site-verification" content="2ab9df6f0a067733338a68c01294e730">
+
+<title>字符串的高级玩法 - 交互式学Python | 莫烦Python</title>
+
+<meta property="fb:app_id" content="2053270218284962">
+<meta property="og:site_name" content="莫烦Python">
+<meta property="og:title" content="字符串的高级玩法 - 交互式学Python | 莫烦Python">
+<meta property="og:description" content="字符串绝对不是单一的文字，它是有生命的~ 有很多有趣的方法可以丰富你的字符串表达，这里介绍的技术 %、format、f 模式，你肯定在使用Python某个阶段中会要用到。">
+<meta property="og:image" content="https://static.mofanpy.com/img/course_cover-small/interactive_python.png">
+<meta property="og:url" content="https://mofanpy.com/tutorials/python-basic/interactive-python/string/">
+<meta property="og:type" content="article">
+
+
+<meta name="twitter:card" content="article">
+<meta name="twitter:site" content="https://mofanpy.com/tutorials/python-basic/interactive-python/string/">
+<meta name="twitter:title" content="字符串的高级玩法 - 交互式学Python | 莫烦Python">
+<meta name="twitter:description" content="字符串绝对不是单一的文字，它是有生命的~ 有很多有趣的方法可以丰富你的字符串表达，这里介绍的技术 %、format、f 模式，你肯定在使用Python某个阶段中会要用到。">
+<meta name="twitter:creator" content="莫烦Python">
+<meta name="twitter:image" content="https://static.mofanpy.com/img/course_cover-small/interactive_python.png">
+
+
+<link href="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/page-style.css" type="text/css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.mofanpy.com/img/description/tab_icon.png">
+
+<script type="text/javascript" async="" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/analytics.js.下载"></script><script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/hm.js.下载"></script><script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/jquery.min.js.下载"></script>
+<script>window.jQuery || document.write('<script src="https://static.mofanpy.com/js/jquery-1.9.1.min.js">\x3C/script>')</script>
+
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/comment.js.下载"></script>
+<link rel="stylesheet" href="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/gml.css">
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/highlight.min.js.下载"></script>
+<script>window.hljs || document.write('<script src="https://static.mofanpy.com/js/highlight-10.5.0.min.js">\x3C/script>')</script>
+<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+
+<!-- click dropdown -->
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.clicker').on("click", function (e) {
+      $(this).next('.dropdown-content').toggle();
+      e.stopPropagation();
+      e.preventDefault();
+    });
+  });
+
+  
+  $(window).bind('scroll load', function () {
+    $.each($('.lazy-img'), function () {
+      if ($(this).attr('data-src') && $(this).offset().top < ($(window).scrollTop() + $(window).height() + 3000)) {
+        var source = $(this).data('src');
+        $(this).attr('src', source);
+        $(this).removeAttr('data-src');
+      }
+    })
+  })
+</script>
+
+
+  <script async="" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/f.txt"></script>
+
+
+
+
+
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/codemirror.js.下载"></script>
+<link rel="stylesheet" href="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/codemirror.css">
+<link rel="stylesheet" href="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/darcula.min.css">
+<link rel="stylesheet" href="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/foldgutter.min.css">
+<link rel="stylesheet" href="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/show-hint.css">
+
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/show-hint.js.下载"></script>
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/python-hint.js.下载"></script>
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/anyword-hint.js.下载"></script>
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/python.min.js.下载"></script>
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/sublime.js.下载"></script>
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/active-line.js.下载"></script>
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/foldcode.min.js.下载"></script>
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/foldgutter.min.js.下载"></script>
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/indent-fold.min.js.下载"></script>
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/brace-fold.js.下载"></script>
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/comment-fold.js.下载"></script>
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/matchbrackets.js.下载"></script>
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/closebrackets.js.下载"></script>
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/comment.js(1).下载"></script>
+
+
+<script>
+  window.CodeMirror || document.write(
+    '<script src="https://static.mofanpy.com/js/codemirror/5.60.0/lib/codemirror.min.js">\x3C/script>' +
+    '<link rel="stylesheet" href="https://static.mofanpy.com/js/codemirror/5.60.0/codemirror.min.css">' +
+    '<link rel="stylesheet" href="https://static.mofanpy.com/js/codemirror/5.60.0/darcula.css">' +
+    '<link rel="stylesheet" href="https://static.mofanpy.com/js/codemirror/5.60.0/addon/fold/foldgutter.css">' +
+    '<link rel="stylesheet" href="https://static.mofanpy.com/js/codemirror/5.60.0/addon/hint/show-hint.css">' +
+    '<script src="https://static.mofanpy.com/js/codemirror/5.60.0/addon/hint/show-hint.js">\x3C/script>' +
+    '<script src="https://static.mofanpy.com/js/codemirror/5.60.0/addon/hint/anyword-hint.js">\x3C/script>' +
+    '<script src="https://static.mofanpy.com/js/codemirror/5.60.0/mode/python/python.js">\x3C/script>' +
+    '<script src="https://static.mofanpy.com/js/codemirror/5.60.0/keymap/sublime.js">\x3C/script>' +
+    '<script src="https://static.mofanpy.com/js/codemirror/5.60.0/addon/selection/active-line.js">\x3C/script>' +
+    '<script src="https://static.mofanpy.com/js/codemirror/5.60.0/addon/fold/foldcode.js">\x3C/script>' +
+    '<script src="https://static.mofanpy.com/js/codemirror/5.60.0/addon/fold/foldgutter.js">\x3C/script>' +
+    '<script src="https://static.mofanpy.com/js/codemirror/5.60.0/addon/fold/indent-fold.js">\x3C/script>' +
+    '<script src="https://static.mofanpy.com/js/codemirror/5.60.0/addon/fold/brace-fold.js">\x3C/script>' +
+    '<script src="https://static.mofanpy.com/js/codemirror/5.60.0/addon/fold/comment-fold.js">\x3C/script>' +
+    '<script src="https://static.mofanpy.com/js/codemirror/5.60.0/addon/edit/matchbrackets.js">\x3C/script>' +
+    '<script src="https://static.mofanpy.com/js/codemirror/5.60.0/addon/edit/closebrackets.js">\x3C/script>' +
+    '<script src="https://static.mofanpy.com/js/codemirror/5.60.0/addon/comment/comment.js">\x3C/script>'
+    
+  )
+</script>
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/code.js.下载"></script>
+<link rel="stylesheet" href="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/codemirror(1).css">
+
+
+  
+  <script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/pyodide.js.下载"></script>
+  <script>window.pyodide || document.write('<script src="https://static.mofanpy.com/js/pyodide/v0.17.0/pyodide.js">\x3C/script>')</script>
+
+  
+  
+
+
+<script type="text/javascript">
+  let dependencies, preCode;
+  let onInteractivePage = false;
+  
+    dependencies = [];
+    preCode = `import os, re
+os.makedirs("files", exist_ok=True)
+with open("files/a.txt", "w") as f:
+    f.write("I have an apple, I have a pen")
+with open("files/b.txt", "w") as f:
+    f.write("this is a page in morvanzhou.github.io, please have a look.")
+with open("files/c.txt", "w") as f:
+    f.write("morvanzhou.github.io is my favorite site, please have a look.")
+with open("files/d.txt", "w") as f:
+    f.write("what is my favorite site, please have a look of morvanzhou.github.io.")`;
+    onInteractivePage = true;
+  
+  $(document).ready(function () {
+    setCodeArea(onInteractivePage, dependencies, preCode)
+  });
+</script>
+<script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/pyodide.asm.js.下载"></script><style>.crx_bdwk_down_wrap {
+    top: 70%;
+    left: 0;
+    position: fixed;
+    z-index: 99999999;
+    color: #fff;
+    user-select: none;
+}
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_loading {
+        background-color: #666;
+        cursor: wait;
+        width: 126px;
+        text-align: center;
+        padding: 16px 0;
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_loading p {
+            font-size: 14px;
+        }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_loading small {
+            font-size: 10px;
+        }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_btn {
+        width: 126px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 14px;
+        background-color: #dd5a57;
+        position: relative;
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        background-color: #666;
+        font-size: 12px;
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types div {
+            position: relative;
+        }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types div:after {
+                content: ' ';
+                height: 12px;
+                width: 1px;
+                background-color: #eee;
+                position: absolute;
+                top: 10px;
+                right: 0;
+                transform: scaleX(0.5);
+            }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types div:last-child:after {
+                    display: none;
+                }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types_check {
+            flex: 1;
+            color: #dd5a57;
+            padding: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types_uncheck {
+            flex: 1;
+            padding: 8px;
+            cursor: pointer;
+            color: #fff;
+            font-weight: lighter;
+        }
+</style></head>
+<body>
+  <a href="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/interactive_python.png"><img alt="字符串的高级玩法 - 交互式学Python | 莫烦Python" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/interactive_python.png" style="display: none"></a>
+
+<header>
+  <nav id="home-nav">
+    <ul>
+      <li id="liHome"><a class="nav-home bold" href="https://mofanpy.com/">莫烦PYTHON</a></li>
+      <li id="liDiscuss"><a href="https://mofanpy.com/discuss/">大家说</a></li>
+      <li id="liSupport"><a href="https://mofanpy.com/support/">赞助</a></li>
+      <li id="liAbout"><a href="https://mofanpy.com/about/">About</a></li>
+      <li id="liSearch">
+
+        <a class="search-bar clicker"><img class="search-img" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/search_icon.png" alt="Go"></a>
+
+        <!-- baidu search -->
+        <form class="search-box dropdown-content" method="get" action="https://www.baidu.com/s" target="_blank">
+          <input type="hidden" name="q6" value="mofanpy.com">
+          <input type="hidden" name="tn" value="baiduadv">
+          <input class="search-text" type="text" name="q3" placeholder="Search.." size="20" value="">
+        </form>
+      </li>
+
+      <!-- tutorial navigation -->
+      <li id="liStudy" class="dropbtn nav-float-right"><a class="clicker">学习 ▾</a>
+        <ul class="dropdown-content">
+          
+            <li class="dropbtn">
+              <a class="" href="https://mofanpy.com/learning-steps/">
+                <img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/learning-steps.png" alt="推荐学习顺序">
+                推荐学习顺序
+              </a>
+              
+            </li>
+          
+            <li class="dropbtn">
+              <a class="clicker" href="https://mofanpy.com/tutorials/python-basic/interactive-python/string/">
+                <img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/python_icon.png" alt="Python基础 ▾">
+                Python基础 ▾
+              </a>
+              
+                <ul class="dropdown-content">
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/basic_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="交互式学Python">
+                        <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/">交互式学Python</a></li>
+                    
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/multiprocessing_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="多进程 multiprocessing">
+                        <a href="https://mofanpy.com/tutorials/python-basic/multiprocessing/">多进程 multiprocessing</a></li>
+                    
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/thread_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="多线程 threading">
+                        <a href="https://mofanpy.com/tutorials/python-basic/threading/">多线程 threading</a></li>
+                    
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/GUI_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="窗口视窗 Tkinter">
+                        <a href="https://mofanpy.com/tutorials/python-basic/tkinter/">窗口视窗 Tkinter</a></li>
+                    
+                  
+                </ul>
+              
+            </li>
+          
+            <li class="dropbtn">
+              <a class="clicker" href="https://mofanpy.com/tutorials/python-basic/interactive-python/string/">
+                <img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/ML_icon.png" alt="机器学习 ▾">
+                机器学习 ▾
+              </a>
+              
+                <ul class="dropdown-content">
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/ML_intro_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="有趣的机器学习">
+                        <a href="https://mofanpy.com/tutorials/machine-learning/ML-intro/">有趣的机器学习</a></li>
+                    
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/rl_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="强化学习 Reinforcement Learning">
+                        <a href="https://mofanpy.com/tutorials/machine-learning/reinforcement-learning/">强化学习 Reinforcement Learning</a></li>
+                    
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/evolution_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="进化算法 Evolutionary Algorithm">
+                        <a href="https://mofanpy.com/tutorials/machine-learning/evolutionary-algorithm/">进化算法 Evolutionary Algorithm</a></li>
+                    
+                  
+                    
+                      <li class="dropbtn"><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/neural_net_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="神经网络 ▾">
+                        <a class="clicker">神经网络 ▾</a>
+                        <ul class="dropdown-content">
+                          
+                            <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/tf_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="Tensorflow">
+                              <a href="https://mofanpy.com/tutorials/machine-learning/tensorflow/">Tensorflow</a>
+                            </li>
+                          
+                            <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/torch_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="PyTorch">
+                              <a href="https://mofanpy.com/tutorials/machine-learning/torch/">PyTorch</a>
+                            </li>
+                          
+                            <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/theano_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="Theano">
+                              <a href="https://mofanpy.com/tutorials/machine-learning/theano/">Theano</a>
+                            </li>
+                          
+                            <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/keras_icon.jpg" style="max-width:1.5em; max-height:1.1em;" alt="Keras">
+                              <a href="https://mofanpy.com/tutorials/machine-learning/keras/">Keras</a>
+                            </li>
+                          
+                        </ul>
+                      </li>
+                    
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/sklearn_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="通用机器学习 Scikit-learn">
+                        <a href="https://mofanpy.com/tutorials/machine-learning/sklearn/">通用机器学习 Scikit-learn</a></li>
+                    
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/nlp_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="自然语言处理">
+                        <a href="https://mofanpy.com/tutorials/machine-learning/nlp/">自然语言处理</a></li>
+                    
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/gan_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="生成对抗网络">
+                        <a href="https://mofanpy.com/tutorials/machine-learning/gan/">生成对抗网络</a></li>
+                    
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/ML-practice_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="机器学习实战">
+                        <a href="https://mofanpy.com/tutorials/machine-learning/ML-practice/">机器学习实战</a></li>
+                    
+                  
+                </ul>
+              
+            </li>
+          
+            <li class="dropbtn">
+              <a class="clicker" href="https://mofanpy.com/tutorials/python-basic/interactive-python/string/">
+                <img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/data_icon.png" alt="数据处理 ▾">
+                数据处理 ▾
+              </a>
+              
+                <ul class="dropdown-content">
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/numpy.svg" style="max-width:1.5em; max-height:1.1em;" alt="Numpy 数据怪兽">
+                        <a href="https://mofanpy.com/tutorials/data-manipulation/numpy/">Numpy 数据怪兽</a></li>
+                    
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/np_pd_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="数据 Numpy &amp; Pandas">
+                        <a href="https://mofanpy.com/tutorials/data-manipulation/np-pd/">数据 Numpy &amp; Pandas</a></li>
+                    
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/plt_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="画图 Matplotlib">
+                        <a href="https://mofanpy.com/tutorials/data-manipulation/plt/">画图 Matplotlib</a></li>
+                    
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/scraping_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="网页爬虫">
+                        <a href="https://mofanpy.com/tutorials/data-manipulation/scraping/">网页爬虫</a></li>
+                    
+                  
+                </ul>
+              
+            </li>
+          
+            <li class="dropbtn">
+              <a class="clicker" href="https://mofanpy.com/tutorials/python-basic/interactive-python/string/">
+                <img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/others_icon.png" alt="提效工具 ▾">
+                提效工具 ▾
+              </a>
+              
+                <ul class="dropdown-content">
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/git_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="Git 版本管理">
+                        <a href="https://mofanpy.com/tutorials/others/git/">Git 版本管理</a></li>
+                    
+                  
+                    
+                      <li><img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/linux_icon.png" style="max-width:1.5em; max-height:1.1em;" alt="Linux 简易教学">
+                        <a href="https://mofanpy.com/tutorials/others/linux-basic/">Linux 简易教学</a></li>
+                    
+                  
+                </ul>
+              
+            </li>
+          
+            <li class="dropbtn">
+              <a class="" href="https://mofanpy.com/rethink/">
+                <img class="icon-image" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/rethink.png" alt="Rethink">
+                Rethink
+              </a>
+              
+            </li>
+          
+        </ul>
+      </li>
+      <li id="liNotification" class="nav-notification nav-float-right" style="display: none;"></li>
+    </ul>
+  </nav>
+
+<script async="">
+  if ('False' === "True") {
+    let btn = $("<button>", {
+          class:"user-msg-notify-btn"
+      }).append($("<svg>", {
+          fill: "#343a40",
+          viewBox: "0 0 24 24"
+      }).append($("<path>", {
+          d: "M11 2c5.571 0 9 4.335 9 8 0 6-6.475 9.764-11.481 8.022-.315-.07-.379-.124-.78.078-1.455.54-2.413.921-3.525 1.122-.483.087-.916-.25-.588-.581 0 0 .677-.417.842-1.904.064-.351-.14-.879-.454-1.171A8.833 8.833 0 0 1 2 10c0-3.87 3.394-8 9-8zm10.14 9.628c.758.988.86 2.009.86 3.15 0 1.195-.619 3.11-1.368 3.938-.209.23-.354.467-.308.722.12 1.073.614 1.501.614 1.501.237.239-.188.562-.537.5-.803-.146-1.495-.42-2.546-.811-.29-.146-.336-.106-.563-.057-2.043.711-4.398.475-6.083-.927 5.965-.524 8.727-3.03 9.93-8.016z"
+      })));
+
+    let navNoti = $(".nav-notification");
+    navNoti.append(btn).css({display:"inline-block"});
+    navNoti.html(navNoti.html());
+    checkCommentResponse('https://mofanpy.com/api/comment');
+  }
+
+  function isOnMobile() {
+    let check = false;
+    (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor||window.opera);
+    return check;
+  }
+
+  if (isOnMobile()) {
+    const liHome = $("#liHome"),
+      liDiscuss = $("#liDiscuss"),
+      liAbout = $("#liAbout"),
+      liSupport = $("#liSupport"),
+      liSearch = $("#liSearch"),
+      liStudy = $("#liStudy"),
+      liNotification = $("#liNotification");
+    const ul = $("#home-nav > ul");
+    ul.empty();
+    ul.append(liHome, liDiscuss, liSupport, liAbout, liNotification, liStudy, liSearch);
+
+  }
+
+
+</script>
+
+</header>
+
+  <main class="tut-main">
+
+
+    <div id="left-side-share-donate">
+
+      <ul>
+        <li>
+
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://mofanpy.com/tutorials/python-basic/interactive-python/string/&amp;pic=https://mofanpyhttps://static.mofanpy.com/img/course_cover-small/interactive_python.png" target="_blank">
+            <svg class="left-share-link" viewBox="0 0 1024 1024"><path d="M1024,512C1024,229.23016,794.76978,0,512,0S0,229.23016,0,512c0,255.554,187.231,467.37012,432,505.77777V660H302V512H432V399.2C432,270.87982,508.43854,200,625.38922,200,681.40765,200,740,210,740,210V336H675.43713C611.83508,336,592,375.46667,592,415.95728V512H734L711.3,660H592v357.77777C836.769,979.37012,1024,767.554,1024,512Z" fill-rule="evenodd"></path></svg>
+          </a>
+        </li>
+        <li>
+
+          <a href="https://service.weibo.com/share/share.php?url=https://mofanpy.com/tutorials/python-basic/interactive-python/string/&amp;type=icon&amp;language=zh_cn&amp;searchPic=true&amp;title=%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E9%AB%98%E7%BA%A7%E7%8E%A9%E6%B3%95%20-%20%E4%BA%A4%E4%BA%92%E5%BC%8F%E5%AD%A6Python%20|%20%E8%8E%AB%E7%83%A6Python&amp;pic=https://mofanpyhttps://static.mofanpy.com/img/course_cover-small/interactive_python.png" target="_blank">
+            <svg class="left-share-link" viewBox="0 0 97.75 97.75">
+              <path d="M48.875,0C21.883,0,0,21.883,0,48.875S21.883,97.75,48.875,97.75S97.75,75.867,97.75,48.875S75.867,0,48.875,0z
+                 M43.332,76.779c-14.294,0-28.904-6.928-28.904-18.32c0-5.957,3.773-12.844,10.271-19.344c8.68-8.674,18.799-12.627,22.604-8.818
+                c1.679,1.678,1.841,4.582,0.763,8.051c-0.563,1.748,1.639,0.779,1.639,0.783c7.016-2.938,13.135-3.109,15.37,0.086
+                c1.192,1.703,1.079,4.09-0.021,6.859c-0.509,1.273,0.157,1.473,1.127,1.762c3.952,1.227,8.351,4.189,8.351,9.412
+                C74.531,65.893,62.068,76.779,43.332,76.779z M69.206,40.553c0.463-1.428,0.172-3.055-0.905-4.25
+                c-1.076-1.191-2.668-1.645-4.136-1.334v-0.002c-1.224,0.266-2.431-0.52-2.69-1.742c-0.266-1.229,0.518-2.436,1.744-2.697
+                c3.002-0.637,6.254,0.291,8.455,2.732c2.208,2.443,2.797,5.771,1.854,8.689c-0.385,1.195-1.664,1.846-2.857,1.465
+                c-1.193-0.389-1.846-1.67-1.461-2.861H69.206z M82.438,44.828c0,0.002,0,0.008,0,0.01c-0.449,1.383-1.937,2.141-3.321,1.693
+                c-1.39-0.447-2.148-1.932-1.699-3.32l-0.001-0.004c1.377-4.26,0.504-9.119-2.71-12.682c-3.218-3.563-7.96-4.926-12.343-3.994
+                c-1.426,0.305-2.826-0.605-3.131-2.029s0.604-2.826,2.029-3.131h0.002c6.16-1.309,12.834,0.602,17.357,5.619
+                C83.148,32,84.37,38.832,82.438,44.828z"></path>
+              <path d="M43.444,57.424c-0.678-0.27-1.526,0.057-1.924,0.723c-0.386,0.672-0.173,1.435,0.507,1.713
+                c0.69,0.285,1.573-0.043,1.972-0.727C44.38,58.447,44.133,57.676,43.444,57.424z"></path>
+              <path d="M40.688,45.58c-11.402,1.129-20.051,8.111-19.311,15.598c0.741,7.488,10.588,12.643,21.991,11.518
+                c11.405-1.127,20.05-8.11,19.312-15.602C61.939,49.607,52.096,44.451,40.688,45.58z M50.695,63.24
+                c-2.327,5.264-9.021,8.07-14.702,6.24c-5.482-1.771-7.803-7.187-5.402-12.063c2.356-4.783,8.492-7.487,13.918-6.074
+                C50.126,52.795,52.992,58.094,50.695,63.24z"></path>
+              <path d="M39.091,59.229c-1.767-0.739-4.049,0.021-5.138,1.73c-1.104,1.715-0.587,3.76,1.167,4.559
+                c1.779,0.813,4.141,0.041,5.244-1.719C41.448,62.02,40.876,59.99,39.091,59.229z"></path>
+            </svg>
+          </a>
+        </li>
+        <li>
+
+          <a href="https://static.mofanpy.com/qr/tutorials/python-basic/interactive-python/string_deploy.png" target="_blank">
+            <svg class="left-share-link" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.372-12 12 0 6.627 5.374 12 12 12 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12zm5.543 16.389c.889-.644 1.457-1.597 1.457-2.656 0-1.94-1.888-3.514-4.217-3.514-2.329 0-4.217 1.574-4.217 3.514 0 1.941 1.888 3.514 4.217 3.514.481 0 .946-.068 1.377-.192l.124-.019c.081 0 .154.025.224.065l.923.533.081.026c.078 0 .14-.063.14-.14l-.022-.103-.19-.709-.015-.09c0-.094.047-.178.118-.229zm-7.483-10.049c-2.794 0-5.06 1.888-5.06 4.217 0 1.27.682 2.414 1.748 3.187.086.061.142.161.142.275l-.018.107-.228.851-.027.123c0 .093.076.169.169.169l.097-.032 1.108-.639c.083-.048.172-.078.269-.078l.149.022c.516.149 1.074.231 1.651.231l.278-.006c-.11-.329-.17-.675-.17-1.034 0-2.123 2.066-3.845 4.615-3.845l.275.007c-.381-2.015-2.473-3.555-4.998-3.555zm3.317 6.831c-.31 0-.562-.252-.562-.562 0-.311.252-.562.562-.562.311 0 .563.251.563.562 0 .31-.252.562-.563.562zm2.812 0c-.311 0-.562-.252-.562-.562 0-.311.251-.562.562-.562.31 0 .562.251.562.562 0 .31-.252.562-.562.562zm-7.815-3.289c-.373 0-.675-.302-.675-.675 0-.372.302-.674.675-.674.372 0 .674.302.674.674 0 .373-.302.675-.674.675zm3.373 0c-.373 0-.675-.302-.675-.675 0-.372.302-.674.675-.674.373 0 .675.302.675.674 0 .373-.302.675-.675.675z" fill-rule="evenodd"></path></svg>
+          </a>
+        </li>
+        <li>
+
+          <a href="https://twitter.com/intent/tweet?url=https://mofanpy.com/tutorials/python-basic/interactive-python/string/&amp;original_referer=https://mofanpy.com/tutorials/python-basic/interactive-python/string/" target="_blank">
+            <svg class="left-share-link" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.066 9.645c.183 4.04-2.83 8.544-8.164 8.544-1.622 0-3.131-.476-4.402-1.291 1.524.18 3.045-.244 4.252-1.189-1.256-.023-2.317-.854-2.684-1.995.451.086.895.061 1.298-.049-1.381-.278-2.335-1.522-2.304-2.853.388.215.83.344 1.301.359-1.279-.855-1.641-2.544-.889-3.835 1.416 1.738 3.533 2.881 5.92 3.001-.419-1.796.944-3.527 2.799-3.527.825 0 1.572.349 2.096.907.654-.128 1.27-.368 1.824-.697-.215.671-.67 1.233-1.263 1.589.581-.07 1.135-.224 1.649-.453-.384.578-.87 1.084-1.433 1.489z" fill-rule="evenodd"></path></svg>
+          </a>
+        </li>
+        <li>
+
+          <a id="left-donation" href="https://mofanpy.com/support/">
+            <p class="left-donation-text">支持</p>
+
+            <div>
+              <img src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/Wechat.png">
+              <img src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/alipay.png">
+            </div>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+    <div class="tut-post-main">
+      
+
+<div class="section ie-size">
+
+  <a href="https://mofanpy.com/tutorials/data-manipulation/numpy/">
+    <div class="marquee"><p>【新】在线运行 Numpy 学习数据处理</p></div>
+  </a>
+
+  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/">
+    <div class="marquee"><p>【浏览器里运行Python】交互式Python学习</p></div>
+  </a>
+
+  <a href="https://mofanpy.com/tutorials/machine-learning/gan/">
+    <div class="marquee"><p>【GAN生成网络】生成对抗网络深度学习教学</p></div>
+  </a>
+
+</div>
+
+
+
+      
+      <div class="section ie-size" id="top-a-d-s">
+
+        <ins class="adsbygoogle" style="display:inline-block;width:700px;height:90px" data-ad-client="ca-pub-4601203457616636" data-ad-slot="6002797349"></ins>
+        <script type="text/javascript">
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (err) {
+                console.log(err);
+            }
+        </script>
+
+      </div>
+      
+
+
+
+      <div class="section ie-size">
+
+        <script src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/video-select.js.下载"></script>
+
+<!-- video section -->
+
+  
+
+
+
+
+        <div class="pad-page-navigation">
+          <div class="PageNavigation">
+
+            
+              <a class="prev" href="https://mofanpy.com/tutorials/python-basic/interactive-python/file-ops">
+                <b>«</b> 文件批量处理</a>
+            
+            
+              <a class="next" href="https://mofanpy.com/tutorials/python-basic/interactive-python/lazy-usage">
+                Python的偷懒用法 <b>»</b></a>
+            
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="section ie-size">
+
+
+        <div class="tut-main-content-pad">
+          <br>
+          <h1>字符串的高级玩法</h1>
+          <div style="text-align: center;">
+            作者:
+            <span class="author">
+              莫烦
+            </span>
+            编辑:
+            <span class="editor">
+              莫烦
+            </span>
+            <span class="publish-date">
+            
+              2021-06-03
+            
+            </span>
+
+          </div>
+
+
+
+          <div id="under-title-a-d-s">
+            
+
+              <ins class="adsbygoogle" style="display:inline-block;width:250px;height:250px" data-ad-client="ca-pub-4601203457616636" data-ad-slot="2975922481"></ins>
+              <script type="text/javascript">
+                  try {
+                      (adsbygoogle = window.adsbygoogle || []).push({});
+                  } catch (err) {
+                      console.log(err);
+                  }
+              </script>
+            
+          </div>
+
+
+          
+
+<p>处理字符串很有意思的，一般的情况下，我们只需要打印出一段特定的话就好了，
+但是还有些时候，这些话会应为场景的不同，方式的不同，参数的不同，里面的具体内容就会随之发生改变。
+不管你是打印给自己看的，还是输出给别人看的，你都会使用这些方法。</p>
+
+<p>而下面介绍的这些方法就是能让你释放劳动力的功能，让你更关注与编程本身，而不是处理那些繁杂的字符。</p>
+
+<p><a href="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/Python-String-format-Method-Syntax.png" target="_blank"><img class="course-image lazy-img" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/Python-String-format-Method-Syntax.png" alt="string" title="string"></a></p>
+
+<p>在这一节涉及到的功能：</p>
+
+<ul>
+<li><a href="https://mofanpy.com/tutorials/python-basic/interactive-python/string/#%%E7%99%BE%E5%88%86%E5%8F%B7%E6%A8%A1%E5%BC%8F">%百分号模式</a>
+
+<ul>
+<li><code>"%s" % string</code></li>
+</ul></li>
+<li><a href="https://mofanpy.com/tutorials/python-basic/interactive-python/string/#format%E5%8A%9F%E8%83%BD%E6%9B%B4%E5%A4%9A">format功能更多</a>
+
+<ul>
+<li><code>"{}".format()</code></li>
+</ul></li>
+<li><a href="https://mofanpy.com/tutorials/python-basic/interactive-python/string/#f%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2">f格式化字符串</a><br>
+
+<ul>
+<li><code>f"{n}"</code></li>
+</ul></li>
+<li><a href="https://mofanpy.com/tutorials/python-basic/interactive-python/string/#%E4%BF%AE%E6%94%B9%E5%AD%97%E7%AC%A6%E4%B8%B2">修改字符串</a>
+
+<ul>
+<li><code>string.strip()</code></li>
+<li><code>string.replace()</code></li>
+<li><code>string.lower()</code></li>
+<li><code>string.upper()</code></li>
+<li><code>string.split()</code></li>
+<li><code>",".join([])</code></li>
+<li><code>string.startswith()</code></li>
+<li><code>string.endswith()</code></li>
+</ul></li>
+</ul>
+
+<h2 class="tut-h2-pad" id="%百分号模式">%百分号模式
+  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/string#%%E7%99%BE%E5%88%86%E5%8F%B7%E6%A8%A1%E5%BC%8F" class="headerlink" title="Permalink to this headline">¶</a>
+</h2>
+
+<p>这个应该会算是你接触到最多的一种形式，因为它在很久以前的 Python 版本中就存在了。
+下面还有 format，f 字符串都是类似的功能，只是 Python 给你提供了多样化的方式达成类似的目的。</p>
+
+<div><textarea class="scriptInput" style="display: none;">name = "莫烦Python"
+print("我的名字是" + name + "！")
+print("我的名字是%s!" % name)</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 63px; min-width: 235.413px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">name</span> <span class="cm-operator">=</span> <span class="cm-string">"莫烦Python"</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我的名字是"</span> <span class="cm-operator">+</span> <span class="cm-variable">name</span> <span class="cm-operator">+</span> <span class="cm-string">"！"</span>)</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我的名字是%s!"</span> <span class="cm-operator">%</span> <span class="cm-variable">name</span>)</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 63px;"></div><div class="CodeMirror-gutters" style="height: 97px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-0" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-0" style="display: block;">我的名字是莫烦Python！<br>我的名字是莫烦Python!</div>
+<img class="scriptImage" id="scriptImage-0" src="https://mofanpy.com/tutorials/python-basic/interactive-python/string/"></div>
+
+<p>你看，同样是输出一个可配置的字符串，我们就见到了两种不同的方式。而上面第二种，相对而言就算比较简单的，因为当字符串里面要传入的参数变多的时候，
+第一种方式将会很混乱。</p>
+
+<div><textarea class="scriptInput" style="display: none;">name = "莫烦Python"
+age = 18
+gender = "男"
+print("我的名字是" + name + "！我" + str(age) + "岁了，我是" + gender + "的~")
+print("我的名字是 %s !我 %d 岁了，我是 %s 的~" % (name, age, gender))</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 100px; min-width: 547.95px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">name</span> <span class="cm-operator">=</span> <span class="cm-string">"莫烦Python"</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">age</span> <span class="cm-operator">=</span> <span class="cm-number">18</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">gender</span> <span class="cm-operator">=</span> <span class="cm-string">"男"</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我的名字是"</span> <span class="cm-operator">+</span> <span class="cm-variable">name</span> <span class="cm-operator">+</span> <span class="cm-string">"！我"</span> <span class="cm-operator">+</span> <span class="cm-builtin">str</span>(<span class="cm-variable">age</span>) <span class="cm-operator">+</span> <span class="cm-string">"岁了，我是"</span> <span class="cm-operator">+</span> <span class="cm-variable">gender</span> <span class="cm-operator">+</span> <span class="cm-string">"的~"</span>)</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我的名字是 %s !我 %d 岁了，我是 %s 的~"</span> <span class="cm-operator">%</span> (<span class="cm-variable">name</span>, <span class="cm-variable">age</span>, <span class="cm-variable">gender</span>))</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 100px;"></div><div class="CodeMirror-gutters" style="height: 134px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-1" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-1"></div>
+<img class="scriptImage" id="scriptImage-1"></div>
+
+<p>我们后面再说 % 后面那些标识符的含义，你现在就光看我们的模式，你觉得哪一种看起来比较舒服，比较好写呢？我认为是第二种，你还认为是第一种吗？
+要不你自己手打一遍，体验一下~</p>
+
+<p>而且当你要在这句话中塞入更多参数时，即使是第二种也有可能不太适合了，因为我都不记得他们的顺序是怎样的，我很容易就填错了。
+那么能不能用字典一样的模式来填入数据呢？</p>
+
+<div><textarea class="scriptInput" style="display: none;">name = "莫烦Python"
+age = 18
+gender = "男"
+print("我的名字是 %(nm)s !我 %(age)d 岁了，我是 %(gd)s 的~" % {"nm": name, "age":age, "gd":gender})</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true" style="display: block; right: 0px; left: 38px;"><div style="height: 100%; min-height: 1px; width: 698px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 82px; min-width: 697.313px; padding-right: 0px; padding-bottom: 16px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">name</span> <span class="cm-operator">=</span> <span class="cm-string">"莫烦Python"</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">age</span> <span class="cm-operator">=</span> <span class="cm-number">18</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">gender</span> <span class="cm-operator">=</span> <span class="cm-string">"男"</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我的名字是 %(nm)s !我 %(age)d 岁了，我是 %(gd)s 的~"</span> <span class="cm-operator">%</span> {<span class="cm-string">"nm"</span>: <span class="cm-variable">name</span>, <span class="cm-string">"age"</span>:<span class="cm-variable">age</span>, <span class="cm-string">"gd"</span>:<span class="cm-variable">gender</span>})</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 16px solid transparent; top: 82px;"></div><div class="CodeMirror-gutters" style="height: 132px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-2" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-2"></div>
+<img class="scriptImage" id="scriptImage-2"></div>
+
+<p>因为用字典我就不用关心后面参数的顺序了，而且有的时候，我还可以重复利用字典里面的 key 做索引。</p>
+
+<p>好了，上面我还卖了个关子，没告诉你们这个 % 后面跟着的字母是什么意思，我现在在下面列了一些比较常用的。</p>
+
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>意思</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>%d</td>
+<td>整数</td>
+</tr>
+<tr>
+<td>%i</td>
+<td>整数</td>
+</tr>
+<tr>
+<td>%f</td>
+<td>小数</td>
+</tr>
+<tr>
+<td>%s</td>
+<td>字符</td>
+</tr>
+</tbody>
+</table>
+
+<p>按照这些，我来举几个例子。</p>
+
+<div><textarea class="scriptInput" style="display: none;">name = "莫烦Python"
+age = 18
+height = 1.8
+print("我的名字是 %s !我 %d 岁了，我 %f 米高~" % (name, age, height))</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 82px; min-width: 484.95px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">name</span> <span class="cm-operator">=</span> <span class="cm-string">"莫烦Python"</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">age</span> <span class="cm-operator">=</span> <span class="cm-number">18</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">height</span> <span class="cm-operator">=</span> <span class="cm-number">1.8</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我的名字是 %s !我 %d 岁了，我 %f 米高~"</span> <span class="cm-operator">%</span> (<span class="cm-variable">name</span>, <span class="cm-variable">age</span>, <span class="cm-variable">height</span>))</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 82px;"></div><div class="CodeMirror-gutters" style="height: 116px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-3" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-3"></div>
+<img class="scriptImage" id="scriptImage-3"></div>
+
+<p>关于字符和数字类型，如果你在数字类型里输入的是字符，他就报错了，不信你试试。如果你在字符类型里输入的是数字，它也没问题，你也可以试试。</p>
+
+<p>还有一个比较常用的方式，就是当你使用小数的时候，你会发现 <code>%f</code> 可以打印出很长一串数字。有时候很占格子，我不喜欢，我可以让它短一点，输出固定长度的小数。</p>
+
+<div><textarea class="scriptInput" style="display: none;">print("%f" % (1/3))
+print("%.2f" % (1/3))</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 45px; min-width: 155.725px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"%f"</span> <span class="cm-operator">%</span> (<span class="cm-number">1</span><span class="cm-operator">/</span><span class="cm-number">3</span>))</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"%.2f"</span> <span class="cm-operator">%</span> (<span class="cm-number">1</span><span class="cm-operator">/</span><span class="cm-number">3</span>))</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 45px;"></div><div class="CodeMirror-gutters" style="height: 79px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-4" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-4"></div>
+<img class="scriptImage" id="scriptImage-4"></div>
+
+<p>比较上面两种写法，如果你不需要看太多精度的话，你就浓缩一下就好，我觉得简约就是美。同样，下面还有四种对比，
+让你看看我不光可以限制小数点后面的长度，也可以对小数点前面的长度做点手脚。</p>
+
+<div><textarea class="scriptInput" style="display: none;">print("%f" % (1/3))     # 后面不限制
+print("%.2f" % (1/3))   # 后面限制 2 个位置
+print("%4d" % (1/3))    # 前面补全最大 4 个位置
+print("%5d" % 12)       # 前面补全最大 5 个位置</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 82px; min-width: 331.875px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"%f"</span> <span class="cm-operator">%</span> (<span class="cm-number">1</span><span class="cm-operator">/</span><span class="cm-number">3</span>))     <span class="cm-comment"># 后面不限制</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"%.2f"</span> <span class="cm-operator">%</span> (<span class="cm-number">1</span><span class="cm-operator">/</span><span class="cm-number">3</span>))   <span class="cm-comment"># 后面限制 2 个位置</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"%4d"</span> <span class="cm-operator">%</span> (<span class="cm-number">1</span><span class="cm-operator">/</span><span class="cm-number">3</span>))    <span class="cm-comment"># 前面补全最大 4 个位置</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"%5d"</span> <span class="cm-operator">%</span> <span class="cm-number">12</span>)       <span class="cm-comment"># 前面补全最大 5 个位置</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 82px;"></div><div class="CodeMirror-gutters" style="height: 116px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-5" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-5"></div>
+<img class="scriptImage" id="scriptImage-5"></div>
+
+<h2 class="tut-h2-pad" id="format功能更多">format功能更多
+  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/string#format%E5%8A%9F%E8%83%BD%E6%9B%B4%E5%A4%9A" class="headerlink" title="Permalink to this headline">¶</a>
+</h2>
+
+<p>format 的方法是在 % 百分号之后发明的，我一般都比较喜欢用这种方法，因为我觉得它更加 Python。为什么这么说呢？
+因为在我眼里，我会认为 format 更像是一个编辑字符串的功能，而非像百分号那样的固定搭配。
+我们来对比一下 format 和百分号吧，他们能实现的功能差不多的。只是你可以按你的需求挑选一种你喜欢的方式。</p>
+
+<div><textarea class="scriptInput" style="display: none;">name = "莫烦Python"
+age = 18
+height = 1.8
+print("我的名字是 %s !我 %d 岁了，我 %f 米高~" % (name, age, height))
+print("我的名字是 {} !我 {} 岁了，我 {} 米高~".format(name, age, height))</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 100px; min-width: 513.262px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">name</span> <span class="cm-operator">=</span> <span class="cm-string">"莫烦Python"</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">age</span> <span class="cm-operator">=</span> <span class="cm-number">18</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">height</span> <span class="cm-operator">=</span> <span class="cm-number">1.8</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我的名字是 %s !我 %d 岁了，我 %f 米高~"</span> <span class="cm-operator">%</span> (<span class="cm-variable">name</span>, <span class="cm-variable">age</span>, <span class="cm-variable">height</span>))</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我的名字是 {} !我 {} 岁了，我 {} 米高~"</span>.<span class="cm-property">format</span>(<span class="cm-variable">name</span>, <span class="cm-variable">age</span>, <span class="cm-variable">height</span>))</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 100px;"></div><div class="CodeMirror-gutters" style="height: 134px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-6" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-6"></div>
+<img class="scriptImage" id="scriptImage-6"></div>
+
+<p>从这里看出，简单的使用方式，就是我只用<code>{}</code>来占位，后面在 format 里按顺序放入值就好了，不用管这个值到底是什么类型。
+其实除了这样的方式，format 还支持很多其他方式。比如我给 <code>{}</code> 里放一个数字，表示后面 format 里面的 index，这样我就能复用传入的值了。
+这一招就比 百分号 模式要好一些。</p>
+
+<div><textarea class="scriptInput" style="display: none;">name = "莫烦Python"
+age = 18
+height = 1.8
+print("我的名字是 {0} !我 {1} 岁了，我 {2} 米高~我是{0}".format(name, age, height))</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 82px; min-width: 582.288px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">name</span> <span class="cm-operator">=</span> <span class="cm-string">"莫烦Python"</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">age</span> <span class="cm-operator">=</span> <span class="cm-number">18</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">height</span> <span class="cm-operator">=</span> <span class="cm-number">1.8</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我的名字是 {0} !我 {1} 岁了，我 {2} 米高~我是{0}"</span>.<span class="cm-property">format</span>(<span class="cm-variable">name</span>, <span class="cm-variable">age</span>, <span class="cm-variable">height</span>))</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 82px;"></div><div class="CodeMirror-gutters" style="height: 116px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-7" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-7"></div>
+<img class="scriptImage" id="scriptImage-7"></div>
+
+<p>除了按照 index 来传字符，我们也可以用字典模式。只要我在 <code>{}</code> 传入一个 key 的名字就好。这样子也是可以复用参数的，方便很多。</p>
+
+<div><textarea class="scriptInput" style="display: none;">name = "莫烦Python"
+age = 18
+height = 1.8
+print("我的名字是 {nm} !我 {age} 岁了，我 {ht} 米高~我是{nm}".format(nm=name, age=age, ht=height))</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true" style="display: block; right: 0px; left: 38px;"><div style="height: 100%; min-height: 1px; width: 689px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 82px; min-width: 688.5px; padding-right: 0px; padding-bottom: 16px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">name</span> <span class="cm-operator">=</span> <span class="cm-string">"莫烦Python"</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">age</span> <span class="cm-operator">=</span> <span class="cm-number">18</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">height</span> <span class="cm-operator">=</span> <span class="cm-number">1.8</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我的名字是 {nm} !我 {age} 岁了，我 {ht} 米高~我是{nm}"</span>.<span class="cm-property">format</span>(<span class="cm-variable">nm</span><span class="cm-operator">=</span><span class="cm-variable">name</span>, <span class="cm-variable">age</span><span class="cm-operator">=</span><span class="cm-variable">age</span>, <span class="cm-variable">ht</span><span class="cm-operator">=</span><span class="cm-variable">height</span>))</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 16px solid transparent; top: 82px;"></div><div class="CodeMirror-gutters" style="height: 132px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-8" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-8"></div>
+<img class="scriptImage" id="scriptImage-8"></div>
+
+<p>同样，我么也是可以在做一些手脚，让它在显示小数或数字时，有更丰富的控制。</p>
+
+<div><textarea class="scriptInput" style="display: none;">print("我 {:.3f} 米高".format(1.12345))
+print("我 {ht:.1f} 米高".format(ht=1.12345))
+print("我 {:3d} 米高".format(1))
+print("我 {:3d} 米高".format(21))</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 82px; min-width: 315.875px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我 {:.3f} 米高"</span>.<span class="cm-property">format</span>(<span class="cm-number">1.12345</span>))</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我 {ht:.1f} 米高"</span>.<span class="cm-property">format</span>(<span class="cm-variable">ht</span><span class="cm-operator">=</span><span class="cm-number">1.12345</span>))</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我 {:3d} 米高"</span>.<span class="cm-property">format</span>(<span class="cm-number">1</span>))</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我 {:3d} 米高"</span>.<span class="cm-property">format</span>(<span class="cm-number">21</span>))</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 82px;"></div><div class="CodeMirror-gutters" style="height: 116px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-9" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-9"></div>
+<img class="scriptImage" id="scriptImage-9"></div>
+
+<p>对了，你迟早会遇到要在 <code>{}</code> 放入百分号的问题的，至少我在实际中，也遇到了要输入百分号的问题。</p>
+
+<div><textarea class="scriptInput" style="display: none;">txt = "You scored {:%}"
+print(txt.format(2.1234))
+
+txt = "You scored {:.2%}"
+print(txt.format(2.1234))</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 100px; min-width: 184.013px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">txt</span> <span class="cm-operator">=</span> <span class="cm-string">"You scored {:%}"</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-variable">txt</span>.<span class="cm-property">format</span>(<span class="cm-number">2.1234</span>))</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">txt</span> <span class="cm-operator">=</span> <span class="cm-string">"You scored {:.2%}"</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-variable">txt</span>.<span class="cm-property">format</span>(<span class="cm-number">2.1234</span>))</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 100px;"></div><div class="CodeMirror-gutters" style="height: 134px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-10" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-10"></div>
+<img class="scriptImage" id="scriptImage-10"></div>
+
+<p>我在下面这个表里列一下我觉得你可能会用到的。除了表里这些常用的，还有更多方式，你可以去查一下。</p>
+
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>意思</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>:,</td>
+<td>每 3 个 0 就用逗号隔开，比如 1,000</td>
+</tr>
+<tr>
+<td>:b</td>
+<td>该数字的二进制</td>
+</tr>
+<tr>
+<td>:d</td>
+<td>整数型</td>
+</tr>
+<tr>
+<td>:f</td>
+<td>小数模式</td>
+</tr>
+<tr>
+<td>:%</td>
+<td>百分比模式</td>
+</tr>
+</tbody>
+</table>
+
+<h2 class="tut-h2-pad" id="f格式化字符串">f格式化字符串
+  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/string#f%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2" class="headerlink" title="Permalink to this headline">¶</a>
+</h2>
+
+<p>这个是 Python 3.6 之后引入的一个功能，如果你是其他语言转过来学 Python 的，你可能在其他语言中有遇到过这种形式的字符串处理模式。
+这就比百分号%和 format 更加方便易用了。因为你写的字更少了，用有限的生命写出更多的 code~</p>
+
+<p>注意，在使用 f 模式的情况下，我们要在字符串开头加上一个 <code>f</code>。然后用 <code>{}</code> 圈出你的变量名，直接在 <code>{}</code> 引用变量。例子如下：</p>
+
+<div><textarea class="scriptInput" style="display: none;">name = "莫烦Python"
+age = 18
+height = 1.8
+print(f"我的名字是 {name} !我 {age} 岁了，我 {height} 米高~")</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 82px; min-width: 428.375px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">name</span> <span class="cm-operator">=</span> <span class="cm-string">"莫烦Python"</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">age</span> <span class="cm-operator">=</span> <span class="cm-number">18</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">height</span> <span class="cm-operator">=</span> <span class="cm-number">1.8</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">f"我的名字是 </span>{<span class="cm-variable">name</span>}<span class="cm-string"> !我 </span>{<span class="cm-variable">age</span>}<span class="cm-string"> 岁了，我 </span>{<span class="cm-variable">height</span>}<span class="cm-string"> 米高~"</span>)</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 82px;"></div><div class="CodeMirror-gutters" style="height: 116px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-11" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-11"></div>
+<img class="scriptImage" id="scriptImage-11"></div>
+
+<p>甚至你还可以在 <code>{}</code> 里做运算，比如下面这样：</p>
+
+<div><textarea class="scriptInput" style="display: none;">print(f"我 {age} 岁了，明年我就{age + 1}岁了~")</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 26px; min-width: 331.05px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">f"我 </span>{<span class="cm-variable">age</span>}<span class="cm-string"> 岁了，明年我就</span>{<span class="cm-variable">age</span> <span class="cm-operator">+</span> <span class="cm-number">1</span>}<span class="cm-string">岁了~"</span>)</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 26px;"></div><div class="CodeMirror-gutters" style="height: 60px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-12" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-12"></div>
+<img class="scriptImage" id="scriptImage-12"></div>
+
+<p>不仅仅是节省了代码量，它同样还是保留了一些特殊写法，包括限制字符长度等。做法都和 % 还有 format 类似。</p>
+
+<div><textarea class="scriptInput" style="display: none;">score = 2.1234
+print(f"You scored {score:.2%}")
+print(f"You scored {score:.3f}")
+print(f"You scored {12:5d}")</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 82px; min-width: 233.587px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">score</span> <span class="cm-operator">=</span> <span class="cm-number">2.1234</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">f"You scored </span>{<span class="cm-variable">score</span>:<span class="cm-number">.2</span><span class="cm-operator">%</span>}<span class="cm-string">"</span>)</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">f"You scored </span>{<span class="cm-variable">score</span>:<span class="cm-number">.3</span><span class="cm-variable">f</span>}<span class="cm-string">"</span>)</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">f"You scored </span>{<span class="cm-number">12</span>:<span class="cm-number">5</span><span class="cm-variable">d</span>}<span class="cm-string">"</span>)</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 82px;"></div><div class="CodeMirror-gutters" style="height: 116px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-13" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-13"></div>
+<img class="scriptImage" id="scriptImage-13"></div>
+
+<h2 class="tut-h2-pad" id="修改字符串">修改字符串
+  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/string#%E4%BF%AE%E6%94%B9%E5%AD%97%E7%AC%A6%E4%B8%B2" class="headerlink" title="Permalink to this headline">¶</a>
+</h2>
+
+<p>除了让你多样化拼接字符串，比如用 <code>%</code>，<code>format</code> 或者 <code>f</code> 方式，我们还可以用一些字符串功能来处理文字的更多需求。</p>
+
+<p>这些我就在下面列一个表告诉你一些常用的吧，还有些不常用的，你也很容易从网上搜到。</p>
+
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>意思</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>strip</td>
+<td>去除两端的空白符</td>
+</tr>
+<tr>
+<td>replace</td>
+<td>替换字符</td>
+</tr>
+<tr>
+<td>lower</td>
+<td>全部做小写处理</td>
+</tr>
+<tr>
+<td>upper</td>
+<td>全部做大写处理</td>
+</tr>
+<tr>
+<td>title</td>
+<td>仅开头的字母大写</td>
+</tr>
+<tr>
+<td>split</td>
+<td>按要求分割</td>
+</tr>
+<tr>
+<td>join</td>
+<td>按要求合并</td>
+</tr>
+<tr>
+<td>startswith</td>
+<td>判断是否为某字段开头</td>
+</tr>
+<tr>
+<td>endswith</td>
+<td>判断是否为某字段结尾</td>
+</tr>
+</tbody>
+</table>
+
+<p>下面我来介绍几个我觉得有必要介绍的，因为它很有趣。而且很多还可以和<a href="https://mofanpy.com/tutorials/python-basic/interactive-python/regex/">正则表达式</a>配合着用。</p>
+
+<p><strong>剔除前后空白</strong></p>
+
+<div><textarea class="scriptInput" style="display: none;">"  我不想要前后的空白，但是  中间\n的可以有\n  ".strip()</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 26px; min-width: 387.625px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-string">"  我不想要前后的空白，但是  中间\n的可以有\n  "</span>.<span class="cm-property">strip</span>()</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 26px;"></div><div class="CodeMirror-gutters" style="height: 60px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-14" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-14"></div>
+<img class="scriptImage" id="scriptImage-14"></div>
+
+<p><strong>替换文字</strong></p>
+
+<div><textarea class="scriptInput" style="display: none;">"帮我替换掉莫烦".replace("莫烦", "沫凡")</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 26px; min-width: 280.55px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-string">"帮我替换掉莫烦"</span>.<span class="cm-property">replace</span>(<span class="cm-string">"莫烦"</span>, <span class="cm-string">"沫凡"</span>)</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 26px;"></div><div class="CodeMirror-gutters" style="height: 60px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-15" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-15"></div>
+<img class="scriptImage" id="scriptImage-15"></div>
+
+<p><strong>文字的大小写处理</strong></p>
+
+<div><textarea class="scriptInput" style="display: none;">print("How ABOUT lower CaSe?".lower())
+print("And upper CaSe?".upper())
+print("do tiTle For me".title())</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 63px; min-width: 276px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"How ABOUT lower CaSe?"</span>.<span class="cm-property">lower</span>())</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"And upper CaSe?"</span>.<span class="cm-property">upper</span>())</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"do tiTle For me"</span>.<span class="cm-property">title</span>())</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 63px;"></div><div class="CodeMirror-gutters" style="height: 97px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-16" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-16"></div>
+<img class="scriptImage" id="scriptImage-16"></div>
+
+<p><strong>拆散你，重组你</strong> </p>
+
+<div><textarea class="scriptInput" style="display: none;">print("你|帮|我|拆分|一下|这句话".split("|"))
+print("|".join(["你","帮", "我", "重组", "一下", "这句话"]))</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 45px; min-width: 423.025px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"你|帮|我|拆分|一下|这句话"</span>.<span class="cm-property">split</span>(<span class="cm-string">"|"</span>))</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"|"</span>.<span class="cm-property">join</span>([<span class="cm-string">"你"</span>,<span class="cm-string">"帮"</span>, <span class="cm-string">"我"</span>, <span class="cm-string">"重组"</span>, <span class="cm-string">"一下"</span>, <span class="cm-string">"这句话"</span>]))</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 45px;"></div><div class="CodeMirror-gutters" style="height: 79px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-17" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-17"></div>
+<img class="scriptImage" id="scriptImage-17"></div>
+
+<p><strong>街头巷尾遇见你</strong></p>
+
+<div><textarea class="scriptInput" style="display: none;">print("我在街头看到你".startswith("我在"))
+print("我在街头看到你".startswith("街头"))
+print("我在巷尾看到你".endswith("看到你"))
+print("我在巷尾看到你".endswith("巷尾"))</textarea><div class="CodeMirror cm-s-darcula"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 42px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 38px; margin-bottom: -16px; border-right-width: 34px; min-height: 82px; min-width: 296.462px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 18.4px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -38px; width: 38px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我在街头看到你"</span>.<span class="cm-property">startswith</span>(<span class="cm-string">"我在"</span>))</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我在街头看到你"</span>.<span class="cm-property">startswith</span>(<span class="cm-string">"街头"</span>))</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我在巷尾看到你"</span>.<span class="cm-property">endswith</span>(<span class="cm-string">"看到你"</span>))</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -38px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"我在巷尾看到你"</span>.<span class="cm-property">endswith</span>(<span class="cm-string">"巷尾"</span>))</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 34px; width: 1px; border-bottom: 0px solid transparent; top: 82px;"></div><div class="CodeMirror-gutters" style="height: 116px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div><div class="CodeMirror-gutter CodeMirror-lint-markers"></div></div></div></div>
+<button class="userSubmitBtn scriptRunBtn" onclick="evaluatePython(this);" id="scriptBtn-18" style="display: block;">Run</button>
+<div class="scriptOutput" id="scriptOutput-18"></div>
+<img class="scriptImage" id="scriptImage-18"></div>
+
+<h2 class="tut-h2-pad" id="总结">总结
+  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/string#%E6%80%BB%E7%BB%93" class="headerlink" title="Permalink to this headline">¶</a>
+</h2>
+
+<p>字符串绝对不是单一的文字，它是有生命的~ 有很多有趣的方法可以丰富你的字符串表达，这里介绍的技术 <code>%</code>、<code>format</code>、<code>f</code> 模式，你肯定在使用Python某个阶段中会要用到。</p>
+
+
+
+
+
+
+          <div id="bottom-donation-section">
+            <hr>
+            <h3 id="bottom-donation-title">降低知识传递的门槛</h3>
+            <div class="hover-move">
+                <a id="bottom-donation-button" href="https://mofanpy.com/support/"><b>支持莫烦</b></a>
+            </div>
+            <p>
+              莫烦很常从互联网上学习知识，开源分享的人是我学习的榜样。
+               他们的行为也改变了我对教育的态度: <b>降低知识传递的门槛</b>。
+               <b>免费</b> 奉献我的所学正是受这种态度的影响。
+              通过 <a href="https://mofanpy.com/support/">【赞助莫烦】</a> 能让我感到认同，我也更有理由坚持下去。
+            </p>
+          </div>
+        </div>
+
+
+        <div class="pad-page-navigation">
+          <div class="PageNavigation">
+
+            
+              <a class="prev" href="https://mofanpy.com/tutorials/python-basic/interactive-python/file-ops">
+                <b>«</b> 文件批量处理</a>
+            
+            
+              <a class="next" href="https://mofanpy.com/tutorials/python-basic/interactive-python/lazy-usage">
+                Python的偷懒用法 <b>»</b></a>
+            
+          </div>
+
+        </div>
+      </div>
+
+    
+    
+    <div class="section ie-size">
+      <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-4601203457616636" data-ad-slot="7975585337" data-matched-content-ui-type="image_card_stacked,image_card_stacked" data-matched-content-rows-num="3,2" data-matched-content-columns-num="2,5"></ins>
+      <script>
+          try {
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          } catch (err) {
+              console.log(err);
+          }
+      </script>
+    </div>
+
+    
+
+      <div class="section ie-size">
+        <div class="comment-section">
+  <button onclick="commentSortDateSwitch(&#39;https://mofanpy.com/api/comment&#39;, 435)" value="oldFirst" id="comment-sort-btn" class="comment-btn" style="margin: 0 0 2em 0;">
+    ⇌ 展示最早
+  </button>
+  <div class="comment-page-nav" id="comment-page-nav1"></div>
+  <ul class="comments" id="bottom-comments-ul"><li class="comment-li"><div class="comment-thumbnail"><img class="cycle-img" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/7026742111.jpeg"></div><div class="comment-content" id="comment-content-div-1579"><div class="comment-author">Amity8023</div><div class="comment-date">10-13</div><div class="comment-body-hidden" id="comment-hidden-id-1579">图片中fromat拼写错误</div><div class="comment-body" id="comment-id-1579">图片中fromat拼写错误</div><button class="comment-like-btn comment-btn" id="like-btn-id-1579"><svg fill="#8590a6" viewBox="0 0 24 18" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg>0</button><button class="hide-button comment-btn" id="reply-btn-id-1579">回复</button></div><div class="comment-reply-tools-div" id="comment-reply-tools-id-1579"></div><div class="comment-reply-div" id="comment-reply-id-1579"></div><ul class="reply-ul" id="reply-ul-id-1579"><li class="comment-li"><div class="comment-thumbnail"><img class="cycle-img" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/my_pic.jpg"></div><div class="comment-content" id="comment-content-div-1584"><div class="comment-author">莫烦Python</div><div class="comment-author-reply">回复</div><div class="comment-author comment-replier">Amity8023 ⤴</div><div class="comment-date">10-13</div><div class="comment-body-hidden" id="comment-hidden-id-1584">更换啦，谢谢</div><div class="comment-body" id="comment-id-1584">更换啦，谢谢</div><button class="comment-like-btn comment-btn" id="like-btn-id-1584"><svg fill="#8590a6" viewBox="0 0 24 18" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg>0</button><button class="hide-button comment-btn" id="reply-btn-id-1584">回复</button></div><div class="comment-reply-tools-div" id="comment-reply-tools-id-1584"></div><div class="comment-reply-div" id="comment-reply-id-1584"></div></li></ul></li><li class="comment-li"><div class="comment-thumbnail"><img class="cycle-img" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/7026742111.jpeg"></div><div class="comment-content" id="comment-content-div-1578"><div class="comment-author">Amity8023</div><div class="comment-date">10-13</div><div class="comment-body-hidden" id="comment-hidden-id-1578">有有限的生命写出更多的 code~
+有 -&gt; 用</div><div class="comment-body" id="comment-id-1578">有有限的生命写出更多的 code~<br>有 -&gt; 用</div><button class="comment-like-btn comment-btn" id="like-btn-id-1578"><svg fill="#8590a6" viewBox="0 0 24 18" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg>0</button><button class="hide-button comment-btn" id="reply-btn-id-1578">回复</button></div><div class="comment-reply-tools-div" id="comment-reply-tools-id-1578"></div><div class="comment-reply-div" id="comment-reply-id-1578"></div><ul class="reply-ul" id="reply-ul-id-1578"><li class="comment-li"><div class="comment-thumbnail"><img class="cycle-img" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/my_pic.jpg"></div><div class="comment-content" id="comment-content-div-1583"><div class="comment-author">莫烦Python</div><div class="comment-author-reply">回复</div><div class="comment-author comment-replier">Amity8023 ⤴</div><div class="comment-date">10-13</div><div class="comment-body-hidden" id="comment-hidden-id-1583">谢谢，已修改</div><div class="comment-body" id="comment-id-1583">谢谢，已修改</div><button class="comment-like-btn comment-btn" id="like-btn-id-1583"><svg fill="#8590a6" viewBox="0 0 24 18" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg>0</button><button class="hide-button comment-btn" id="reply-btn-id-1583">回复</button></div><div class="comment-reply-tools-div" id="comment-reply-tools-id-1583"></div><div class="comment-reply-div" id="comment-reply-id-1583"></div></li></ul></li><li class="comment-li"><div class="comment-thumbnail"><img class="cycle-img" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/41472B1C89DF1FD60CBBFB9387F83B55.jpeg"></div><div class="comment-content" id="comment-content-div-1336"><div class="comment-author">HH</div><div class="comment-date">06-22</div><div class="comment-body-hidden" id="comment-hidden-id-1336">1、“百分号模式”下的第三个代码块前的一段中，“而且当你要在这句话中塞入更多参数时，及时是第二种也有可能不太适合了”中“及时”建议修改为“即使”。
+2、"f格式化字符串"上的那个表格。我试了下“:,”，它的效果是把数字每隔3个打一个逗号，类似这样“10,000,000”，我认为原文中的“逗号隔离开 1000”有点没说清，但是我也不知道该怎么去描述，试一试就明白了。同一个表格，第三行“:b”原文为“而精致模式”，应该为“输出该数字的二进制”。</div><div class="comment-body" id="comment-id-1336">1、“百分号模式”下的第三个代码块前的一段中，“而且当你要在这句话中塞入更多参数时，及时是第二种也有可能不太适合了”中“及时”建议修改为“即使”。<br>2、"f格式化字符串"上的那个表格。我试了下“:,”，它的效果是把数字每隔3个打一个逗号，类似这样“10,000,000”，我认为原文中的“逗号隔离开 1000”有点没说清，但是我也不知道该怎么去描述，试一试就明白了。同一个表格，第三行“:b”原文为“而精致模式”，应该为“输出该数字的二进制”。</div><button class="comment-like-btn comment-btn" id="like-btn-id-1336"><svg fill="#8590a6" viewBox="0 0 24 18" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg>0</button><button class="hide-button comment-btn" id="reply-btn-id-1336">回复</button></div><div class="comment-reply-tools-div" id="comment-reply-tools-id-1336"></div><div class="comment-reply-div" id="comment-reply-id-1336"></div><ul class="reply-ul" id="reply-ul-id-1336"><li class="comment-li"><div class="comment-thumbnail"><img class="cycle-img" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/my_pic.jpg"></div><div class="comment-content" id="comment-content-div-1337"><div class="comment-author">莫烦Python</div><div class="comment-author-reply">回复</div><div class="comment-author comment-replier">HH ⤴</div><div class="comment-date">06-22</div><div class="comment-body-hidden" id="comment-hidden-id-1337">十分感谢~已修改</div><div class="comment-body" id="comment-id-1337">十分感谢~已修改</div><button class="comment-like-btn comment-btn" id="like-btn-id-1337"><svg fill="#8590a6" viewBox="0 0 24 18" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg>0</button><button class="hide-button comment-btn" id="reply-btn-id-1337">回复</button></div><div class="comment-reply-tools-div" id="comment-reply-tools-id-1337"></div><div class="comment-reply-div" id="comment-reply-id-1337"></div></li></ul></li></ul>
+  <div class="comment-page-nav" id="comment-page-nav2"></div>
+  <script async="">
+      commentGet('https://mofanpy.com/api/comment', 435, )
+  </script>
+</div>
+
+
+
+
+  <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-4601203457616636" data-ad-slot="3952173485"></ins>
+  <script type="text/javascript">
+      try {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (err) {
+          console.log(err);
+      }
+  </script>
+
+
+
+<div class="comment-section">
+  <div class="comment-reply-tools-div" id="comment-reply-tools-div-0" style="margin-left: 0"></div>
+  <div style="display: flex;">
+      <textarea class="comment-textarea" name="comments" id="comment-textarea-main" oninput="this.style.height = &quot;&quot;;this.style.height = this.scrollHeight + &quot;px&quot;" maxlength="2000" disabled="disabled" placeholder="留言请先第三方账号登录"></textarea>
+      <button class="comment-submit-btn" disabled="disabled" id="comment-submit" onclick="commentPut(&#39;https://mofanpy.com/api/comment&#39;,
+                    435, null, null, &#39;comment-textarea-main&#39;)">
+        发布
+      </button>
+  </div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+  if ('False' === "True") {
+    $("#comment-reply-tools-div-0").append(
+      $("<button>", {
+        class:"comment-btn",
+      }).on("click", function(){insertCodePlaceholder(0, 'comment-textarea-main')}).html("&#60;&#47;&#62;")
+      .append($("<span>", {
+        class: "tooltiptext",
+        text: "选中多行代码高亮"
+      }))
+    )
+  }
+  $('#comment-submit').attr('disabled', true);
+  $('#comment-textarea-main').on('keyup', function () {
+    let textarea_value = $("#comment-textarea-main").val();
+    if (textarea_value !== '') {
+      $('#comment-submit').attr('disabled', false);
+    } else {
+      $('#comment-submit').attr('disabled', true);
+    }
+    })})
+</script>
+
+<div id="third-party-oauth-login"><p class="third-party-oauth-login-p">第三方账户登录：</p><a href="https://github.com/login/oauth/authorize?client_id=5a7eb626fd7d60f0311d&amp;redirect_uri=https%3A%2F%2Fmofanpy.com%2Foauth%2Fredirect%2Fgithub&amp;allow_signup=true&amp;state=NzAzNDY1NjUwNTsvdHV0b3JpYWxzL3B5dGhvbi1iYXNpYy9pbnRlcmFjdGl2ZS1weXRob24vc3RyaW5nLw%3D%3D"><img class="oauth-login-img" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/github.png" alt="github"></a><a href="https://graph.qq.com/oauth2.0/authorize?client_id=101896882&amp;redirect_uri=https%3A%2F%2Fmofanpy.com%2Foauth%2Fredirect%2Fqq&amp;state=NzAzNDY1NjUwNTsvdHV0b3JpYWxzL3B5dGhvbi1iYXNpYy9pbnRlcmFjdGl2ZS1weXRob24vc3RyaW5nLw%3D%3D&amp;response_type=code"><img class="oauth-login-img" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/qq_icon.png" alt="qq"></a><a href="https://api.weibo.com/oauth2/authorize?client_id=519727822&amp;redirect_uri=https://mofanpy.com/oauth/redirect/weibo&amp;state=NzAzNDY1NjUwNTsvdHV0b3JpYWxzL3B5dGhvbi1iYXNpYy9pbnRlcmFjdGl2ZS1weXRob24vc3RyaW5nLw==&amp;response_type=code"><img class="oauth-login-img" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/weibo.png" alt="weibo"></a><a href="https://gitee.com/oauth/authorize?client_id=cf12948e73bf7b0b9e80f66235040170f8a1104a8fe9d777fbff2de5ead3d00e&amp;redirect_uri=https%3A%2F%2Fmofanpy.com%2Foauth%2Fredirect%2Fgitee&amp;response_type=code&amp;state=NzAzNDY1NjUwNTsvdHV0b3JpYWxzL3B5dGhvbi1iYXNpYy9pbnRlcmFjdGl2ZS1weXRob24vc3RyaW5nLw%3D%3D"><img class="oauth-login-img" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/gitee.png" alt="gitee"></a></div>
+
+<script>
+  setThirdPartyLoginUris({'github': 'https://github.com/login/oauth/authorize?client_id=5a7eb626fd7d60f0311d&redirect_uri=https%3A%2F%2Fmofanpy.com%2Foauth%2Fredirect%2Fgithub&allow_signup=true&state=NzAzNDY1NjUwNTsvdHV0b3JpYWxzL3B5dGhvbi1iYXNpYy9pbnRlcmFjdGl2ZS1weXRob24vc3RyaW5nLw%3D%3D', 'qq': 'https://graph.qq.com/oauth2.0/authorize?client_id=101896882&redirect_uri=https%3A%2F%2Fmofanpy.com%2Foauth%2Fredirect%2Fqq&state=NzAzNDY1NjUwNTsvdHV0b3JpYWxzL3B5dGhvbi1iYXNpYy9pbnRlcmFjdGl2ZS1weXRob24vc3RyaW5nLw%3D%3D&response_type=code', 'weibo': 'https://api.weibo.com/oauth2/authorize?client_id=519727822&redirect_uri=https://mofanpy.com/oauth/redirect/weibo&state=NzAzNDY1NjUwNTsvdHV0b3JpYWxzL3B5dGhvbi1iYXNpYy9pbnRlcmFjdGl2ZS1weXRob24vc3RyaW5nLw==&response_type=code', 'wechat': 'https://open.weixin.qq.com/connect/qrconnect?appid=wxd50c62e79c56b92b&scope=snsapi_login&redirect_uri=mofanpy.com%2Foauth%2Fredirect%2Fwechat&response_type=code&state=NzAzNDY1NjUwNTsvdHV0b3JpYWxzL3B5dGhvbi1iYXNpYy9pbnRlcmFjdGl2ZS1weXRob24vc3RyaW5nLw%3D%3D#wechat_redirect', 'gitee': 'https://gitee.com/oauth/authorize?client_id=cf12948e73bf7b0b9e80f66235040170f8a1104a8fe9d777fbff2de5ead3d00e&redirect_uri=https%3A%2F%2Fmofanpy.com%2Foauth%2Fredirect%2Fgitee&response_type=code&state=NzAzNDY1NjUwNTsvdHV0b3JpYWxzL3B5dGhvbi1iYXNpYy9pbnRlcmFjdGl2ZS1weXRob24vc3RyaW5nLw%3D%3D'});
+  if ('False' === "False") {
+      insertThirdPartyLogin();
+  } else {
+      $("#comment-textarea-main").attr("disabled", false
+      ).prop("placeholder", "")
+  }
+  $(".comment-textarea").on("keydown", textareaKeydown);
+</script>
+
+</div>
+      </div>
+
+
+      <div class="tut-content-menu">
+        <a class="hover-move" href="https://mofanpy.com/tutorials/python-basic/interactive-python/">
+          <img src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/tutorial_contents_icon.jpg" alt="教程目录"></a>
+      </div>
+
+
+    </div>
+
+
+    <div class="tut-right-bar">
+      <div class="tut-table-content-nav section" id="tut-table-content-nav-scroll">
+        <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/"><p><b>交互式学Python</b></p></a>
+
+        
+          <ul class="tut-table-content-nav-contents">
+            <p>介绍</p>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/introduction/">课程介绍</a>
+                
+              </li>
+            
+          </ul>
+        
+          <ul class="tut-table-content-nav-contents">
+            <p>基础功能</p>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/var-ops-print/">变量与运算</a>
+                
+              </li>
+            
+          </ul>
+        
+          <ul class="tut-table-content-nav-contents">
+            <p>循环、数据、判断</p>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/if-else/">条件判断</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/for-while/">for 和 while 循环</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/data/">数据种类</a>
+                
+              </li>
+            
+          </ul>
+        
+          <ul class="tut-table-content-nav-contents">
+            <p>函数、类、模块</p>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/function/">Function 函数</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/class/">Class 类</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/module/">Module 模块</a>
+                
+              </li>
+            
+          </ul>
+        
+          <ul class="tut-table-content-nav-contents">
+            <p>文件管理</p>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/read-write-file/">读写文件</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/os/">文件目录管理</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/regex/">正则表达式</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/pickle-json/">pickle/json 序列化</a>
+                
+              </li>
+            
+          </ul>
+        
+          <ul class="tut-table-content-nav-contents">
+            <p>异常检查和处理</p>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/try-except/">如何控制异常 try-except</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/unittest/">单元测试</a>
+                
+              </li>
+            
+          </ul>
+        
+          <ul class="tut-table-content-nav-contents">
+            <p>做个项目</p>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/useless-calculator/">没啥用计算器</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/file-ops/">文件批量处理</a>
+                
+              </li>
+            
+          </ul>
+        
+          <ul class="tut-table-content-nav-contents">
+            <p>高阶内容</p>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/string/" style="color:#ffffff;" id="nav-to-this-li">字符串的高级玩法</a>
+                  <ul style="padding-left: 1em">
+                    
+                      <li>
+                        <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/string/#%%E7%99%BE%E5%88%86%E5%8F%B7%E6%A8%A1%E5%BC%8F" style="color:#ffffff;">%百分号模式</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/string/#format%E5%8A%9F%E8%83%BD%E6%9B%B4%E5%A4%9A" style="color:#ffffff;">format功能更多</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/string/#f%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2" style="color:#ffffff;">f格式化字符串</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/string/#%E4%BF%AE%E6%94%B9%E5%AD%97%E7%AC%A6%E4%B8%B2" style="color:#ffffff;">修改字符串</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/string/#%E6%80%BB%E7%BB%93" style="color:#ffffff;">总结</a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/lazy-usage/">Python的偷懒用法</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/copy/">复制的"玄学"</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/generator/">为什么要有生成器</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/decorator/">套娃的装饰器</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/py-install-env/">Python 安装和依赖管理：Conda/Pip</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/ide/">Python编辑器</a>
+                
+              </li>
+            
+          </ul>
+        
+          <ul class="tut-table-content-nav-contents">
+            <p>进阶学习</p>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/threading-multiprocessing/">多线程多进程</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/tkinter/">Python 窗口部件</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/numpy-pandas-matplotlib/">数据三剑客 Numpy Pandas Matplotlib</a>
+                
+              </li>
+            
+              <li class="tut-table-content-nav-li">
+                
+                  <a href="https://mofanpy.com/tutorials/python-basic/interactive-python/scraping/">数据采集-爬虫技术</a>
+                
+              </li>
+            
+          </ul>
+        
+        <script type="text/javascript" async="">
+            let myElement = document.getElementById(id = "nav-to-this-li");
+            let topPos = myElement.offsetTop;
+            document.getElementById('tut-table-content-nav-scroll').scrollTop = topPos - 30;
+        </script>
+      </div>
+
+
+      <div class="section">
+        
+
+          <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-4601203457616636" data-ad-slot="8101278819"></ins>
+          <script type="text/javascript">
+              try {
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              } catch (err) {
+                  console.log(err);
+              }
+          </script>
+        
+      </div>
+      
+      <div class="section">
+        
+
+          <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-4601203457616636" data-ad-slot="5136097798"></ins>
+          <script>
+              try {
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              } catch (err) {
+                  console.log(err);
+              }
+          </script>
+        
+      </div>
+
+    </div>
+  </main>
+
+<footer>
+  <p>关注我的动向:</p>
+  <ul>
+    <li><a href="https://github.com/MorvanZhou" target="_blank">
+      <svg class="footer-subscribe-link" viewBox="0 0 24 24">
+        <path d="M12 1A10.89 10.89 0 0 0 1 11.77 10.79 10.79 0 0 0 8.52 22c.55.1.75-.23.75-.52v-1.83c-3.06.65-3.71-1.44-3.71-1.44a2.86 2.86 0 0 0-1.22-1.58c-1-.66.08-.65.08-.65a2.31 2.31 0 0 1 1.68 1.11 2.37 2.37 0 0 0 3.2.89 2.33 2.33 0 0 1 .7-1.44c-2.44-.27-5-1.19-5-5.32a4.15 4.15 0 0 1 1.11-2.91 3.78 3.78 0 0 1 .11-2.84s.93-.29 3 1.1a10.68 10.68 0 0 1 5.5 0c2.1-1.39 3-1.1 3-1.1a3.78 3.78 0 0 1 .11 2.84A4.15 4.15 0 0 1 19 11.2c0 4.14-2.58 5.05-5 5.32a2.5 2.5 0 0 1 .75 2v2.95c0 .35.2.63.75.52A10.8 10.8 0 0 0 23 11.77 10.89 10.89 0 0 0 12 1"></path>
+      </svg>
+    </a></li>
+    <li><a href="https://gitee.com/MorvanZhou" target="_blank">
+      <svg class="footer-subscribe-link" viewBox="0 0 32 32">
+        <g fill="none" fill-rule="evenodd">
+          <circle cx="16" cy="16" fill="#4a4a4a" r="16"></circle>
+          <path d="m24.0987698 14.2225144h-9.0863697c-.4362899.000207-.7900048.3538292-.790326.7901191l-.0005173 1.9752185c-.0003277.4363707.353328.7902117.7896987.790326.0000712 0 .0001424 0 .0002135-.0002135l5.5317648-.0000461c.4363708-.0000102.7901221.3537352.7901257.790106 0 .0000022 0 .0000044-.0000066.0000066v.1975077.1975318c0 1.3091122-1.0612451 2.3703573-2.3703573 2.3703573h-7.5067195c-.4363081-.0000218-.790009-.353713-.7900429-.7900211l-.0002069-7.5059917c-.0001014-1.3091122 1.0611145-2.3703865 2.3702267-2.3704226.0000217 0 .0000435 0 .0000653.0000653h11.0602463c.4361793-.0004902.7898484-.35394.7906091-.79011894l.0012251-1.97521881c.0007606-.43637034-.3527683-.79033806-.7891389-.79060871-.0001634-.0000001-.0003268-.00000015-.0004901.00048976h-11.0617654c-3.27278051 0-5.92589329 2.65311278-5.92589329 5.9258933v11.0612755c0 .4363707.35374837.7901191.7901191.7901191h11.65447149c2.9454379 0 5.3331872-2.3877493 5.3331872-5.3331872v-4.5430682c0-.4363707-.3537484-.7901191-.7901191-.7901191z" fill="#02c39a"></path>
+        </g>
+      </svg>
+    </a></li>
+    <li><a href="https://www.youtube.com/user/MorvanZhou" target="_blank">
+      <svg class="footer-subscribe-link" viewBox="0 0 24 24">
+        <path d="M23,9.71a8.5,8.5,0,0,0-.91-4.13,2.92,2.92,0,0,0-1.72-1A78.36,78.36,0,0,0,12,4.27a78.45,78.45,0,0,0-8.34.3,2.87,2.87,0,0,0-1.46.74c-.9.83-1,2.25-1.1,3.45a48.29,48.29,0,0,0,0,6.48,9.55,9.55,0,0,0,.3,2,3.14,3.14,0,0,0,.71,1.36,2.86,2.86,0,0,0,1.49.78,45.18,45.18,0,0,0,6.5.33c3.5.05,6.57,0,10.2-.28a2.88,2.88,0,0,0,1.53-.78,2.49,2.49,0,0,0,.61-1,10.58,10.58,0,0,0,.52-3.4C23,13.69,23,10.31,23,9.71ZM9.74,14.85V8.66l5.92,3.11C14,12.69,11.81,13.73,9.74,14.85Z"></path>
+      </svg>
+    </a></li>
+    <li><a href="https://space.bilibili.com/243821484#!/" target="_blank">
+      <svg class="footer-subscribe-link" viewBox="0 0 1000 1000">
+        <path d="M957.6,281.2c0-29.1-4.8-33.9-33.9-33.9c-95.3,0-190.6,0-285.1,0h-25.8c27.5-40.4,52.5-76.7,76.7-113.1c17.8-25.8,35.5-52.5,53.3-78.3c9.7-13.7,12.1-28.3-2.4-40.4C727.4,5,712.8,9.8,700.7,27.6c-1.6,2.4-3.2,4.8-4.8,6.5c-43.6,64.6-88,129.2-131.7,193c-14.5,21-54.1,28.3-75.9,15.3C401.9,194.8,315.4,148,229,101.1c-14.5-8.1-29.1-7.3-37.2,8.9c-8.1,15.3-2.4,28.3,12.9,36.3c37.2,20.2,73.5,40.4,110.7,60.6c22.6,12.1,44.4,24.2,67,36.3c-0.8,1.6-1.6,3.2-1.6,4.8h-20.2c-96.1,0-191.4,0-287.5,0c-23.4,0-31.5,7.3-31.5,28.3C40.8,478.3,40.8,681,40.8,883c0,20.2,8.9,28.3,29.1,29.1c18.6,0,37.2,0.8,55.7,0c14.5-0.8,21,2.4,25.8,18.6c9.7,37.2,39.6,59,72.7,59c32.3-0.8,62.2-23.4,71.1-59c4-17,12.1-17.8,25.8-17.8c119.5,0,238.3,0.8,357.8,0c17,0,26.7,2.4,31.5,21.8c8.9,31.5,30.7,51.7,64.6,54.9c29.1,3.2,62.2-12.1,70.3-42.8c9.7-33.9,29.9-36.3,57.3-33.1c7.3,0.8,15.3,0,22.6,0c29.1,0,33.9-4.8,33.9-33.1C957.6,679.4,957.6,479.9,957.6,281.2z M220.1,941.1c-15.3-0.8-22.6-12.1-26.7-28.3H250C245.2,929.8,237.1,942.7,220.1,941.1z M781.5,941.1c-17,0.8-25-11.3-30.7-29.1h57.3C803.3,928.2,796,940.3,781.5,941.1z M911.5,864.4h-823v-571h823V864.4z M170.1,824.8c110.7,0,220.5,0,331.2,0s220.5,0,331.2,0c30.7,0,37.2-5.7,37.2-35.5c0-138.9-0.8-277.8-0.8-416.8c0-29.1-6.5-34.7-35.5-34.7c-221.3,0-442.6,0-663.9,0c-29.1,0-34.7,5.7-34.7,35.5c0,138.1-0.8,276.2-0.8,415.2C132.9,820,137.7,824.8,170.1,824.8z M182.2,387h636.5v389.3H182.2V387z M632.9,611.6c-15.3-0.8-24.2,8.1-26.7,22.6c-1.6,9.7-1.6,21-6.5,27.5c-8.1,9.7-21,22.6-31.5,21.8c-11.3,0-24.2-12.1-33.1-22.6c-5.7-6.5-5.7-17.8-7.3-27.5c-1.6-14.5-10.5-23.4-24.2-23.4c-14.5,0-23.4,8.9-25.8,24.2c-0.8,8.1,0,18.6-4.8,23.4c-9.7,10.5-21,23.4-33.9,25.8c-17,4-28.3-11.3-34.7-26.7c-3.2-8.1-1.6-19.4-5.7-25.8c-5.7-8.9-16.2-19.4-24.2-19.4c-8.1,0-22.6,12.1-23.4,20.2c-2.4,35.5,10.5,66.2,40.4,87.2c27.5,19.4,56.5,20.2,85.6,4.8c8.9-4.8,17-11.3,25-17.8c1.6,1.6,4,2.4,4.8,3.2c27.5,25,59.8,32.3,93.7,16.2c36.3-17.8,51.7-49.3,53.3-88.8C656.3,622.1,648.2,612.4,632.9,611.6z M764.5,545.3c-46.8-29.1-93.7-57.3-141.3-84.8c-12.1-7.3-25-3.2-32.3,9.7c-7.3,12.1-4.8,25,8.1,32.3c46,28.3,92.1,56.5,139.7,83.2c17.8,9.7,36.3-2.4,36.3-25.8C773.4,557.5,770.2,548.6,764.5,545.3z M389.7,488c-0.8-7.3-12.1-13.7-17-17.8c-7.3,0.8-9.7,0.8-11.3,1.6c-42.8,19.4-86.4,38-128.4,59.8c-6.5,3.2-10.5,20.2-8.1,29.9c3.2,13.7,17,17.8,29.9,12.1c42-18.6,84-37.2,125.2-58.2C386.5,512.2,391.4,496.9,389.7,488z"></path>
+      </svg>
+    </a></li><li><a href="http://i.youku.com/pythontutorial" target="_blank">
+      <svg class="footer-subscribe-link" viewBox="0 0 1000 1000">
+        <g>
+          <path d="M638.1,646.2h1.6l0.1-51.9h-11l-0.1,39C628.6,641.8,631.8,646.2,638.1,646.2z"></path>
+          <path d="M559.1,684.6l80.5,0.1l0.1-17.1l-5.9-0.1c-16,0-28.7-12.6-28.6-28.6l0.1-44.6l-8.5,0v0.8c-0.1,36.7-9.3,67.6-18,78l-19.6-11.8L559.1,684.6z"></path>
+          <path d="M596.9,535.9h8.4v30h-8.4V535.9z"></path>
+          <path d="M559,729c0,5.3,0.7,9.2,2.9,11.5c2,2,4.9,2.9,9,2.9c0.3,0,12,0,25.6,0c1.7,0,3.5,0,5.2,0c13.6,0,25.4,0,25.7,0c4.1,0,7-0.9,9-2.9c2.3-2.3,3-6.2,3-11.4l0-17.5l-80.5-0.2L559,729z"></path>
+          <path d="M348.9,373.3c21.2,0,38.6-21.9,38.6-48.7c0-26.9-17.2-48.9-38.5-48.9h0c-21.2,0-38.6,21.9-38.7,48.8c0,13,4,25.3,11.2,34.5C328.9,368.2,338.5,373.3,348.9,373.3z"></path>
+          <path d="M573.2,594.9v-0.8l-13.9,0l-0.1,63.4l1.5-2.3C569.6,642.3,573.2,617.5,573.2,594.9z"></path>
+          <path d="M892,10H108c-54.1,0-98,43.9-98,98v784c0,54.1,43.9,98,98,98h784c54.2,0,98-43.9,98-98V108C990,53.9,946.2,10,892,10z M595.9,264.4c0.9-16,8.4-23.4,23.3-23.4c14.6,0,23.3,8.4,23.7,23.5V311l61.3-62.5c3.7-3.7,10.8-7.4,18.2-7.4c6.1,0,11.5,2.4,16.1,7.2c16.9,17.5-1.7,37.1-2.5,37.9l-41.7,39.2l46.4,42.8c5.4,5,8.7,12.7,9,20.6c0.2,6.4-1.6,11.9-5.2,15.7c-4.1,4.1-10.2,6.5-16.9,6.5c-6.5,0-12.4-2.2-16.9-6.1c-3.4-3.2-66.2-61.1-66.2-61.1l-1.3-1.4v49.2c-0.7,14-8.7,21.1-23.5,21.1v0.9l0,0l-0.3-0.9c-14.8,0-22.5-6.9-23.3-21.2L595.9,264.4L595.9,264.4z M349.2,234c46.1,0.1,83.6,40.1,83.5,89.2c-0.1,54-33,88.9-83.7,88.9v0.9l-0.2-0.9c-24.7,0-45.8-9.1-61.1-26.1c-14.5-16.2-22.5-38.6-22.4-63C265.4,273.9,303,234,349.2,234z M438,502.7c26.9,19.6,48.9,37.8,52.7,41l-21.3,23.9c-4.3-4-32.7-29.9-49.5-43.3L438,502.7z M164.3,476.3c-3.6,0-7.6-0.9-11.8-2.8c-21-9-13.1-30.6-11.3-34.8l25.5-56.7L102,272c-0.4-0.9-11.8-23.3,8.1-35c4.3-2.5,8.6-3.8,12.9-3.8c11,0,19.4,8.6,23.6,16.6l44.9,77l33.5-74.6c3.7-9.3,9.1-18.9,21.3-18.9c3.9,0,8.3,0.9,13.2,2.9c6.4,2.4,10.7,6.4,13,11.6c4.2,10.1-0.8,21.8-0.8,21.9l-84,185.7C183,465.7,176.6,476.3,164.3,476.3z M499.8,735.9c-2.4,12.7-6.9,21.4-13.6,26.7c-6.2,5-15.3,7.4-28.6,7.4l-20,0c-6.5,0-11.5-0.6-16.6-2c-5-1.4-9.2-3.7-12.2-6.7c-3.1-2.8-5.5-6.8-7-11.9c-1.5-4.9-2-10.6-2-17.6l0.3-129.3h-6.9c-2.8,31.6-8.6,58.7-17.6,81.7c-11,28.4-29.7,57.4-58.7,87.6L292,752.3v19.5l-32.7-0.1l0.3-132.7c0,0-9.3,14.3-18.2,26.3l-24.6-22.7c30.3-41.5,53.3-86.6,69.2-142.3l31.1,12.3c-5.3,21.9-13.7,46.3-24.7,70.2L292,747.9c24.6-23.6,41.2-47.9,52.2-73.2c8.4-17.8,13.8-42,16.3-72.3l-55.9-0.1l0-28.9l56.6,0.1l0.1-73.1l32.8,0.1l-0.2,73.1l102.5,0.2l0,28.9l-63.7-0.2L432.3,729c0,11.2,6.6,13.7,12.3,13.7h7.3c5.1,0,9-1.2,11.6-3.7c2.8-2.5,4.3-6.3,4.9-11.8c1-6.6,3-28,3.8-40.8l32.5,9.7C503.4,706.4,501.3,726.8,499.8,735.9z M437.8,348.9v-83.3c0.8-17.2,8.3-25.6,22.8-25.6c13.5,0.6,20.6,9,21.4,25.6V349c0.9,18.2,13.1,29.9,31.3,30c17.5,0,30.3-12.3,31.2-29.9v-83.3c0.5-16.2,8.2-25,22-25.4c14,0.5,21.5,9.1,22.3,25.5v83.3c-2.2,42.2-27,63.1-75.8,63.9C464.6,412,439.3,390.5,437.8,348.9z M668.6,536.1l-39.7-0.1l0,30l39.3,0l-0.3,151.6h-0.1l0,24.2c0,11-2.4,18.2-7.6,22.3c-4.6,4.2-13.1,6.1-25.6,6.1l-32.7-0.1h-5.1l-32.7-0.1c-12.5,0-20.8-2-25.5-6.2c-5.2-4.1-7.6-11.4-7.5-22.4l0-24.2l0.3-151.6l42.1,0.1l0.1-30l-42.1-0.1l0-28.8h137.3L668.6,536.1z M806,742.2c0.1,11-2.4,18.3-7.6,22.4c-4.6,4.1-13.1,6.1-25.6,6.1h-15.3l-23.4-0.1h-15.3c-12.5,0-20.9-2.1-25.5-6.2c-5.2-4.1-7.7-11.4-7.5-22.4L686,652l120.1,0.3L806,742.2z M813.1,635.9l-135.3-0.3v-27.4l55,0.1l0.1-39l-26.9,0l-0.4,1.5c-2.5,12.7-6.1,25.6-6.7,28.5l-26.4-5.2c1.4-6.2,12.4-51.1,14-82.5l28.9,2.3c-0.8,9-2,18.2-3.7,27.4l-0.1,0.9l21.3,0.1l0.1-41.2l31.4,0.1l-0.1,41.2l40.4,0.1l-0.1,27l-40.4-0.1l0,38.9l49,0.1L813.1,635.9z M901.6,349.1c-2.2,42.2-27,63.1-75.8,63.9c-48.4-0.9-73.6-22.5-75.2-64.1v-83.3c0.9-17.2,8.3-25.6,22.9-25.6c13.5,0.6,20.6,9,21.4,25.6V349c0.8,18.2,13.1,29.9,31.2,30c17.5,0,30.3-12.3,31.2-29.9v-83.3c0.6-16.2,8.2-25,22-25.4c14,0.5,21.5,9.1,22.3,25.5V349.1z"></path>
+          <path d="M729.1,743.6c0.1,0,2,0,5.1,0c9.6,0,18.2,0,23.4,0c3.1,0,5,0,5,0c4.1,0,7-0.9,9-2.9c2.4-2.3,3.1-6.1,3.1-11.4l0.1-50.2l-57.6-0.1l-0.1,50.2c0,5.3,0.7,9.2,3,11.4C722,742.6,725,743.6,729.1,743.6z"></path>
+        </g>
+      </svg>
+  </a></li>
+    <li><a href="https://www.zhihu.com/people/morvan/activities" target="_blank">
+
+      <svg class="footer-subscribe-link" viewBox="0 0 24 24">
+        <path d="M5.721 0C2.251 0 0 2.25 0 5.719V18.28C0 21.751 2.252 24 5.721 24h12.56C21.751 24 24 21.75 24 18.281V5.72C24 2.249 21.75 0 18.281 0zm1.964 4.078c-.271.73-.5 1.434-.68 2.11h4.587c.545-.006.445 1.168.445 1.171H9.384a58.104 58.104 0 01-.112 3.797h2.712c.388.023.393 1.251.393 1.266H9.183a9.223 9.223 0 01-.408 2.102l.757-.604c.452.456 1.512 1.712 1.906 2.177.473.681.063 2.081.063 2.081l-2.794-3.382c-.653 2.518-1.845 3.607-1.845 3.607-.523.468-1.58.82-2.64.516 2.218-1.73 3.44-3.917 3.667-6.497H4.491c0-.015.197-1.243.806-1.266h2.71c.024-.32.086-3.254.086-3.797H6.598c-.136.406-.158.447-.268.753-.594 1.095-1.603 1.122-1.907 1.155.906-1.821 1.416-3.6 1.591-4.064.425-1.124 1.671-1.125 1.671-1.125zM13.078 6h6.377v11.33h-2.573l-2.184 1.373-.401-1.373h-1.219zm1.313 1.219v8.86h.623l.263.937 1.455-.938h1.456v-8.86z"></path>
+      </svg>
+    </a></li><li><a href="http://weibo.com/u/5945530751" target="_blank">
+
+      <svg class="footer-subscribe-link" viewBox="0 0 32 32">
+        <path d="M21.938 6.281a6.314 6.314 0 0 0-1.625.125.93.93 0 0 0-.72 1.094.93.93 0 0 0 1.095.719c1.527-.324 3.19.136 4.312 1.375a4.552 4.552 0 0 1 .938 4.437c-.157.485.109 1 .593 1.156.48.157 1-.113 1.157-.593.671-2.09.265-4.473-1.313-6.219a6.395 6.395 0 0 0-4.438-2.094zm-8.282 2.75c-1.676.18-4.015 1.485-6.094 3.563C5.301 14.859 4 17.27 4 19.344c0 3.968 5.082 6.375 10.063 6.375 6.527 0 10.874-3.801 10.874-6.813 0-1.82-1.527-2.855-2.906-3.281-.34-.102-.582-.148-.406-.594.383-.965.445-1.812.031-2.406-.777-1.113-2.933-1.055-5.375-.031 0 0-.758.36-.562-.25.375-1.207.304-2.227-.281-2.813-.415-.414-1.02-.582-1.782-.5zm8.125.5a3.091 3.091 0 0 0-.781.063.827.827 0 0 0-.625.969.781.781 0 0 0 .938.593 1.568 1.568 0 0 1 1.468.469c.375.414.473.973.313 1.469a.794.794 0 0 0 .5 1 .793.793 0 0 0 1-.5 3.102 3.102 0 0 0-.657-3.031 3.1 3.1 0 0 0-2.156-1.032zm-7.187 5.281c3.32.118 5.992 1.782 6.219 4.063.257 2.61-2.747 5.047-6.72 5.438-3.972.39-7.429-1.422-7.687-4.032-.258-2.61 2.778-5.047 6.75-5.437.496-.051.965-.047 1.438-.031zM13.03 16.75c-1.437.137-2.789.969-3.406 2.219-.836 1.699-.035 3.601 1.875 4.218 1.98.637 4.313-.351 5.125-2.187.8-1.793-.2-3.621-2.156-4.125a4.162 4.162 0 0 0-1.438-.125zm.906 2.188a.36.36 0 0 1 .157.03c.242.09.351.356.219.595-.141.238-.446.347-.688.25-.238-.098-.32-.36-.188-.594a.613.613 0 0 1 .5-.282zm-1.843.562c.168.004.347.027.5.094.62.265.816.976.437 1.593-.383.614-1.191.907-1.812.625-.61-.277-.79-.996-.406-1.593.285-.446.78-.727 1.28-.719z"></path>
+      </svg>
+    </a></li>
+  </ul>
+  <br>
+  <br>
+  <p><b>Email:</b> mofanpy@hotmail.com</p>
+  <p>© 2020 mofanpy.com All Rights Reserved <a href="http://beian.miit.gov.cn/" target="_blank">粤ICP备20060366号</a></p>
+</footer>
+
+<script>
+  
+  var _hmt = _hmt || [];
+  (function() {
+    let hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?9d4c4973d7eb0cd4876e83fa9b6005c9";
+    let s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="字符串的高级玩法%20-%20交互式学Python%20_%20莫烦Python_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-108653085-2');
+</script>
+
+
+</body></html>

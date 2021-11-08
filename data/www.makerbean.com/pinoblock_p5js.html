@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.makerbean.com/pinoblock_p5js by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 15 Oct 2021 06:26:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PinoBlock p5js | 每颗豆</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="icon" href="static/images/favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="static/css/revolution/rs6.css">
+    <link rel="stylesheet" href="static/css/plugins/plugins.min.css">
+
+
+    <!-- Main Style CSS -->
+    
+    <link rel="stylesheet" href="https://makerbean-web.oss-cn-beijing.aliyuncs.com/css/style.min.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="static/pinoblock_p5js/blockly-style.css"/>
+
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e712693387c3444f47c42c103f7d0e1a";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+</head>
+
+<body>
+    <div class="preloader-activate preloader-active open_tm_preloader">
+        <div class="preloader-area-wrap">
+            <div class="spinner d-flex justify-content-center align-items-center h-100">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+    </div>
+
+    <!--====================  header area ====================-->
+    <div class="header-area header-sticky header-area--absolute">
+        <div class="container-fluid container-fluid--cp-150">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="header position-relative">
+                        <!-- brand logo -->
+                        <div class="header__logo">
+                            <a class="navbar-brand" href="index.html" style="padding: 5px 5px;">
+                                <img src="static/images/base/logo.png" alt="Brand" width="120px" height="40px">
+                            </a>
+                        </div>
+                        <!-- navigation menu -->
+                        <div class="header__navigation d-none d-xl-block">
+                            <nav class="navigation-menu">
+                                <ul>
+                                    
+                                    <li class="header-tab-index"><a href="index.html"><span>首页</span></a></li>
+                                    <li class="header-tab-online_courses"><a href="online_courses/index.html"><span>在线课程</span></a></li>
+                                    <li class="has-children has-children--multilevel-submenu header-tab-online_programming">
+                                        <a href="python_online.html"><span>在线编程</span></a>
+                                        <ul class="submenu">
+                                            <li><a href="python_blockly_online.html"><span>Python拖拽式编程</span></a></li>
+                                            <li><a href="python_online.html"><span>Python编程</span></a></li>
+                                            <li><a href="pinoblock_p5js.html"><span>p5js图形化编程</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-children has-children--multilevel-submenu header-tab-online_tools">
+                                        <a href="#"><span>在线工具</span></a>
+                                        <ul class="submenu">
+                                            <li><a href="https://rewindcode.cn/"><span>倒带代码练习系统</span></a></li>
+                                            <li><a href="http://pythontutor.com/visualize.html#mode=edit"><span>可视化代码执行</span></a></li>
+                                            <li><a href="http://c2qr.com/"><span>代码分享工具</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="header-tab-about"><a href="about.html"><span>关于我们</span></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- header actions -->
+                        <div class="header__actions">
+                            <div class="header__icons-wrapper" id="hidden-icon-wrapper">
+                                <div class="header-button">
+                                    
+                                    <a class="ht-btn ht-btn--outline" href="#" onclick="open_wechat_login_modal()">登录</a>
+                                    
+                                </div>
+                            </div>
+                            <!-- mobile menu -->
+                            <div class="mobile-navigation-icon d-block d-xl-none" id="mobile-menu-trigger">
+                                <i></i>
+                            </div>
+                            <!-- hidden icons menu -->
+                            <div class="hidden-icons-menu d-block d-md-none" id="hidden-icon-trigger">
+                                <a href="javascript:void(0)">
+                                    <i class="far fa-ellipsis-h-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--====================  End of header area  ====================-->
+    
+<div id="level_container overflow-hidden" style="padding: 100px 50px;">
+	<h1 class="text-center mb-5" style="font-size:50px;">
+		<strong style="color: #333;">PinoBlock p5js</strong>
+	</h1>
+	<div class="row">
+		<div class="col-sm-12" id="blockly_space">
+			<table width="100%" height="100%">
+				<tr>
+					<td colspan="3">
+						<table width="100%">
+							<tr id="tabRow" height="1em">
+								<td class="tabon" id="tab_blocks" style="min-width: 100px;">...</td>
+								<td class="tabmin"></td>
+								<td class="taboff" id="tab_javascript">p5.js</td>
+								<td class="tabmin"></td><td class="taboff" id="tab_xml">XML</td>
+								<td class="tabmax"><select id="languageMenu"></select>
+									<button class="notext" id="trashButton" title="...">
+										<img class="trash icon21" src="static/pinoblock_p5js/media/1x1.gif"/>
+									</button>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td id="content_area" height="700px" colspan="2"></td>
+				</tr>
+			</table>
+			<div class="content" id="content_blocks"></div>
+			<pre class="content" id="content_javascript">\n</pre>
+			<textarea class="content" id="content_xml" wrap="on" style="height: 700px;"></textarea>
+			<xml id="toolbox" style="display: none;">
+				<category name="{catControl}" colour="#334D5C">
+					<block type="pinoblock_p5js_structure_setup">
+						<next>
+							<block type="pinoblock_p5js_structure_draw">
+							</block>
+						</next>
+					</block>
+					<block type="controls_if"></block>
+					<block type="controls_repeat_ext">
+						<value name="TIMES">
+							<shadow type="math_number">
+								<field name="NUM">10</field>
+							</shadow>
+						</value>
+					</block>
+					<block type="controls_whileUntil"></block>
+					<block type="controls_for">
+						<value name="FROM">
+							<shadow type="math_number">
+								<field name="NUM">1</field>
+							</shadow>
+						</value>
+						<value name="TO">
+							<shadow type="math_number">
+								<field name="NUM">10</field>
+							</shadow>
+						</value>
+						<value name="BY">
+							<shadow type="math_number">
+								<field name="NUM">1</field>
+							</shadow>
+						</value>
+					</block>
+					<block type="controls_forEach"></block>
+					<block type="controls_flow_statements"></block>
+				</category>
+				<category name="{catSprites}" colour="#DF5A49">
+  					<block type="pinoblock_p5js_p5play_general_createsprite">
+    					<value name="x">
+      						<shadow type="math_number">
+        						<field name="NUM">50</field>
+        					</shadow>
+    					</value>
+   						<value name="y">
+      						<shadow type="math_number">
+        						<field name="NUM">50</field>
+        					</shadow>
+    					</value>
+    					<value name="width">
+      						<shadow type="math_number">
+        						<field name="NUM">20</field>
+        					</shadow>
+    					</value>
+    					<value name="height">
+      						<shadow type="math_number">
+        						<field name="NUM">20</field>
+        					</shadow>
+    					</value>
+  					</block>
+  					<block type="pinoblock_p5js_p5play_group_new"></block>
+  					<block type="pinoblock_p5js_p5play_group_add"></block>
+  					<block type="pinoblock_p5js_p5play_sprite_setlife">
+    					<value name="life">
+      						<shadow type="math_number">
+        						<field name="NUM">50</field>
+        					</shadow>
+    					</value>
+  					</block>
+  					<block type="pinoblock_p5js_p5play_sprite_drawallsprites"></block>
+  					<block type="pinoblock_p5js_p5play_sprite_remove"></block>
+  					<block type="pinoblock_p5js_p5play_general_getallspritelength"></block>
+  					<block type="pinoblock_p5js_p5play_general_getspritefromall">
+    					<value name="no">
+    						<shadow type="math_number">
+    							<field name="NUM">0</field>
+    						</shadow>
+    					</value>
+  					</block>
+					<block type="pinoblock_p5js_p5play_sprite_new_attr"></block>
+					<block type="pinoblock_p5js_p5play_sprite_get_attr"></block>
+				</category>
+				<category name="{catLooks}" colour="#45B29D">
+					<block type="pinoblock_p5js_rendering_createcanvas">
+						<value name="width">
+							<shadow type="math_number">
+								<field name="NUM">400</field>
+							</shadow>
+						</value>
+						<value name="height">
+							<shadow type="math_number">
+								<field name="NUM">400</field>
+							</shadow>
+						</value>
+					</block>
+					<block type="pinoblock_p5js_getcanvaswh"></block>
+					<block type="pinoblock_p5js_color_background_simple"></block>
+					<block type="pinoblock_p5js_p5play_sprite_addimage">
+						<value name="lable">
+							<shadow type="text">
+								<field name="TEXT">normal</field>
+							</shadow>
+						</value>
+					</block>
+					<block type="pinoblock_p5js_p5play_sprite_set_scale">
+						<value name="scale">
+							<shadow type="math_number">
+								<field name="NUM">1</field>
+							</shadow>
+						</value>
+					</block>
+					<block type="pinoblock_p5js_p5play_assets_asteroids_ship001"></block>
+					<block type="pinoblock_p5js_p5play_assets_asteroids_asteroid0"></block>
+				</category>
+				<category name="{catMotion}" colour="#EFC94C">
+				  <block type="pinoblock_p5js_p5play_sprite_setspeedto">
+				    <value name="speed">
+				      <shadow type="math_number">
+				        <field name="NUM">0.2</field></shadow>
+				    </value>
+				    <value name="angle">
+				      <shadow type="math_number">
+				        <field name="NUM">90</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_p5play_sprite_addspeed">
+				    <value name="speed">
+				      <shadow type="math_number">
+				        <field name="NUM">0.2</field></shadow>
+				    </value>
+				    <value name="angle">
+				      <shadow type="math_number">
+				        <field name="NUM">90</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_p5play_sprite_getspeed"></block>
+				  <block type="pinoblock_p5js_p5play_sprite_setpositionto">
+				    <value name="x">
+				      <shadow type="math_number">
+				        <field name="NUM">40</field></shadow>
+				    </value>
+				    <value name="y">
+				      <shadow type="math_number">
+				        <field name="NUM">40</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_p5play_sprite_setpositionby">
+				    <value name="x">
+				      <shadow type="math_number">
+				        <field name="NUM">10</field></shadow>
+				    </value>
+				    <value name="y">
+				      <shadow type="math_number">
+				        <field name="NUM">10</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_p5play_sprite_getposition"></block>
+				  <block type="pinoblock_p5js_p5play_sprite_setrotationto">
+				    <value name="rotation">
+				      <shadow type="math_number">
+				        <field name="NUM">5</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_p5play_sprite_setrotationby">
+				    <value name="rotation">
+				      <shadow type="math_number">
+				        <field name="NUM">5</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_p5play_sprite_setrotationspeed">
+				    <value name="rotation_speed">
+				      <shadow type="math_number">
+				        <field name="NUM">1</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_p5play_sprite_getrotation"></block>
+				</category>
+				<category name="{catPen}" colour="300">
+				  <block type="colour_picker"></block>
+				  <block type="colour_random"></block>
+				  <block type="colour_rgb">
+				    <value name="RED">
+				      <shadow type="math_number">
+				        <field name="NUM">100</field></shadow>
+				    </value>
+				    <value name="GREEN">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				    <value name="BLUE">
+				      <shadow type="math_number">
+				        <field name="NUM">0</field></shadow>
+				    </value>
+				  </block>
+				  <block type="colour_blend">
+				    <value name="COLOUR1">
+				      <shadow type="colour_picker">
+				        <field name="COLOUR">#ff0000</field></shadow>
+				    </value>
+				    <value name="COLOUR2">
+				      <shadow type="colour_picker">
+				        <field name="COLOUR">#3333ff</field></shadow>
+				    </value>
+				    <value name="RATIO">
+				      <shadow type="math_number">
+				        <field name="NUM">0.5</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_color_fill_rgba">
+				    <value name="red">
+				      <shadow type="math_number">
+				        <field name="NUM">100</field></shadow>
+				    </value>
+				    <value name="green">
+				      <shadow type="math_number">
+				        <field name="NUM">100</field></shadow>
+				    </value>
+				    <value name="blue">
+				      <shadow type="math_number">
+				        <field name="NUM">0</field></shadow>
+				    </value>
+				    <value name="alpha">
+				      <shadow type="math_number">
+				        <field name="NUM">180</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_shape_ellipse">
+				    <value name="x">
+				      <shadow type="math_number">
+				        <field name="NUM">100</field></shadow>
+				    </value>
+				    <value name="y">
+				      <shadow type="math_number">
+				        <field name="NUM">100</field></shadow>
+				    </value>
+				    <value name="width">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				    <value name="height">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_shape_strokeweight">
+				    <value name="strokeweight">
+				      <shadow type="math_number">
+				        <field name="NUM">0</field></shadow>
+				    </value>
+				  </block>
+				</category>
+				<category name="{catPhysics}" colour="60">
+				  <block type="pinoblock_p5js_p5play_sprite_attractionpoint">
+				    <value name="x">
+				      <shadow type="math_number">
+				        <field name="NUM">40</field></shadow>
+				    </value>
+				    <value name="y">
+				      <shadow type="math_number">
+				        <field name="NUM">40</field></shadow>
+				    </value>
+				    <value name="magnitude">
+				      <shadow type="math_number">
+				        <field name="NUM">1</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_p5play_sprite_max_speed">
+				    <value name="max_speed">
+				      <shadow type="math_number">
+				        <field name="NUM">6</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_p5play_sprite_friction">
+				    <value name="friction">
+				      <shadow type="math_number">
+				        <field name="NUM">0.98</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_p5play_sprite_setmass">
+				    <value name="mass">
+				      <shadow type="math_number">
+				        <field name="NUM">2</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_p5play_sprite_setcolliderrectangle">
+				    <value name="width">
+				      <shadow type="math_number">
+				        <field name="NUM">20</field></shadow>
+				    </value>
+				    <value name="height">
+				      <shadow type="math_number">
+				        <field name="NUM">20</field></shadow>
+				    </value>
+				  </block>
+				</category>
+				<category name="{catSensing}" colour="0">
+				  <block type="pinoblock_p5js_events_mousex"></block>
+				  <block type="pinoblock_p5js_events_mousey"></block>
+				  <block type="pinoblock_p5js_p5play_general_keydown"></block>
+				  <block type="pinoblock_p5js_p5play_general_keywentdown"></block>
+				  <block type="pinoblock_p5js_p5play_sprite_bounce"></block>
+				  <block type="pinoblock_p5js_p5play_sprite_overlap"></block>
+				  <block type="pinoblock_p5js_p5play_general_mousedown"></block>
+				</category>
+				<category name="{catOperators}" colour="#E27A3F">
+				  <block type="logic_compare"></block>
+				  <block type="logic_operation"></block>
+				  <block type="logic_negate"></block>
+				  <block type="logic_boolean"></block>
+				  <block type="logic_null"></block>
+				  <block type="logic_ternary"></block>
+				  <block type="math_number"></block>
+				  <block type="math_arithmetic">
+				    <value name="A">
+				      <shadow type="math_number">
+				        <field name="NUM">1</field></shadow>
+				    </value>
+				    <value name="B">
+				      <shadow type="math_number">
+				        <field name="NUM">1</field></shadow>
+				    </value>
+				  </block>
+				  <block type="math_single">
+				    <value name="NUM">
+				      <shadow type="math_number">
+				        <field name="NUM">9</field></shadow>
+				    </value>
+				  </block>
+				  <block type="math_trig">
+				    <value name="NUM">
+				      <shadow type="math_number">
+				        <field name="NUM">45</field></shadow>
+				    </value>
+				  </block>
+				  <block type="math_constant"></block>
+				  <block type="math_number_property">
+				    <value name="NUMBER_TO_CHECK">
+				      <shadow type="math_number">
+				        <field name="NUM">0</field></shadow>
+				    </value>
+				  </block>
+				  <block type="math_round">
+				    <value name="NUM">
+				      <shadow type="math_number">
+				        <field name="NUM">3.1</field></shadow>
+				    </value>
+				  </block>
+				  <block type="math_on_list"></block>
+				  <block type="math_modulo">
+				    <value name="DIVIDEND">
+				      <shadow type="math_number">
+				        <field name="NUM">64</field></shadow>
+				    </value>
+				    <value name="DIVISOR">
+				      <shadow type="math_number">
+				        <field name="NUM">10</field></shadow>
+				    </value>
+				  </block>
+				  <block type="math_constrain">
+				    <value name="VALUE">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				    <value name="LOW">
+				      <shadow type="math_number">
+				        <field name="NUM">1</field></shadow>
+				    </value>
+				    <value name="HIGH">
+				      <shadow type="math_number">
+				        <field name="NUM">100</field></shadow>
+				    </value>
+				  </block>
+				  <block type="math_random_int">
+				    <value name="FROM">
+				      <shadow type="math_number">
+				        <field name="NUM">1</field></shadow>
+				    </value>
+				    <value name="TO">
+				      <shadow type="math_number">
+				        <field name="NUM">100</field></shadow>
+				    </value>
+				  </block>
+				  <!-- <block type="math_random_float"></block>-->
+				  <block type="text"></block>
+				  <block type="text_join"></block>
+				  <block type="text_append">
+				    <value name="TEXT">
+				      <shadow type="text"></shadow>
+				    </value>
+				  </block>
+				  <block type="text_length">
+				    <value name="VALUE">
+				      <shadow type="text">
+				        <field name="TEXT">abc</field></shadow>
+				    </value>
+				  </block>
+				  <block type="text_isEmpty">
+				    <value name="VALUE">
+				      <shadow type="text">
+				        <field name="TEXT"></field>
+				      </shadow>
+				    </value>
+				  </block>
+				  <block type="text_indexOf">
+				    <value name="VALUE">
+				      <block type="variables_get">
+				        <field name="VAR">text</field></block>
+				    </value>
+				    <value name="FIND">
+				      <shadow type="text">
+				        <field name="TEXT">abc</field></shadow>
+				    </value>
+				  </block>
+				  <block type="text_charAt">
+				    <value name="VALUE">
+				      <block type="variables_get">
+				        <field name="VAR">text</field></block>
+				    </value>
+				  </block>
+				  <block type="text_getSubstring">
+				    <value name="STRING">
+				      <block type="variables_get">
+				        <field name="VAR">text</field></block>
+				    </value>
+				  </block>
+				  <block type="text_changeCase">
+				    <value name="TEXT">
+				      <shadow type="text">
+				        <field name="TEXT">abc</field></shadow>
+				    </value>
+				  </block>
+				  <block type="text_trim">
+				    <value name="TEXT">
+				      <shadow type="text">
+				        <field name="TEXT">abc</field></shadow>
+				    </value>
+				  </block>
+				  <block type="text_print">
+				    <value name="TEXT">
+				      <shadow type="text">
+				        <field name="TEXT">abc</field></shadow>
+				    </value>
+				  </block>
+				  <block type="text_prompt_ext">
+				    <value name="TEXT">
+				      <shadow type="text">
+				        <field name="TEXT">abc</field></shadow>
+				    </value>
+				  </block>
+				</category>
+				<category name="{catLists}" colour="260">
+				  <block type="lists_create_with">
+				    <mutation items="0"></mutation>
+				  </block>
+				  <block type="lists_create_with"></block>
+				  <block type="lists_repeat">
+				    <value name="NUM">
+				      <shadow type="math_number">
+				        <field name="NUM">5</field></shadow>
+				    </value>
+				  </block>
+				  <block type="lists_length"></block>
+				  <block type="lists_isEmpty"></block>
+				  <block type="lists_indexOf">
+				    <value name="VALUE">
+				      <block type="variables_get">
+				        <field name="VAR">list</field></block>
+				    </value>
+				  </block>
+				  <block type="lists_getIndex">
+				    <value name="VALUE">
+				      <block type="variables_get">
+				        <field name="VAR">list</field></block>
+				    </value>
+				  </block>
+				  <block type="lists_setIndex">
+				    <value name="LIST">
+				      <block type="variables_get">
+				        <field name="VAR">list</field></block>
+				    </value>
+				  </block>
+				  <block type="lists_getSublist">
+				    <value name="LIST">
+				      <block type="variables_get">
+				        <field name="VAR">list</field></block>
+				    </value>
+				  </block>
+				  <block type="lists_split">
+				    <value name="DELIM">
+				      <shadow type="text">
+				        <field name="TEXT">,</field></shadow>
+				    </value>
+				  </block>
+				</category>
+				<sep></sep>
+				<category name="{catVariables}" colour="330" custom="VARIABLE"></category>
+				<category name="{catFunctions}" colour="290" custom="PROCEDURE"></category>
+				<sep></sep>
+				<category name="{cat3D}" colour="#00594B">
+				  <block type="pinoblock_p5js_3d_create3dcanvas">
+				    <value name="width">
+				      <shadow type="math_number">
+				        <field name="NUM">500</field></shadow>
+				    </value>
+				    <value name="height">
+				      <shadow type="math_number">
+				        <field name="NUM">500</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_3d_orbitcontrol"></block>
+				  <block type="pinoblock_p5js_3d_translate">
+				    <value name="x">
+				      <shadow type="math_number">
+				        <field name="NUM">100</field></shadow>
+				    </value>
+				    <value name="y">
+				      <shadow type="math_number">
+				        <field name="NUM">100</field></shadow>
+				    </value>
+				    <value name="z">
+				      <shadow type="math_number">
+				        <field name="NUM">100</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_3d_rotate">
+				    <value name="angle">
+				      <shadow type="math_number">
+				        <field name="NUM">60</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_3d_plane">
+				    <value name="width">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				    <value name="height">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_3d_box">
+				    <value name="width">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				    <value name="height">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				    <value name="depth">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_3d_sphere">
+				    <value name="radius">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_3d_cylinder">
+				    <value name="radius">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				    <value name="height">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_3d_cone">
+				    <value name="radius">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				    <value name="height">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_3d_ellipsoid">
+				    <value name="radiusx">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				    <value name="radiusy">
+				      <shadow type="math_number">
+				        <field name="NUM">100</field></shadow>
+				    </value>
+				    <value name="radiusz">
+				      <shadow type="math_number">
+				        <field name="NUM">150</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_3d_torus">
+				    <value name="radius">
+				      <shadow type="math_number">
+				        <field name="NUM">50</field></shadow>
+				    </value>
+				    <value name="tubeRadius">
+				      <shadow type="math_number">
+				        <field name="NUM">20</field></shadow>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_3d_material"></block>
+				  <block type="pinoblock_p5js_3d_light"></block>
+				  <block type="pinoblock_p5js_3d_loadmodel">
+				    <value name="url">
+				      <block type="pinoblock_p5js_3d_teapot"></block>
+				    </value>
+				  </block>
+				  <block type="pinoblock_p5js_3d_showmodel"></block>
+				  <block type="pinoblock_p5js_3d_teapot"></block>
+				  <block type="pinoblock_p5js_3d_lego_man"></block>
+				</category>
+			</xml>
+		</div>
+		<pre class="col-sm-3" id="content_code" style="display: none;">\n</pre>
+	</div>
+	<div class="container-fluid">
+		<div class="row mt-3 mb-3">
+	  		<div class="col-sm-3">
+	    		<div class="row btn-group" role="group">
+		    		<button class="btn first" id="pinoBlockRun" href="#">
+						<i class="fa fa-play"></i>
+						运行程序
+					</button>
+					<button class="btn last" id="pinoBlockStop" href="#">
+						<i class="fa fa-stop"></i>
+						停止程序
+					</button>
+				</div>
+			</div>
+			<div class="col-sm-9 btn-group" role="group">
+				<button class="btn btn--green" id="saveImgBtn">保存图片</button>
+				<button class="btn btn--green" id="saveInoBtn" onclick="saveJsFile()">保存为p5.js程序</button>
+				<button class="btn btn--green" id="saveXmlBtn" onclick="saveXmlFile()">保存图形化程序</button>
+				<button class="btn btn--green" id="openXmlBtn" onclick="performClick('file-input')">打开图形化程序</button>
+			</div>
+		</div>
+	</div>
+	<input id="file-input" type="file" style="position:fixed;top:-1000px;" />
+	<div class="row text-center mt-5">
+		<div id="p5Canvas"></div>
+	</div>
+</div>
+
+    <!--====================  footer area ====================-->
+    <div class="footer-area-wrapper">
+        <div class="footer-area section-space--ptb_90">
+            <div class="container">
+                <div class="row footer-widget-wrapper">
+                    <div class="col-lg-4 col-md-6 footer-widget">
+                        <ul class="footer-widget__list">
+                            <li>北京市海淀区西北旺网易北京研发中心</li>
+                            <li><a href="#" class="hover-style-link">service@makerbean.com</a></li>
+                            <li><a href="#" class="hover-style-link hover-style-link--green">www.makerbean.com</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-6 footer-widget">
+                        <h6 class="footer-widget__title mb-20">我们是谁</h6>
+                        <ul class="footer-widget__list">
+                            <li><a href="about.html" class="hover-style-link">关于</a></li>
+                            <!-- <li><a href="#" class="hover-style-link">FAQ</a></li> -->
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-6 footer-widget">
+                        <h6 class="footer-widget__title mb-20">合作伙伴</h6>
+                        <ul class="footer-widget__list">
+                            <li><a href="https://study.163.com/" class="hover-style-link">网易云课堂</a></li>
+                            <li><a href="https://ke.youdao.com/" class="hover-style-link">有道精品课</a></li>
+                            <li><a href="http://thumaker.cn/" class="hover-style-link">清华创客空间</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 offset-lg-1 footer-widget">
+                        <div class="text-center">
+                            <img src="static/images/base/weixin_qrcode.jpg">
+                            <p style="margin-top: 10px;">扫一扫关注每颗豆微信公众号</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright-area border-top section-space--ptb_30">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-left">
+                        <span class="copyright-text">© 2021 每颗豆创客 <a href="https://beian.miit.gov.cn/">京ICP备15024205号-8</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--====================  End of footer area  ====================-->
+
+    <!--====================  scroll top ====================-->
+    <a href="#" class="scroll-top" id="scroll-top">
+        <i class="arrow-top fas fa-long-arrow-alt-up"></i>
+        <i class="arrow-bottom fas fa-long-arrow-alt-up"></i>
+    </a>
+    <!--====================  End of scroll top  ====================-->
+
+
+    <!--====================  mobile menu overlay ====================-->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-overlay__inner">
+            <div class="mobile-menu-overlay__header">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-8">
+                            <!-- logo -->
+                            <div class="logo">
+                                <a href="index-2.html">
+                                    <img src="static/images/base/logo.png" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-4">
+                            <!-- mobile menu content -->
+                            <div class="mobile-menu-content text-right">
+                                <span class="mobile-navigation-close-icon" id="mobile-menu-close-trigger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mobile-menu-overlay__body">
+                <nav class="offcanvas-navigation offcanvas-navigation--onepage">
+                    <ul>
+                        <li class="active"><a href="index.html"><span>首页</span></a></li>
+                        <li><a href="online_course.html"><span>在线课程</span></a></li>
+                        <li><a href="python_online.html"><span>Python在线编程</span></a></li>
+                        <li><a href="http://pythontutor.makerbean.com/visualize.html"><span>可视化代码执行</span></a></li>
+                        <li><a href="about.html"><span>关于我们</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!--====================  End of mobile menu overlay  ====================-->
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">微信扫一扫登录</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <h5 id="login-qrcode-expired-warning" class="mb-3"></h5>
+                    <div id="login-qrcode" class="mb-3">
+                        <div class="spinner-border text-success" role="status">
+                            <span class="sr-only">正在生成登录二维码...</span>
+                        </div>
+                        <p>正在生成登录二维码...请稍后</p>
+                    </div>
+                    <p>关注公众号即可登录</p>
+                    <p>登录后就能分享作品、记录练习进度以及获取更多权益！</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="ht-btn ht-btn-xs btn-secondary" data-dismiss="modal" onclick="clearInterval(check_interval)">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/Swiper/4.5.1/js/swiper.min.js"></script>
+    <script src="https://cdn.staticfile.org/tippy.js/3.4.1/tippy.min.js"></script>
+    <script src="https://cdn.staticfile.org/lightgallery/1.6.12/js/lightgallery.min.js"></script>
+    <script src="https://cdn.staticfile.org/lg-video/1.2.2/lg-video.min.js"></script>
+    <script src="https://cdn.staticfile.org/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-circle-progress/1.2.2/circle-progress.min.js"></script>
+    <script src="https://cdn.staticfile.org/instafeed.js/1.4.1/instafeed.min.js"></script>
+    <script src="https://cdn.staticfile.org/wow/1.1.2/wow.min.js"></script>
+    <script src="https://cdn.staticfile.org/odometer.js/0.4.8/odometer.min.js"></script>
+    <script src="https://cdn.staticfile.org/gsap/2.1.2/TweenMax.min.js"> </script>
+
+    
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/vendor/popper.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/plugins/countdown.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/plugins/isotope.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/plugins/masonry.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/plugins/images-loaded.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/plugins/appear.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/plugins/wavify.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/plugins/jquery.wavify.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/plugins/counterup.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/plugins/time-circles.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/plugins/animation-text.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/plugins/one-page-nav.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/plugins/test.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/revolution/revolution.tools.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/revolution/rs6.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/revolution.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/qrcode.min.js"></script>
+    <script src="https://makerbean-web.oss-cn-beijing.aliyuncs.com/js/main.min.js"></script>
+    
+
+    
+<script src="static/pinoblock_p5js/pinoblock.p5js.min.js"></script>
+<script type="text/javascript" src="static/js/html2canvas.js"></script>
+<script type="text/javascript" src="static/js/FileSaver.min.js"></script>
+<script type="text/javascript" src="static/js/p5/p5.min.js"></script>
+<script type="text/javascript" src="static/js/p5/p5.play.js"></script>
+<script type="text/javascript" src="static/js/p5/player.js"></script>
+<script type="text/javascript">
+	$('.header-area.header-sticky.header-area--absolute').addClass('is-sticky');
+	var isrealtimecodeshow = false;
+	$("#togglerealtimecode").click(function(){
+		isrealtimecodeshow = ~isrealtimecodeshow;
+		$("#content_code").toggle(1000);
+		if (isrealtimecodeshow) {
+			$("#blockly_space").removeClass("col-sm-12");
+			$("#blockly_space").addClass("col-sm-9");
+			$("#togglerealtimecode").text("关闭代码实时显示");
+			togglerealtimecode()
+		} else {
+			$("#blockly_space").removeClass("col-sm-9");
+			$("#blockly_space").addClass("col-sm-12");
+			$("#togglerealtimecode").text("开启代码实时显示");
+			togglerealtimecode()
+		}
+	});
+	var myLibraries = "";
+	function is_touch_device() {
+		return (('ontouchstart' in window)
+			|| (navigator.MaxTouchPoints > 0)
+			|| (navigator.msMaxTouchPoints > 0));
+	}
+	$(function() {
+		var Pjs;
+		/* wait for DOM building */
+		var wait0 = setTimeout(function() {
+		//- loadLibraries();
+		}, 500);
+	
+		$("#pinoBlockRun").click(function() {
+			execCode();
+		});
+		$("#pinoBlockStop").click(function() {
+			if (Pjs) {
+				Pjs.remove();
+			}
+			$( "#p5Canvas" ).empty();
+		});
+		function loadLibraries() {
+			startMain();
+			$.ajax({
+				type: "GET",
+				url: "/static/js/p5.play.js",
+				dataType: "text",
+				async: true,
+				success: handleData
+				//success: loadLibraries,
+			});
+		}
+		function handleData(data) {
+			myLibraries = data;
+			// execCode();
+		}
+		function execCode() {
+			<!-- stop and clear -->
+			if (Pjs) {
+				Pjs.remove();
+				// Pjs.noCanvas();
+			}
+			try {
+				var content = document.getElementById('content_javascript');
+				// Initialize the pane.
+				if (content.id == 'content_javascript') {
+					var code = Blockly.JavaScript.workspaceToCode(Code.workspace);
+					content.textContent = code;
+					if (typeof prettyPrintOne == 'function') {
+						code = content.innerHTML;
+						code = prettyPrintOne(code, 'js');
+						content.innerHTML = code;
+					}
+				}
+			} catch(e){}
+			<!-- get code -->
+			var codeText = $("#content_javascript").text();
+			codeText = codeText;
+			playCode(codeText);
+		};
+	});
+	window.onbeforeunload = function(event) {
+		return confirm("Sure to leave?");
+	}
+	function saveImg() {
+		var target = $('body');
+		html2canvas(target, {
+			onrendered: function (canvas){
+					var imgURL = canvas.toDataURL();
+					var triggerDownload = $("<a>").attr("href", imgURL).attr("download", "My%20Block.html").appendTo("body");
+					triggerDownload[0].click();
+					triggerDownload.remove();
+				}
+		});
+	}
+	saveImgBtn.addEventListener('click', saveImg, false);
+</script>
+<script type="text/javascript">
+	function performClick(elemId) {
+		var elem = document.getElementById(elemId);
+		if(elem && document.createEvent) {
+			var evt = document.createEvent("MouseEvents");
+			evt.initEvent("click", true, false);
+			elem.dispatchEvent(evt);
+		}
+	}
+
+	function readSingleFile(e) {
+		var file = e.target.files[0];
+		if (!file) {
+			return;
+		}
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			var contents = e.target.result;
+			displayContents(contents);
+		};
+		reader.readAsText(file);
+	}
+
+	function displayContents(contents) {
+		var xmlTextarea = document.getElementById('content_xml');
+		var xmlText = contents;
+		var xmlDom = null;
+		try {
+			xmlDom = Blockly.Xml.textToDom(xmlText);
+		} catch (e) {
+			var q =
+			window.confirm(MSG['badXml'].replace('%1', e));
+			if (!q) {
+				// Leave the user on the XML tab.
+				return;
+			}
+		}
+		if (xmlDom) {
+			Code.workspace.clear();
+			Blockly.Xml.domToWorkspace(xmlDom, Code.workspace);
+		}
+		// var element = document.getElementById('file-content');
+		// element.innerHTML = contents;
+	}
+	document.getElementById('file-input').addEventListener('change', readSingleFile, false);
+</script>
+<script type="text/javascript">
+	// function GetPageScroll() {
+	// 	var x, y;
+	// 	if(window.pageYOffset) {
+	// 		// all except IE
+	// 		y = window.pageYOffset;
+	// 		x = window.pageXOffset;
+	// 	} else if(document.documentElement && document.documentElement.scrollTop) {
+	// 		// IE 6 Strict
+	// 		y = document.documentElement.scrollTop;
+	// 		x = document.documentElement.scrollLeft;
+	// 	} else if(document.body) {
+	// 		// all other IE
+	// 		y = document.body.scrollTop;
+	// 		x = document.body.scrollLeft;
+	// 	}
+	// 	return y;
+	// }
+	// function revealOnScroll() {
+	// 	originBGW = 1280;
+	// 	originBGH = 3012;
+	// 	w_height = $(window).outerHeight();
+	// 	w_width = $(window).outerWidth();
+	// 	bgw = w_width;
+	// 	bgh = bgw/originBGW*originBGH;
+	// 	y = GetPageScroll();
+	// 	if(y>100){
+	// 		navbar = document.getElementById("navbar");
+	// 		navbar.style.display = "None";
+	// 	} else {
+	// 		navbar = document.getElementById("navbar");
+	// 		navbar.style.display = "inline";
+	// 	}
+	// }
+	// $(window).on("scroll", revealOnScroll);
+	// navbar = document.getElementById("navbar");
+	// navbar.style.background = "rgba(231, 231, 231, 0.9)";
+</script>
+
+
+    <script type="text/javascript">
+        var qr_data, check_interval;
+        $('#login-modal').on('hidden.bs.modal', function (e) {
+            clearInterval(check_interval);
+        })
+
+        function open_wechat_login_modal() {
+            $('#login-modal').modal('show');
+            $.ajax({
+                type: 'post',
+                url: '/wechatplatform/login',
+                dataType: 'json',
+                data: {},
+                success: function(d){
+                    $('#login-qrcode').html('');
+                    qr_data = d;
+                    new QRCode(document.getElementById("login-qrcode"), d.url);
+                    check_interval = setInterval(check_user_scan, 2000);
+                    qrCodeGenerateSuccess = true;
+                },
+                error: function() {
+                    if (($("#login-modal").data('bs.modal') || {})._isShown){
+                        $.ajax(this);
+                    }
+                }
+            })
+        }
+
+        function check_user_scan() {
+            $.ajax({
+                type: 'get',
+                url: '/wechatplatform/check',
+                dataType: 'json',
+                data: {'uuid': qr_data.uuid},
+                success: function(d){
+                    if (d.scanned) {
+                        clearInterval(check_interval);
+                        $('#login-modal').modal('hide');
+                        location.reload();
+                    } else if (d.expired) {
+                        clearInterval(check_interval);
+                        $('#login-qrcode-expired-warning').text('二维码已过期，请重新刷新页面获取');
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+
+<!-- Mirrored from www.makerbean.com/pinoblock_p5js by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 15 Oct 2021 06:26:17 GMT -->
+</html>

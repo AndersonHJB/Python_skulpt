@@ -1,0 +1,139 @@
+function hideBtnClick(elem){
+  const v = $("#myVideo");
+  if (elem.textContent === "<<") {
+    elem.textContent = ">>";
+    v.css("display", "none");
+  } else {
+    elem.textContent = "<<";
+    v.css("display", "block");
+  }
+}
+function toTopBtnClick() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
+function moveVideo(){
+  const vfw = $("#videogfw");
+  const vfwOuterHeight = vfw.outerHeight();
+  const switchHeight = vfw.offset().top + vfwOuterHeight;
+  const smallVideoHeight = 140;
+  let oldY = window.scrollY;
+  document.addEventListener('scroll', function(e) {
+    const svd = $(".switch-video-div");
+    if (window.scrollY < switchHeight) {
+      if (oldY >= switchHeight) {
+        svd.height(svd.height() - vfwOuterHeight);
+      }
+      if (vfw.attr('class').includes("video-container-small")) {
+        vfw.removeClass("video-container-small");
+        vfw.addClass("video-container");
+        $("#myVideo").css("height", "100%");
+        $("#video-container-small-btns").css("display", "none");
+      }
+    } else {
+      if (oldY < switchHeight) {
+        svd.height(svd.height() + vfwOuterHeight);
+      }
+      if (!vfw.attr('class').includes("video-container-small")) {
+        if ($("#video-container-small-btns").length === 0){
+          $("main").append(
+            $("<div>", {
+              id: "video-container-small-btns",
+            }).append(
+              $("<button>", {
+                text: "<<"
+              }).on("click", function(){hideBtnClick(this)}),
+                $("<button>", {
+                text: "↑"
+              }).on("click", function(){toTopBtnClick()})
+              )
+          )
+        }
+        vfw.removeClass("video-container");
+        vfw.addClass("video-container-small");
+        $("#myVideo").css("height", smallVideoHeight);
+        const btns = $("#video-container-small-btns");
+        btns.css("display", "block");
+        btns.css("top", vfw.position().top - 2 - btns.outerHeight());
+      }
+    }
+    oldY = window.scrollY;
+  });
+}
+
+
+function getEmbeddedVideo(bilibili_src, bilibili_id, youtube_src, youtube_id) {
+    $.ajax({
+            url: "/api/vsrc",
+            type: 'GET',
+            contentType: 'application/json',
+            dataType: "json",
+            error: function (xhr, textStatus, error) {
+                console.log(xhr.responseText);
+                console.log(xhr.statusText);
+                console.log(textStatus);
+                console.log(error);
+                chooseVideo(bilibili_src, "bilibili", bilibili_id);
+            },
+            success: function (response) {
+                if (response.error === "" || response.error === null) {
+                    if ("bilibili" === response.data.vsrc) {
+                        chooseVideo(bilibili_src, 'bilibili', bilibili_id);
+                    } else {
+                        chooseVideo(youtube_src, "youtube", youtube_id);
+                    }
+                } else {
+                    chooseVideo(bilibili_src, "bilibili", bilibili_id);
+                }
+            }
+    })
+}
+
+function chooseVideo(src, src_name, vid)
+// this function is not in here!!!!! find it in base.html
+{
+    var velem = $('#videogfw');
+    velem.removeClass();
+    velem.addClass("video-container");
+    var vai = document.getElementById("video-alrt-info");
+    var t;
+    // bilibili
+    if (src_name === "bilibili") {
+      t = '(无法播放? 请 <a href="https://www.bilibili.com/video/' + String(vid) +'" target="_blank" >点击这里</a> 跳转至B站内)';
+      if (src.includes("hdslb")) {
+        velem.addClass("videogfw-hdslb");
+      } else if (src.includes("bilibili")) {
+        velem.addClass("videogfw-bilibili");
+      }
+    } else if (src_name === "youku") { // youku
+      velem.addClass("videogfw-youku");
+      t = '(无法播放? 请 <a href="http://v.youku.com/v_show/id_' + vid +'==.html" target="_blank" >点击这里</a> 跳转至优酷站内)';
+    } else  {  // youtube
+      velem.addClass("videogfw-youtube");
+      t = '(无法播放? 请 <a href="https://www.youtube.com/watch?v='+String(vid)+'&feature=emb_title"' + ' target="_blank" >点击这里</a> 跳转至Youtube)';
+    }
+    if (vai) {
+          vai.style.display = "block";
+          vai.innerHTML = t;
+    }
+
+    $("#myVideo").remove();
+    $("#videogfw").append(
+        $("<iframe>", {
+            id: "myVideo",
+            src: src,
+            frameborder: "0",
+            scrolling: "no",
+            allow: "autoplay",
+            framespacing: "0",
+            // sandbox: "allow-top-navigation allow-same-origin allow-forms allow-scripts",
+        }
+        ).attr("allowfullscreen", ""
+        ).attr("autoplay", ""
+        ).attr("width", "100%"
+        )
+    );
+}
+
+

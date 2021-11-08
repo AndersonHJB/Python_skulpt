@@ -1,0 +1,178 @@
+let cms = [];
+// let pyodideUrl = "//cdn.jsdelivr.net/pyodide/dev/full/";
+// window.languagePluginUrl = 'https://pyodide-cdn2.iodide.io/v0.16.1/full/';
+// window.languagePluginUrl = 'https://static.mofanpy.com/js/pyodide/v0.16.1/full/';
+// window.languagePluginUrl = '//cdn.jsdelivr.net/pyodide/v0.16.1/full/';
+function addToOutput(div, s) {
+  div.innerText += s + '\n';
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function runPythonAsync(code, btn, messageCallback, errorCallback) {
+  btn.textContent = "Downloading packages...";
+  await pyodide.loadPackagesFromImports(code, messageCallback, errorCallback);
+  btn.textContent = "Running..."
+  let coroutine = pyodide.pyodide_py.eval_code_async(code, pyodide.globals);
+  try {
+    return await coroutine;
+  } finally {
+    coroutine.destroy();
+  }
+}
+
+async function evaluatePython(btn) {
+  const myId = btn.id.split("-")[1];
+  const txDiv = document.getElementById("scriptOutput-" + myId);
+  txDiv.innerText = "";
+  btn.disabled = true;
+  await sleep(100);
+
+  // runPythonAsync download all dependencies automatically
+  pyodide.runPython("sys.stdout = sys.stderr = io.StringIO()");
+  runPythonAsync(cms[parseInt(myId)].getValue(), btn).then(r => {
+    if (r === undefined) {
+      r = "";
+    }
+    const oString = pyodide.runPython("sys.stdout.getvalue()");
+
+    pyodide.runPython(`
+import sys, os, io, base64
+_plt_tmp_img_str = None
+def main():
+    global _plt_tmp_img_str
+    if "matplotlib" not in sys.modules:
+        return
+    import matplotlib.pyplot as plt
+    if len(plt.get_fignums()) == 0:
+        return
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    _plt_tmp_img_str = 'data:image/png;base64,' + base64.b64encode(buf.read()).decode('UTF-8')
+    plt.cla()
+    plt.clf()
+    plt.close()
+main()
+`);
+    txDiv.style.display = "block";
+    txDiv.innerText = "";
+    addToOutput(txDiv, oString + r);
+    const img = document.getElementById("scriptImage-" + myId);
+    img.src = "";
+    if (pyodide.globals._plt_tmp_img_str !== undefined) {
+      img.classList.add("course-image");
+      img.src = pyodide.globals._plt_tmp_img_str;
+      pyodide.globals._plt_tmp_img_str = "";
+    }
+  }).catch(err => {
+    txDiv.style.display = "block";
+    txDiv.innerText = "";
+    let oString = pyodide.runPython("sys.stdout.getvalue()");
+    oString += "\n"+err.message;
+    addToOutput(txDiv, oString);
+  }).then(() => {
+    txDiv.innerText = txDiv.innerText.trim();
+    btn.disabled = false;
+    btn.innerText = "Run";
+  })
+}
+
+function getAllHints(e) {
+    var hints = CodeMirror.pythonHint(e); // Note that the code at line 131 of show-hint.js in CodeMirror library is commented (code completion is blocked and intelligent prompt is provided)
+    var anyHints = CodeMirror.hint.anyword(e);
+
+    anyHints.list.forEach(function(hint) {
+        if (hints.list.indexOf(hint) === -1)
+            hints.list.push(hint);
+    })
+
+    hints.list.sort();
+
+    if (hints) {
+        CodeMirror.on(hints, "pick", function(word) {
+            if (word.charAt(word.length - 1) === ')')
+                editor.execCommand("goCharLeft");
+        });
+    }
+    return hints;
+}
+
+function showAllHints(editor) {
+    editor.showHint({
+        hint: getAllHints,
+        completeSingle: false
+    });
+}
+
+async function setCodeArea(onInteractivePage, dependencies, preCode) {
+  if (onInteractivePage === undefined) {
+    onInteractivePage = false;
+  }
+
+  const myTextAreas = document.getElementsByClassName("scriptInput");
+  const outputs = document.getElementsByClassName("scriptOutput");
+  const imgs = document.getElementsByClassName("scriptImage");
+  const runBtns = document.getElementsByClassName("scriptRunBtn");
+  for (let i = 0; i < myTextAreas.length; i++) {
+    outputs[i].id = "scriptOutput-" + i;
+    imgs[i].id = "scriptImage-" + i;
+    let editor = CodeMirror.fromTextArea(myTextAreas[i],
+      {
+        value: myTextAreas[i].value,
+        mode: {name: "python", version: 3},
+        keyMap: 'sublime',
+        theme: "darcula",
+        lineNumbers: true,
+        smartIndent: true,
+        indentUnit: 4,
+        lineWrapping: false, // 在行槽中添加行号显示器、折叠器、语法检测器
+        readOnly: !onInteractivePage,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        styleActiveLine: true,
+        autofocus: false,
+        foldGutter: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers"]
+      }
+    );
+    editor.setOption("extraKeys", {
+      Tab: function (cm) {
+        var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
+        cm.replaceSelection(spaces);
+      }
+    });
+    editor.on('inputRead', function onChange(editor, input) {
+      if (input.text[0] === ';' || input.text[0] === ' ' || input.text[0] === ":") {
+        return;
+      }
+      showAllHints(editor);
+    });
+    cms.push(editor);
+    runBtns[i].id = "scriptBtn-" + i;
+  }
+  if (onInteractivePage) {
+    if (dependencies === undefined) {
+      dependencies = [];
+    }
+    for (let i = 0; i < runBtns.length; i++) {
+      runBtns[i].innerText = 'Initializing...\n';
+      runBtns[i].style.display = "block";
+    }
+    // init pyodide
+    async function loadPyodideAndPackages(){
+        await loadPyodide({ indexURL : 'https://cdn.jsdelivr.net/pyodide/v0.17.0/full/' });
+        await self.pyodide.loadPackage(dependencies).then(() => {
+          pyodide.runPython(`import sys;import io;sys.stdout = io.StringIO()\n${preCode}`);
+        }).then(() => {
+          for (let i = 0; i < runBtns.length; i++) {
+            runBtns[i].innerText = 'Run';
+            runBtns[i].disabled = false;
+          }
+        })
+    }
+    let pyodideReadyPromise = loadPyodideAndPackages();
+  }
+}

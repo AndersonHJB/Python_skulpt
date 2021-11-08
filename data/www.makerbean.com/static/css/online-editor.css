@@ -1,0 +1,83 @@
+/*
+* @Author: ander
+* @Date:   2021-01-28 12:57:58
+* @Last Modified by:   ander
+* @Last Modified time: 2021-01-28 12:58:34
+*/
+textarea {
+    line-height: inherit;
+}
+#mobile-assist-area {
+    width: 100%;
+    height: 10%;
+    min-height: 45px;
+    background-color: #2f3129;
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    padding: 0px 12px 0px 12px;
+}
+.mobile-assist-btn {
+    width: 24px;
+    line-height: 24px;
+    height: 24px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #787878;
+    color: #FFF;
+}
+#container {
+    height: 100%;
+}
+#left-div {
+    padding: 0;
+}
+#right-div {
+    padding: 0;
+}
+#right-div textarea {
+    width: 100%;
+}
+#editor {
+    float: none;
+    height: 100%;
+}
+#console {
+    float: none;
+    border-width: 0;
+    border-radius: 0;
+    font-family: 'Monaco', 'Consolas';
+    padding: 8px 8px;
+    background-color: #000;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 700;
+}
+.run-btn-area {
+    height: 51px;
+    background-color: #2f3129;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.run-btn-area.mobile-btn-area {
+    height: unset;
+}
+.run-btn-area button {
+    height: 100%;
+    line-height: unset;
+    padding: 0 20px;
+}
+.run-btn-area.mobile-btn-area button {
+    padding: 0 8px;
+}
+.run-btn-area .btn-group {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+.run-btn-area .btn:active {
+    background: #38cb89;
+}
+.run-btn-area .right-btn-group {
+    width: 30%;
+}
